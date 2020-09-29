@@ -1,0 +1,66 @@
+{
+  "appKey": "",
+  "appSecret": "",
+  "encryptJs": true,
+  "excludeScenes": [
+    "71d947c1-4e83-4c09-919e-7df22e152d06",
+    "226e2d0d-7345-4aae-9a30-471043c8e100",
+    "5c0528e3-ecef-4313-b383-4a269d3bdf8a",
+    "e817ca9a-cc84-4452-8b91-2114e858467f"
+  ],
+  "fb-instant-games": {},
+  "includeAnySDK": false,
+  "includeSDKBox": false,
+  "inlineSpriteFrames": true,
+  "inlineSpriteFrames_native": true,
+  "jailbreakPlatform": false,
+  "md5Cache": true,
+  "mergeStartScene": false,
+  "oauthLoginServer": "",
+  "optimizeHotUpdate": false,
+  "orientation": {
+    "landscapeLeft": true,
+    "landscapeRight": true,
+    "portrait": false,
+    "upsideDown": false
+  },
+  "packageName": "org.cocos2d.stone_demo",
+  "privateKey": "",
+  "qqplay": {
+    "REMOTE_SERVER_ROOT": "",
+    "orientation": "portrait"
+  },
+  "renderMode": "0",
+  "startScene": "659362c0-e251-46be-bfd9-a71f02e7e750",
+  "title": "cocoscreator",
+  "webOrientation": "auto",
+  "wechatgame": {
+    "REMOTE_SERVER_ROOT": "https://wxdemo.comblockengine.com/stone_res",
+    "appid": "wxfe3c2a610dc6a2e4",
+    "isSubdomain": false,
+    "orientation": "landscape",
+    "subContext": "stone_ranking"
+  },
+  "xxteaKey": "f97f5c48-5bcf-45",
+  "zipCompressJs": true,
+  "android": {
+    "packageName": "org.cocos2d.demo"
+  },
+  "ios": {
+    "packageName": "org.cocos2d.demo"
+  },
+  "mac": {
+    "packageName": "org.cocos2d.demo"
+  },
+  "win32": {},
+  "android-instant": {
+    "REMOTE_SERVER_ROOT": "",
+    "host": "",
+    "packageName": "org.cocos2d.demo",
+    "pathPattern": "",
+    "recordPath": "",
+    "scheme": "https",
+    "skipRecord": false
+  },
+  "appBundle": false
+}
