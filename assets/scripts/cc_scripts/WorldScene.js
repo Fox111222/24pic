@@ -102,6 +102,14 @@ cc.Class({
         this.card2.on(cc.Node.EventType.TOUCH_END, this.onTouchEndedcard2, this);
         this.card3.on(cc.Node.EventType.TOUCH_END, this.onTouchEndedcard3, this);
         this.card4.on(cc.Node.EventType.TOUCH_END, this.onTouchEndedcard4, this);
+
+        this.card1selected=false
+        this.card2selected=false
+        this.card3selected=false
+        this.card4selected=false
+
+
+
         this.gameState = this.node.getComponent("GameState");
         this.clock=this.node.getChildByName("bg2").getChildByName("clock")
         this.clock.active=false;
@@ -165,24 +173,66 @@ cc.Class({
         */
     },
     onTouchEndedcard1:function(){
-        this.card1.setScale(1.1)
-        this.act.push(this.card1num)
-
+        if(this.card1selected==false){
+            this.card1selected=true
+            this.card1.setScale(1)
+            this.act.push(this.card1num)
+        }
+        else{
+            this.card1selected=false
+            this.card1.setScale(0.8)
+            var index = this.act.indexOf(this.card1num)
+            if (index > -1) {
+                this.act.splice(index, 1);
+            }
+        }
     },
     onTouchEndedcard2:function(){
-        this.card2.setScale(1.1)
-        this.act.push(this.card2num)
+        if(this.card2selected==false){
+            this.card2selected=true
+            this.card2.setScale(1)
+            this.act.push(this.card2num)
+        }
+        else{
+            this.card2selected=false
+            this.card2.setScale(0.8)
+            var index = this.act.indexOf(this.card2num)
+            if (index > -1) {
+                this.act.splice(index, 1);
+            }
+        }
 
     },
     onTouchEndedcard3:function(){
-        this.card3.setScale(1.1)
-        this.act.push(this.card3num)
+        if(this.card3selected==false){
+            this.card3selected=true
+            this.card3.setScale(1)
+            this.act.push(this.card3num)
+        }
+        else{
+            this.card3selected=false
+            this.card3.setScale(0.8)
+            var index = this.act.indexOf(this.card3num)
+            if (index > -1) {
+                this.act.splice(index, 1);
+            }
+        }
 
     },
     onTouchEndedcard4:function(){
-        this.card4.setScale(1.1)
-        this.act.push(this.card4num)
-
+        if(this.card4selected==false){
+            this.card4selected=true
+            this.card4.setScale(1)
+            this.act.push(this.card4num)
+        }
+        else{
+            this.card4selected=false
+            this.card4.setScale(0.8)
+            var index = this.act.indexOf(this.card4num)
+            if (index > -1) {
+                this.act.splice(index, 1);
+            }
+        }
     },
     update: function (dt) {
         this.label.string=this.act.join("")
