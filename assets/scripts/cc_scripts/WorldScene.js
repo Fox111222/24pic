@@ -98,6 +98,8 @@ cc.Class({
         this.card3num=0;
         this.card4num=0;
 
+        this.lasttouchcard=null
+
         this.card1.on(cc.Node.EventType.TOUCH_END, this.onTouchEndedcard1, this);
         this.card2.on(cc.Node.EventType.TOUCH_END, this.onTouchEndedcard2, this);
         this.card3.on(cc.Node.EventType.TOUCH_END, this.onTouchEndedcard3, this);
@@ -173,11 +175,16 @@ cc.Class({
         */
     },
     onTouchEndedcard1:function(){
+        if(this.act.length-1>=0){
+            if(this.act[this.act.length-1]==this.card1num ||this.act[this.act.length-1]==this.card2num||this.act[this.act.length-1]==this.card3num||this.act[this.act.length-1]==this.card4num)
+            return
+        }
         if(this.card1selected==false){
+            this.lasttouchcard=this.card1
             this.card1selected=true
             this.card1.setScale(1)
             this.act.push(this.card1num)
-        }
+        }/*
         else{
             this.card1selected=false
             this.card1.setScale(0.8)
@@ -185,54 +192,75 @@ cc.Class({
             if (index > -1) {
                 this.act.splice(index, 1);
             }
-        }
+        }*/
     },
     onTouchEndedcard2:function(){
+        if(this.act.length-1>=0){
+            if(this.act[this.act.length-1]==this.card1num ||this.act[this.act.length-1]==this.card2num||this.act[this.act.length-1]==this.card3num||this.act[this.act.length-1]==this.card4num)
+            return
+        }
         if(this.card2selected==false){
             this.card2selected=true
             this.card2.setScale(1)
             this.act.push(this.card2num)
+            this.lasttouchcard=this.card2
         }
-        else{
+        /*else{
             this.card2selected=false
             this.card2.setScale(0.8)
             var index = this.act.indexOf(this.card2num)
             if (index > -1) {
                 this.act.splice(index, 1);
             }
-        }
+        }*/
 
     },
     onTouchEndedcard3:function(){
+        if(this.act.length-1>=0){
+            if(this.act[this.act.length-1]==this.card1num ||this.act[this.act.length-1]==this.card2num||this.act[this.act.length-1]==this.card3num||this.act[this.act.length-1]==this.card4num)
+            return
+        }
         if(this.card3selected==false){
             this.card3selected=true
             this.card3.setScale(1)
             this.act.push(this.card3num)
+            this.lasttouchcard=this.card3
         }
-        else{
+        /*else{
             this.card3selected=false
             this.card3.setScale(0.8)
             var index = this.act.indexOf(this.card3num)
             if (index > -1) {
                 this.act.splice(index, 1);
             }
-        }
+        }*/
 
     },
     onTouchEndedcard4:function(){
+        if(this.act.length-1>=0){
+            if(this.act[this.act.length-1]==this.card1num ||this.act[this.act.length-1]==this.card2num||this.act[this.act.length-1]==this.card3num||this.act[this.act.length-1]==this.card4num)
+            return
+        }
+        /*
+        var ind = this.act.indexOf(this.card4num)
+        if (ind > -1) {
+            return
+        }
+        */
         if(this.card4selected==false){
             this.card4selected=true
             this.card4.setScale(1)
             this.act.push(this.card4num)
+            this.lasttouchcard=this.card4
         }
-        else{
+        /*else{
             this.card4selected=false
             this.card4.setScale(0.8)
             var index = this.act.indexOf(this.card4num)
             if (index > -1) {
                 this.act.splice(index, 1);
             }
-        }
+        }*/
     },
     update: function (dt) {
         this.label.string=this.act.join("")
@@ -263,10 +291,26 @@ cc.Class({
 
     },
     ondelact:function(){
-        this.act.pop()
+        var num=this.act.pop()
+        this.lasttouchcard.setScale(0.8)
+        if(this.lasttouchcard==this.card1) this.card1selected=false
+        if(this.lasttouchcard==this.card2) this.card2selected=false
+        if(this.lasttouchcard==this.card3) this.card3selected=false
+        if(this.lasttouchcard==this.card4) this.card4selected=false
+        this.lasttouchcard=null
 
     },
     onsureact:function(){
+        this.card1selected=false
+        this.card2selected=false
+        this.card3selected=false
+        this.card4selected=false
+
+        this.card1.setScale(0.8)
+        this.card2.setScale(0.8)
+        this.card3.setScale(0.8)
+        this.card4.setScale(0.8)
+
         var str=this.act.join("")
         try{
             var res=eval(str);
@@ -556,10 +600,13 @@ cc.Class({
 
     onLeaveWorld: function (entity) {
         cc.log("onLeaveWorld",entity.id,entity.className)
+        /*
+        cc.log("onLeaveWorld",entity.id,entity.className)
         if(this.entities[entity.id] && entity.className == "Avatar"){
             this.entities[entity.id].removeFromParent()
             this.entities[entity.id]=null
-        }      
+        }  
+        */    
     },
 
     onAvatarEnterWorld : function(avatar) {
@@ -567,81 +614,23 @@ cc.Class({
         this.createPlayer(avatar);
     },
 
-    otherAvatarOnJump: function(entity) {
-        var ae = this.entities[entity.id];
-		if(ae == undefined)
-            return;
-            
-        ae.isOnGround = entity.isOnGround;
-        if(!ae.isOnGround)
-            return;
-
-        var action = ae.getComponent("AvatarAction");
-        action.onJump();
-    },
-
+   
     updatePosition : function(entity) {
-        //cc.log("test11")
-        //SCALE=1;
-        if(entity.className == "Item")
-            return;
-
-		var ae = this.entities[entity.id];
-		if(ae == undefined)
-            return;
-    
-        var player = KBEngine.app.player();
-        if(player && player.inWorld && player.id == entity.id)
-            return;
-        
-        ae.isOnGround = entity.isOnGround;
-        if(entity.direction.z >= 1)  {
-            ae.scaleX = 1;
-        }else if(entity.direction.z <= -1) {
-            ae.scaleX = -1;
-        }
-        var position = cc.v2(entity.position.x*SCALE, entity.position.z*SCALE);
-        var action = ae.getComponent("AvatarAction");
-        action.onStartMove(position);
+       
     },	  
     
     set_position: function(entity) {
-        //SCALE=1;
-        //cc.log("test12")
-        if(!this.entities) return;
-
-        var ae = this.entities[entity.id];
-		if(ae == undefined)
-			return;
-		
-		ae.x = entity.position.x * SCALE;
-        ae.y = entity.position.z * SCALE;
-        ae.setPosition(ae.x, ae.y);
+        
     },
 
     setCameraTarget: function(entityID){
         
-        var ae = this.entities[entityID];
-		if(ae == undefined)
-            return;
-            
-        this.cameraControl.setTarget(ae);
-        cc.log("setCameraTarget finished")
+       
     },
 
     checkPlayerHasItem: function(left) {
         //cc.log("test14")
-        var count = 0;
-        for(var i in this.items) {
-            var item = this.items[i];
-            if(left) {
-                if(item.x < 80) count++;
-            } else {
-                if(item.x > 350) count++;
-            }
-        }
-
-        return count;
+      
     },
 
     newTurn: function(avatar,eid, second,card01,card02,card03,card04){
@@ -653,10 +642,25 @@ cc.Class({
             //this.label.string = "游戏开始 !!!";
             //this.label.node.runAction(action);
         }
+        this.card1selected=false
+        this.card2selected=false
+        this.card3selected=false
+        this.card4selected=false
+
+        this.card1.setScale(0.8)
+        this.card2.setScale(0.8)
+        this.card3.setScale(0.8)
+        this.card4.setScale(0.8)
+
         this.card1.active=true
         this.card2.active=true
         this.card3.active=true
         this.card4.active=true
+        
+        this.card01=card01;
+        this.card02=card02;
+        this.card03=card03;
+        this.card04=card04;
         ////////////////////////////
         var A_act1=null
         var A_act2=null
@@ -669,6 +673,7 @@ cc.Class({
 
         var x1=this.seat1cardpos.x;
         var y1=this.seat1cardpos.y
+
         var x2=this.seat2cardpos.x;
         var y2=this.seat2cardpos.y
         var card1origposx=this.card1origpos.x
@@ -685,7 +690,6 @@ cc.Class({
         cc.log("this.curid=",eid)
         cc.log("ddddddddddddddddddddthis.seat2cardpos=",x1,y1)
         cc.log("ddddddddddddddddddddthis.seat1cardpos=",x2,y2)
-
         cc.log("ddddddddddddddddddddthis..card1origpos=",card1origposx,card1origposy)
         cc.log("ddddddddddddddddddddthis..card2origpos=",card2origposx,card2origposy)
         cc.log("ddddddddddddddddddddthis..card2origpos=",card3origposx,card3origposy)
@@ -707,7 +711,6 @@ cc.Class({
         else if(eid==KBEngine.app.player().id){
             A_act1=cc.moveTo(1,cc.v2(x1,y1))
             A_act2=cc.moveTo(1,cc.v2(x1,y1))
-
             A_act3=cc.moveTo(1,cc.v2(x1,y1))
             A_act4=cc.moveTo(1,cc.v2(x1,y1))
 
@@ -809,129 +812,53 @@ cc.Class({
         cc.log("wwwwwwnewTurn",avatar.id, second,card01,card02,card03,card04)
 
         this.opt.active=true
-     
-
-
- 
-
-        //this.card1.setScale(1)
-        //this.card2.setScale(1)
-        //this.card3.setScale(1)
-        //this.card4.setScale(1)
+        this.act=[]
   
        
     },
 
 
     resetItem: function() {
-        //cc.log("test17")
-        for(var i in this.items) {
-            var item = this.items[i];
-            item.getComponent("ItemAction").setThrowed(false);
-        }
+    
     },
 
     otherAvatarOnPickUpItem: function(avatarID, itemID, position) {
-        cc.log("WorldScene::otherAvatarOnPickUpItem: avatarID=%d, itemID=%d ", avatarID, itemID);
-        var player = this.entities[avatarID];
-        var item = this.entities[itemID];
-        if(player == undefined || item == undefined)
-            return;
-        var action = player.getComponent("AvatarAction");
-        action.setPlaceItem(item, action.getItemPoint());
-        action.playThrowPreAnim();
+        
     },
 
     otherAvatarThrowItem: function(avatarID, itemID, force){
-        cc.log("WorldScene::otherAvatarThrowItem: avatarID=%d, itemID=%d force(%f, %f)", avatarID, itemID, force.x, force.y);
-        var player = this.entities[avatarID];
-        var item = this.entities[itemID];
         
-        if(player == undefined || item == undefined)
-            return;
-        //item.scaleX=-item.scaleX
-        this.setCameraTarget(itemID);
-        var action = player.getComponent("AvatarAction");
-        action.playThrowAnim();
-        action.throwItem(item, force);
     },
 
     otherAvatarOnStopWalk: function(avatarID, pos){
-        var player = this.entities[avatarID];
-        if(player == undefined)
-            return;
-
-        cc.log("WorldScene::otherAvatarOnStopWalk: avatarID=%d, pos(%f, %f) ", avatarID, pos.x, pos.y);
-        var action = player.getComponent("AvatarAction");
-        action.onStopWalk(pos);
+        
     },
 
     otherAvatarOnStartWalk: function(avatarID, moveFlag){
-        var player = this.entities[avatarID];
-        if(player == undefined)
-            return;
-
-        KBEngine.INFO_MSG("WorldScene::otherAvatarOnStartWalk: avatarID=" + avatarID + " moveFlag=" + moveFlag);
-        var action = player.getComponent("AvatarAction");
-        if(moveFlag == MOVE_LEFT) {
-            action.onLeftWalk();
-        } else if(moveFlag == MOVE_RIGHT) {
-            action.onRightWalk();
-        }
+        
         
     },
 
     otherAvatarRecoverItem: function(avatarID, itemID) {
         //cc.log("test18")
-        var player = this.entities[avatarID];
-        var item = this.entities[itemID];
-        if(player == undefined || item == undefined)
-            return;
-
-        player.getComponent("AvatarAction").reset();
-        item.getComponent("ItemAction").setPlacePrePosition();
     },
 
     otherAvatarOnLeftJump: function(avatarID){
-        var player = this.entities[avatarID];
-        if(player == undefined)
-            return;
-
-        //cc.log("WorldScene::otherAvatarOnLeftJump: avatarID= " + avatarID);
-        var action = player.getComponent("AvatarAction");
-        action.onLeftJump();
+        
     },
 
     otherAvatarOnRightJump: function(avatarID){
-        var player = this.entities[avatarID];
-        if(player == undefined)
-            return;
-
-        //cc.log("WorldScene::otherAvatarOnRightJump: avatarID= " + avatarID);
-        var action = player.getComponent("AvatarAction");
-        action.onRightJump();
+        
     },
 
     onRecvDamage: function(avatarID, harm, hp) {
         //cc.log("WorldScene::otherAvatarRecvDamage: avatarID=%d, harm=%d, hp=%d ", avatarID, harm, hp);
-        var player = this.entities[avatarID];
-        if(player == undefined)
-            return;
-
-        var action = player.getComponent("AvatarAction");
-        action.recvDamage(harm, hp);
+        
     },
 
     onAvatarDie: function(avatarID) {
         //cc.log("WorldScene::onAvatarDie, avatarid=%d", avatarID)
-        var player = this.entities[avatarID];
-        if(player == undefined)
-            return;
         
-        var anim = player.getComponent("AvatarAnim");
-        var collider = player.getComponent(cc.PhysicsPolygonCollider);
-        collider.sensor = true;
-        anim.playDieAnim();
     },
 
     onGameOver: function(avatarID, isWin, hitRate, totalTime, totalHarm, score) {
@@ -961,10 +888,7 @@ cc.Class({
 
     onResetItem: function(itemID, position) {
         ///SCALE=1;
-        cc.log("onResetItem itemID=",itemID, position)
-        var item = this.entities[itemID];
-        if(item == undefined) 
-            return;
+       
     
         //item.setPosition(position.x*SCALE, position.z*SCALE);
     },
@@ -1011,17 +935,10 @@ cc.Class({
     },
 
     enableControlPlayer: function() {
-      cc.log("enableControlPlayer")
-        if(this.player) {
-            this.player.getComponent("AvatarControl").enableEventListen();
-        }
+    
     },
 
     disEnableControlPlayer: function() {
-        cc.log("enableControlPlayer3333")
-        if(this.player) {
-            this.player.getComponent("AvatarControl").disEnableEventListen();
-            this.player.getComponent("AvatarAction").reset();
-        }
+        
     },
 });

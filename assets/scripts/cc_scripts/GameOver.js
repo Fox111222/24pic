@@ -18,27 +18,6 @@ cc.Class({
            default: null,
            type: cc.Node,
        },
-
-       pipiWin: {
-            default: null,
-            type: cc.Prefab,
-        },
-
-       pipiLose: {
-            default: null,
-            type: cc.Prefab,
-        },
-
-        popWin: {
-            default: null,
-            type: cc.Prefab,
-        },
-
-        popLose: {
-            default: null,
-            type: cc.Prefab,
-        },
-
         labelHitRate: {
             default: null,
             type: cc.Label,
@@ -72,9 +51,10 @@ cc.Class({
 
     onLoad () {
         this.isShowRankingView = false;
-        this.buttonRanking.node.active = false;
-        this.rankingView.active = false;
+        //this.buttonRanking.node.active = false;
+        //this.rankingView.active = false;
         var result = null;
+        /*
         switch(GAME_RESULT)
         {
             case PIPI_WIN:
@@ -93,6 +73,8 @@ cc.Class({
 
         this.player.addChild(result);
         result.setPosition(0, 0);
+        */
+    
         KBEngine.INFO_MSG("game is over, result: rate=%f harm=%f time=%f score=%f", HIT_RATE, TOTAL_HARM, TOTAL_TIME, SCORE);
         var rate = HIT_RATE * 100;
         this.labelHitRate.string = rate.toFixed(0) + '%';

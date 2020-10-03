@@ -31,12 +31,14 @@ cc.Class({
     },
 
     // LIFE-CYCLE CALLBACKS:
-
+    EditBoxclick:function(){
+        cc.log("EditBoxclick")
+        this.userName=this.textinput_name.string
+    },
     onLoad: function () {
         this.initKbengine();
         this.installEvents();
-        this.loadItemPrefab();
-        
+        //this.loadItemPrefab();      
         this.userName = cc.sys.platform != cc.sys.WECHAT_GAME ? this.randomstring(4): '';
         this.btn_start.node.on('click', this.startGame, this);
         this.code = "";
@@ -50,7 +52,8 @@ cc.Class({
             this.wxLoginNative();
             //window.wc=true;
         } else {
-            this.textinput_name.string = this.userName;
+            this.textinput_name.placeholder="请取拽点的名..."
+            this.userName=this.textinput_name.string         
         }
      },
 
@@ -225,22 +228,9 @@ cc.Class({
         return s;
     },
 
-    loadItemPrefab: function() {
-        cc.loader.loadResArray(ItemPrefabUrl['map1'], cc.Prefab, function (err, prefabArray) {
-            if (err) {
-                cc.error("load item prefab error: " + err);
-                return;
-            }
-            for(var prefab of prefabArray) {
-                ItemPrefabMap[prefab.name] = prefab;
-            }
-           
-        });
-     },
 
      initKbengine: function() {
-        var args = new KBEngine.KBEngineArgs();
-	
+        var args = new KBEngine.KBEngineArgs();	
 	    args.ip = SERVER_IP;
         args.port = SERVER_PORT;
         args.isWss = IS_USE_WSS;              //是否用wss协议， true:wss  false:ws
@@ -415,11 +405,20 @@ cc.Class({
         {
             this.label_hint.string = "用户名不能为空";
             return;
-        }       
+        }
+        ///////////////////////////////////////////////////
+
+
+        //////////////////////////////////////////////////
+        cc.log("this.userName=",this.userName)  
         var datas = {};
         datas["platform"] = cc.sys.platform;
         datas = this.createDictString(datas);
         KBEngine.INFO_MSG("login name=" + this.userName);
+        //var temp1=UnicodeToUtf8(this.userName)
+        //this.userName =java.net.URLDecoder.decode(temp,"UTF-8"); 
+        //this.userName =Utf8ToUnicode(temp1)
+        //cc.log("this.userName=",this.userName)  
         KBEngine.Event.fire("login", this.userName, "123456", datas);  
         this.label_hint.string = "登陆中 ... ...";
         this.btn_start.node.active = false;
