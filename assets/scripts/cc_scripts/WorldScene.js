@@ -116,9 +116,11 @@ cc.Class({
         this.clock=this.node.getChildByName("bg2").getChildByName("clock")
         this.clock.active=false;
 
-        
-
-        
+        var sp=null
+        for(var i=1061;i<1115;i++){
+            sp=this.node.getChildByName("card_"+i+"@2x")
+            sp.active=false;
+        }
         this.card1origpos=this.card1.position
         this.card2origpos=this.card2.position
         this.card3origpos=this.card3.position
@@ -732,42 +734,40 @@ cc.Class({
         if (this.card3num>10) {this.card3num=1}
         if (this.card4num>10) {this.card4num=1}
 
+        var self=this
         var fun1=cc.callFunc(function(target){
             target.x=x1,
             target.y=y1;
             card01=card01+1000;
-            var url="Game/card/"+"card_"+card01+"@2x"
+            var url="card_"+card01+"@2x"
+            target.getComponent(cc.Sprite).spriteFrame=self.node.getChildByName(url).getComponent(cc.Sprite).spriteFrame
+            /*
             cc.loader.loadRes(url,cc.SpriteFrame,function(err,spriteFrame) {
             self.card1.getComponent(cc.Sprite).spriteFrame= spriteFrame
-            });
+            }); */
         }, this.card1);
+       
         
         var fun2=cc.callFunc(function(target){
             target.x=x1
             target.y=y1
             card02=card02+1000;
-            url="Game/card/"+"card_"+card02+"@2x"
-            cc.loader.loadRes(url,cc.SpriteFrame,function(err,spriteFrame) {
-            self.card2.getComponent(cc.Sprite).spriteFrame= spriteFrame
-            });
+            var url="card_"+card02+"@2x"
+            target.getComponent(cc.Sprite).spriteFrame=self.node.getChildByName(url).getComponent(cc.Sprite).spriteFrame
         }, this.card2);
         var fun3=cc.callFunc(function(target){
             target.x=x2
             target.y=y2
             card03=card03+1000;
-            url="Game/card/"+"card_"+card03+"@2x"
-            cc.loader.loadRes(url,cc.SpriteFrame,function(err,spriteFrame) {
-            self.card3.getComponent(cc.Sprite).spriteFrame= spriteFrame
-            });
+            var url="card_"+card03+"@2x"
+            target.getComponent(cc.Sprite).spriteFrame=self.node.getChildByName(url).getComponent(cc.Sprite).spriteFrame
         }, this.card3);
         var fun4=cc.callFunc(function(target){
             target.x=x2
             target.y=y2
             card04=card04+1000;
-            url="Game/card/"+"card_"+card04+"@2x"
-            cc.loader.loadRes(url,cc.SpriteFrame,function(err,spriteFrame) {
-            self.card4.getComponent(cc.Sprite).spriteFrame= spriteFrame
-            });
+            var url="card_"+card04+"@2x"
+            target.getComponent(cc.Sprite).spriteFrame=self.node.getChildByName(url).getComponent(cc.Sprite).spriteFrame
         }, this.card4);
 
         var fun11=cc.callFunc(function(target){
