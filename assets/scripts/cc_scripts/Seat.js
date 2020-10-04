@@ -19,6 +19,7 @@ cc.Class({
         _isReady:false,
         _userId:null,
         _holds:[],
+        avatarUrl:"",
     },
 
     // use this for initialization
@@ -28,6 +29,8 @@ cc.Class({
         this._lblName = this.node.getChildByName("name").getComponent(cc.Label);
         this._lblScore = this.node.getChildByName("score").getComponent(cc.Label);
         this._voicemsg = this.node.getChildByName("voicemsg");
+
+        this.icon=this.node.getChildByName("icon").getComponent(cc.Sprite);
 
         this.card=this.node.getChildByName("card")
         this.card.active=false;
@@ -63,12 +66,13 @@ cc.Class({
         
         this.refresh();
         
-        if(this._sprIcon && this._userId){
+        //if(this._sprIcon && this._userId){
             //this._sprIcon.setUserID(this._userId);
-        }
+        //}
     },
     
     onIconClicked:function(){
+        /*
         var iconSprite = this._sprIcon.node.getComponent(cc.Sprite);
         if(this._userId != null && this._userId > 0){
            var seat = cc.vv.gameNetMgr.getSeatByID(this._userId);
@@ -81,6 +85,7 @@ cc.Class({
             }
             //cc.vv.userinfoShow.show(seat.name,seat.userid,iconSprite,sex,seat.ip);         
         }
+        */
     },
     /*
     setcards:function(card01,card02){
@@ -117,6 +122,13 @@ cc.Class({
         cc.log("this._holds.length=",this._holds.length)
         if(this._holds.length>0){
             this.card.active=true
+        }
+        var self=this
+        if(this.avatarUrl !=""){
+            cc.log("this.avatarUrl=",this.avatarUrl)
+            cc.loader.load({url:this.avatarUrl,type:'jpg'},function(err,tex){
+                self.icon.spriteFrame = new cc.SpriteFrame(tex);
+            });
         }
     },
     

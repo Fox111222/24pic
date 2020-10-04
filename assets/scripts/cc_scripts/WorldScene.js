@@ -10,6 +10,8 @@
 
 var KBEngine = require("kbengine");
 
+var cal=require("eval")
+
 cc.Class({
     extends: cc.Component,
     
@@ -294,6 +296,9 @@ cc.Class({
     },
     ondelact:function(){
         var num=this.act.pop()
+        if(this.lasttouchcard==null){
+            return
+        }
         this.lasttouchcard.setScale(0.8)
         if(this.lasttouchcard==this.card1) this.card1selected=false
         if(this.lasttouchcard==this.card2) this.card2selected=false
@@ -315,7 +320,9 @@ cc.Class({
 
         var str=this.act.join("")
         try{
-            var res=eval(str);
+            //var res=eval(str);
+            var res= cal(str)
+            cc.log("ttttttttttttttt",res)
         }
         catch{
             res="syntax error"
@@ -586,6 +593,7 @@ cc.Class({
                     this.seat1.active=true
                     //this.seat1.getComponent("Seat")._isReady=false
                     this.seat1.getComponent("Seat")._userName=entity.accountName
+                    this.seat1.getComponent("Seat").avatarUrl=entity.avatarUrl
                     this.seat1.getComponent("Seat").refresh();  
                     //this.entities[entity.id] = entity;  
                     cc.log("WorldScene::onEnterWorld=",this.seat1.getComponent("Seat")._isReady)
@@ -593,6 +601,7 @@ cc.Class({
                     this.seat2.active=true
                     //this.seat2.getComponent("Seat")._isReady=true
                     this.seat2.getComponent("Seat")._userName=entity.accountName
+                    this.seat2.getComponent("Seat").avatarUrl=entity.avatarUrl
                     this.seat2.getComponent("Seat").refresh();   
                     //this.entities[entity.id] = entity; 
                     cc.log("WorldScene::onEnterWorld=",this.seat2.getComponent("Seat")._isReady)
@@ -910,6 +919,7 @@ cc.Class({
             if(avatar.id==KBEngine.app.player().id) {
                 this.seat1.active=true
                 this.seat1.getComponent("Seat")._userName=avatar.accountName
+                this.seat1.getComponent("Seat").avatarUrl=avatar.avatarUrl
                 //this.seat1.getComponent("Seat")._isReady=true
                 this.seat1.getComponent("Seat").refresh();
                 this.player =  this.seat1;
@@ -918,6 +928,7 @@ cc.Class({
                 this.seat2.active=true
                 //this.seat2.getComponent("Seat")._isReady=true
                 this.seat2.getComponent("Seat")._userName=avatar.accountName
+                this.seat2.getComponent("Seat").avatarUrl=avatar.avatarUrl
                 this.seat2.getComponent("Seat").refresh();
                 this.player =  this.seat2;
                 //this.entities[avatar.id]=this.player 

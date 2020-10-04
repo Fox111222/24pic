@@ -4358,7 +4358,7 @@ KBEngine.KBEngineApp = function(kbengineArgs)
 		
 		if(stream.length() > 0)
 			isOnGround = stream.readInt8();
-		
+		cc.log("entityType=",entityType)
 		entityType = KBEngine.moduledefs[entityType].name;
 		KBEngine.INFO_MSG("KBEngineApp::Client_onEntityEnterWorld: " + entityType + "(" + eid + "), spaceID(" + KBEngine.app.spaceID + "), isOnGround(" + isOnGround + ")!");
 		
