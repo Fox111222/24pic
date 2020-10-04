@@ -12,12 +12,7 @@ var KBEngine = require("kbengine");
 
 cc.Class({
     extends: cc.Component,
-
     properties: {
-       player: {
-           default: null,
-           type: cc.Node,
-       },
         labelHitRate: {
             default: null,
             type: cc.Label,
@@ -82,10 +77,11 @@ cc.Class({
         this.labelTotalTime.string = TOTAL_TIME + 'S';
         this.labelScore.string = SCORE;
 
-        cc.director.preloadScene("WorldScene");
+        //cc.director.preloadScene("WorldScene");
     },
 
     start() {
+        /*
         if (window.wx != undefined) {
             this.buttonRanking.node.active = true;
             this._isShow = false;
@@ -107,6 +103,7 @@ cc.Class({
                 }
             });
         }
+        */
     },
 
     continueGame: function() {
@@ -152,7 +149,7 @@ cc.Class({
     },
 
     update() {
-        this._updateSubDomainCanvas();
+        //this._updateSubDomainCanvas();
     },
 
 });

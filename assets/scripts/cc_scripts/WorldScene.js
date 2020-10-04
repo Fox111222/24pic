@@ -441,7 +441,6 @@ cc.Class({
         KBEngine.Event.deregister("playerReadyStateChange", this, "playerReadyStateChange");
         KBEngine.Event.deregister("onotherNetcut", this);
         KBEngine.Event.deregister("onGameOver", this);
-
         KBEngine.Event.deregister("onDisconnected", this, "onDisconnected");
 		KBEngine.Event.deregister("onConnectionState", this, "onConnectionState");
 		KBEngine.Event.deregister("onReloginBaseappFailed", this, "onReloginBaseappFailed");
@@ -872,26 +871,20 @@ cc.Class({
 
     onGameOver: function(avatarID, isWin, hitRate, totalTime, totalHarm, score) {
         if(avatarID == KBEngine.app.player().id) {
-            if(this.player.name == PIPI_NAME) {
-                GAME_RESULT = isWin ? PIPI_WIN : PIPI_LOSE;
-            } else {
-                GAME_RESULT = isWin ? POP_WIN : POP_LOSE;
-            }
-
             HIT_RATE = hitRate;
             TOTAL_TIME = totalTime;
             TOTAL_HARM = totalHarm;
             SCORE = score;
-            
+            this.unInstallEvents();
             if(isWin) {
                 cc.director.loadScene("WinScene");
             } else {
                 cc.director.loadScene("LoseScene");
             }
         }
-
+        //cc.log("8888888888888888888888888888888888888888888888888888888888888888888888888888888888888")
         //this.disEnableControlPlayer();
-        this.unInstallEvents();
+        //this.unInstallEvents();
         this.player = null;
     },
 

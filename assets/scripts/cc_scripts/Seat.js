@@ -10,7 +10,7 @@ cc.Class({
         _voicemsg:null,
         
         _chatBubble:null,
-        card:null,
+        //card:null,
         _emoji:null,
         _lastChatTime:-1,
         
@@ -19,7 +19,7 @@ cc.Class({
         _isReady:false,
         _userId:null,
         _holds:[],
-        avatarUrl:"",
+        //avatarUrl:"",
     },
 
     // use this for initialization
@@ -34,6 +34,7 @@ cc.Class({
 
         this.card=this.node.getChildByName("card")
         this.card.active=false;
+        this.avatarUrl=""
 
         if(this._voicemsg){
             this._voicemsg.active = false;
