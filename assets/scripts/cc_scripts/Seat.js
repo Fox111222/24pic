@@ -64,7 +64,13 @@ cc.Class({
         if(this._emoji != null){
             this._emoji.active = false;
         }
-        
+        var self=this
+        var randvalue=Math.floor((Math.random()*3))  //0--3之间整数
+        if(this.avatarUrl ==""){
+            cc.loader.loadRes("head"+randvalue+".png",cc.SpriteFrame,function(err,spriteFrame) {
+                self.icon.spriteFrame= spriteFrame
+                });
+        }
         this.refresh();
         
         //if(this._sprIcon && this._userId){

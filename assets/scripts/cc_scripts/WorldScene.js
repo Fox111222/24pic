@@ -597,6 +597,7 @@ cc.Class({
                     //this.entities[entity.id] = entity;  
                     cc.log("WorldScene::onEnterWorld=",this.seat1.getComponent("Seat")._isReady)
             }else{  //scalex==-1,
+                this.node.getChildByName("bg2").getChildByName("matching").active=false;
                     this.seat2.active=true
                     //this.seat2.getComponent("Seat")._isReady=true
                     this.seat2.getComponent("Seat")._userName=entity.accountName

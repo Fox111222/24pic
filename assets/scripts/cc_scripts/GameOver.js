@@ -1,12 +1,3 @@
-// Learn cc.Class:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
 var KBEngine = require("kbengine");
 
@@ -41,34 +32,11 @@ cc.Class({
         rankingView: cc.Node,
         rankingScrollView: cc.Sprite,
     },
-
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad () {
         this.isShowRankingView = false;
-        //this.buttonRanking.node.active = false;
-        //this.rankingView.active = false;
+        this.buttonRanking.node.active = false;
+        this.rankingView.active = false;
         var result = null;
-        /*
-        switch(GAME_RESULT)
-        {
-            case PIPI_WIN:
-                result = cc.instantiate(this.pipiWin);
-                break;
-            case PIPI_LOSE:
-                result = cc.instantiate(this.pipiLose);
-                break;
-            case POP_WIN:
-                result = cc.instantiate(this.popWin);
-                break;
-            case POP_LOSE:
-                result = cc.instantiate(this.popLose);
-                break;
-        }
-
-        this.player.addChild(result);
-        result.setPosition(0, 0);
-        */
     
         KBEngine.INFO_MSG("game is over, result: rate=%f harm=%f time=%f score=%f", HIT_RATE, TOTAL_HARM, TOTAL_TIME, SCORE);
         var rate = HIT_RATE * 100;
@@ -77,20 +45,27 @@ cc.Class({
         this.labelTotalTime.string = TOTAL_TIME + 'S';
         this.labelScore.string = SCORE;
 
-        //cc.director.preloadScene("WorldScene");
+        cc.director.preloadScene("WorldScene");
     },
 
     start() {
-        /*
+        
         if (window.wx != undefined) {
-            this.buttonRanking.node.active = true;
+            this.buttonRanking.node.active = true;  //排行榜button
             this._isShow = false;
             this.tex = new cc.Texture2D();
 
-            sharedCanvas.width = cc.winSize.width;
-            sharedCanvas.height = cc.winSize.height;
+            //sharedCanvas.width = this.rankingScrollView.node.width;//cc.winSize.width/2;
+            //sharedCanvas.height = this.rankingScrollView.node.height;//cc.winSize.height;
+            let openDataContext = wx.getOpenDataContext()
 
-            wx.setUserCloudStorage({
+            this.sharedCanvas = openDataContext.canvas
+    
+            this.sharedCanvas.width = 720;
+    
+            this.sharedCanvas.height = 720;
+
+            wx.setUserCloudStorage({  //存储数据
                 KVDataList: [{ key: 'score', value: ""+SCORE }],
                 success: function (res) {
                     KBEngine.INFO_MSG('setUserCloudStorage  success' + JSON.stringify(res));
@@ -103,7 +78,7 @@ cc.Class({
                 }
             });
         }
-        */
+        
     },
 
     continueGame: function() {
@@ -122,8 +97,9 @@ cc.Class({
         this.isShowRankingView = !this.isShowRankingView;
         this.rankingView.active = this.isShowRankingView;
         KBEngine.INFO_MSG("show ranking view: " + this.isShowRankingView.toString());
+        cc.log("show ranking view: this.rankingView.active=",this.isShowRankingView);
         // 发消息给子域
-        let openDataContext = wx.getOpenDataContext();
+        let openDataContext = wx.getOpenDataContext();//获得开放数据域的实例，获得的实例调用postMessage，向子域发送数据，子域通过开启wx.onMessage()接受主域传达的消息
         openDataContext.postMessage({
             message: this.isShowRankingView ? 'Show' : 'Hide',
         });
@@ -143,13 +119,13 @@ cc.Class({
         if (window.wx == undefined)  return;
         if (!this.tex)  return;
         
-        this.tex.initWithElement(sharedCanvas);
+        this.tex.initWithElement(this.sharedCanvas);
         this.tex.handleLoadedTexture();
         this.rankingScrollView.spriteFrame = new cc.SpriteFrame(this.tex);
     },
 
     update() {
-        //this._updateSubDomainCanvas();
+        this._updateSubDomainCanvas();
     },
 
 });

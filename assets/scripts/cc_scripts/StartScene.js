@@ -52,7 +52,7 @@ cc.Class({
             this.wxLoginNative();
             //window.wc=true;
         } else {
-            this.textinput_name.placeholder="请取拽点的名..."
+            this.textinput_name.placeholder="请输入你的昵称..."
             this.userName=this.textinput_name.string         
         }
      },

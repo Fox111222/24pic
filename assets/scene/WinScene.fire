@@ -198,7 +198,7 @@
       "array": [
         0,
         0,
-        269.42050840313846,
+        274.57337012725503,
         0,
         0,
         0,
@@ -1660,7 +1660,9 @@
       "__id__": 29
     },
     "_enabled": true,
-    "_normalMaterial": null,
+    "_normalMaterial": {
+      "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+    },
     "_grayMaterial": null,
     "duration": 0.1,
     "zoomScale": 1.2,
@@ -1951,7 +1953,9 @@
       "__id__": 35
     },
     "_enabled": true,
-    "_normalMaterial": null,
+    "_normalMaterial": {
+      "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+    },
     "_grayMaterial": null,
     "duration": 0.1,
     "zoomScale": 1.2,
@@ -2331,7 +2335,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "02yP0cMhREiJnp4/UqLrAp"
+    "_id": "79OZEvpalGy5OKBAjFLtA+"
   },
   {
     "__type__": "cc.Label",
@@ -2363,7 +2367,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "ab6HRSfIpMsL6gHxJ4j3tD"
+    "_id": "1dVtIkeb1PW4tnGKMnmTCG"
   },
   {
     "__type__": "cc.RichText",
@@ -2411,8 +2415,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1136,
-      "height": 640
+      "width": 720,
+      "height": 720
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2423,8 +2427,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
-        0,
+        -0.529,
+        -49.031,
         0,
         0,
         0,
@@ -2666,8 +2670,8 @@
     "target": {
       "__id__": 2
     },
-    "component": "GameOver",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "c48efyihTZETIsXQsDfrIx0",
     "handler": "onCloseRankingView",
     "customEventData": ""
   },
