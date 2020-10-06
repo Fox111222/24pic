@@ -67,7 +67,7 @@ cc.Class({
         var self=this
         var randvalue=Math.floor((Math.random()*3))  //0--3之间整数
         if(this.avatarUrl ==""){
-            cc.loader.loadRes("head"+randvalue+".png",cc.SpriteFrame,function(err,spriteFrame) {
+            cc.loader.loadRes("head"+randvalue,cc.SpriteFrame,function(err,spriteFrame) {
                 self.icon.spriteFrame= spriteFrame
                 });
         }

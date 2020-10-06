@@ -10,6 +10,7 @@
 
 var KBEngine = require("kbengine");
 
+
 var cal=require("eval")
 
 cc.Class({
@@ -24,6 +25,14 @@ cc.Class({
         seat2: {
             default: null,
             type: cc.Node,
+        },
+        setting:{
+            default: null,
+            type: cc.Prefab,
+        },
+        chat:{
+            default: null,
+            type: cc.Prefab,
         },
         /*
         player: {
@@ -77,8 +86,35 @@ cc.Class({
         */
     },
 
+    showsetting:function(){
+        this.isshowsetting = !this.isshowsetting;
+        this.settingNode.active = this.isshowsetting;
+
+    },
+    showchat:function(){
+        this.isshowchat = !this.isshowchat;
+        this.chatNode.active = this.isshowchat;
+        cc.log("showchat")
+
+    },
     onLoad () {
         this.installEvents();
+        this._timeLabel = cc.find("Canvas/bg2/time").getComponent(cc.Label);
+
+        this.isshowsetting=false
+        //this.settingNode=cc.instantiate(this.setting)
+        //this.node.addChild(this.settingNode)
+        //this.settingNode=this.node.getChildByName("bg2").getChildByName("settings")
+        this.settingNode=cc.find("Canvas/settings")
+        this.settingNode.active = this.isshowsetting;
+
+        
+        this.isshowchat=false
+        //this.chatNode=cc.instantiate(this.chat)
+        //this.node.addChild(this.chatNode)
+        this.chatNode=cc.find("Canvas/chat")
+        this.chatNode.active = this.isshowchat;
+        
         if(cc.sys.platform == cc.sys.WECHAT_GAME) {
             this.enableWxShare();
         }
@@ -266,8 +302,33 @@ cc.Class({
             }
         }*/
     },
+    getBatteryPercent:function(){
+        if(cc.sys.isNative){
+            if(cc.sys.os == cc.sys.OS_ANDROID){
+                return jsb.reflection.callStaticMethod(this.ANDROID_API, "getBatteryPercent", "()F");
+            }
+            else if(cc.sys.os == cc.sys.OS_IOS){
+                return jsb.reflection.callStaticMethod(this.IOS_API, "getBatteryPercent");
+            }            
+        }
+        return 0.9;
+    },
     update: function (dt) {
         this.label.string=this.act.join("")
+        var minutes = Math.floor(Date.now()/1000/60);
+        if(this._lastMinute != minutes){
+            this._lastMinute = minutes;
+            var date = new Date();
+            var h = date.getHours();
+            h = h < 10? "0"+h:h;
+            
+            var m = date.getMinutes();
+            m = m < 10? "0"+m:m;
+            this._timeLabel.string = "" + h + ":" + m;             
+        }
+
+        var power = cc.find("Canvas/bg2/power")
+        power.scaleX = this.getBatteryPercent();
         
     },
     onaddact:function(){

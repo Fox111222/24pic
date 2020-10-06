@@ -38,7 +38,12 @@ cc.Class({
     onLoad: function () {
         this.initKbengine();
         this.installEvents();
-        //this.loadItemPrefab();      
+        //this.loadItemPrefab();
+        //window.AudioMgr=this.node.addComponent("AudioMgr")      
+        var AudioMgr = require("AudioMgr");
+        window.AudioMgr = new AudioMgr();
+        window.AudioMgr.init();
+
         this.userName = cc.sys.platform != cc.sys.WECHAT_GAME ? this.randomstring(4): '';
         this.btn_start.node.on('click', this.startGame, this);
         this.code = "";
