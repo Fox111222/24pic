@@ -10,7 +10,6 @@
 
 var KBEngine = require("kbengine");
 
-
 var cal=require("eval")
 
 cc.Class({
@@ -87,20 +86,38 @@ cc.Class({
     },
 
     showsetting:function(){
-        this.isshowsetting = !this.isshowsetting;
+        window.AudioMgr.playSFX("ui_click")
+        this.isshowsetting = !this.settingNode.active;
         this.settingNode.active = this.isshowsetting;
 
     },
     showchat:function(){
-        this.isshowchat = !this.isshowchat;
+        window.AudioMgr.playSFX("ui_click")
+        this.isshowchat = !this.chatNode.active;
         this.chatNode.active = this.isshowchat;
         cc.log("showchat")
 
     },
     onLoad () {
         this.installEvents();
-        this._timeLabel = cc.find("Canvas/bg2/time").getComponent(cc.Label);
+        /*
+        this._MusicDict = {}
+        var _this = this;
+        cc.loader.loadResDir('sound/', function (count, totalCount, res) {
+                            }, function (err, res) {
+                                if (err == null) {
+                                    _this._MusicDict = {};
+                                    res.forEach(clip => {
+                                    _this._MusicDict[clip.name] = clip;
+                                    });
+                                } else {
+                                    console.error(err);
+                                }
+                            })
+        */
+        window.AudioMgr.playBGM("bgMain")
 
+        this._timeLabel = cc.find("Canvas/bg2/time").getComponent(cc.Label);
         this.isshowsetting=false
         //this.settingNode=cc.instantiate(this.setting)
         //this.node.addChild(this.settingNode)
@@ -108,7 +125,6 @@ cc.Class({
         this.settingNode=cc.find("Canvas/settings")
         this.settingNode.active = this.isshowsetting;
 
-        
         this.isshowchat=false
         //this.chatNode=cc.instantiate(this.chat)
         //this.node.addChild(this.chatNode)
@@ -187,6 +203,7 @@ cc.Class({
 
         this.gameHint=this.node.getChildByName("gameHint").getComponent(cc.Label)
         this.gameHint.node.opacity=0;
+        this.gameHint.node.active=false;
 
         this.seat1= this.node.getChildByName("bg2").getChildByName("seat1")
         this.seat1.active=false
@@ -215,6 +232,7 @@ cc.Class({
         */
     },
     onTouchEndedcard1:function(){
+        window.AudioMgr.playSFX("ui_click")
         if(this.act.length-1>=0){
             if(this.act[this.act.length-1]==this.card1num ||this.act[this.act.length-1]==this.card2num||this.act[this.act.length-1]==this.card3num||this.act[this.act.length-1]==this.card4num)
             return
@@ -235,6 +253,7 @@ cc.Class({
         }*/
     },
     onTouchEndedcard2:function(){
+        window.AudioMgr.playSFX("ui_click")
         if(this.act.length-1>=0){
             if(this.act[this.act.length-1]==this.card1num ||this.act[this.act.length-1]==this.card2num||this.act[this.act.length-1]==this.card3num||this.act[this.act.length-1]==this.card4num)
             return
@@ -256,6 +275,7 @@ cc.Class({
 
     },
     onTouchEndedcard3:function(){
+        window.AudioMgr.playSFX("ui_click")
         if(this.act.length-1>=0){
             if(this.act[this.act.length-1]==this.card1num ||this.act[this.act.length-1]==this.card2num||this.act[this.act.length-1]==this.card3num||this.act[this.act.length-1]==this.card4num)
             return
@@ -277,6 +297,7 @@ cc.Class({
 
     },
     onTouchEndedcard4:function(){
+        window.AudioMgr.playSFX("ui_click")
         if(this.act.length-1>=0){
             if(this.act[this.act.length-1]==this.card1num ||this.act[this.act.length-1]==this.card2num||this.act[this.act.length-1]==this.card3num||this.act[this.act.length-1]==this.card4num)
             return
@@ -332,30 +353,37 @@ cc.Class({
         
     },
     onaddact:function(){
+        window.AudioMgr.playSFX("ui_click")
         this.act.push("+")
 
     },
     onreduceact:function(){
+        window.AudioMgr.playSFX("ui_click")
         this.act.push("-")
 
     },
     onmulact:function(){
+        window.AudioMgr.playSFX("ui_click")
         this.act.push("*")
 
     },
     ondivact:function(){
+        window.AudioMgr.playSFX("ui_click")
         this.act.push("/")
 
     },
     onlefact:function(){
+        window.AudioMgr.playSFX("ui_click")
         this.act.push("(")
 
     },
     onrigact:function(){
+        window.AudioMgr.playSFX("ui_click")
         this.act.push(")")
 
     },
     ondelact:function(){
+        window.AudioMgr.playSFX("ui_click")
         var num=this.act.pop()
         if(this.lasttouchcard==null){
             return
@@ -369,6 +397,7 @@ cc.Class({
 
     },
     onsureact:function(){
+        window.AudioMgr.playSFX("ui_click")
         this.card1selected=false
         this.card2selected=false
         this.card3selected=false
@@ -422,6 +451,10 @@ cc.Class({
         KBEngine.Event.register("onReloginBaseappSuccessfully", this, "onReloginBaseappSuccessfully");
 
         KBEngine.Event.register("onAvatarContinueGame", this, "onAvatarContinueGame");
+
+        KBEngine.Event.register("onquick_chat", this, "onquick_chat");
+        KBEngine.Event.register("onemoji", this, "onemoji");
+        KBEngine.Event.register("oniptChat", this, "oniptChat");
         
         /*
         // common
@@ -507,6 +540,10 @@ cc.Class({
 		KBEngine.Event.deregister("onReloginBaseappFailed", this, "onReloginBaseappFailed");
         KBEngine.Event.deregister("onReloginBaseappSuccessfully", this, "onReloginBaseappSuccessfully");
         KBEngine.Event.deregister("onAvatarContinueGame", this, "onAvatarContinueGame");
+
+        KBEngine.Event.deregister("onquick_chat", this, "onquick_chat");
+        KBEngine.Event.deregister("onemoji", this, "onemoji");
+        KBEngine.Event.deregister("oniptChat", this, "oniptChat");
         /*
         cc.log("test3")
         KBEngine.INFO_MSG("world scene unInstallEvents ......");
@@ -538,6 +575,42 @@ cc.Class({
 
         */
     },
+
+    onquick_chat:function(eid,idx){
+        //cc.log("7777777777777777777777777777777777777777quick_chat=",eid,idx)
+        var strstr=this.node.getComponent("Chat").getQuickChatInfo(idx)["content"]
+        //cc.log("888888888888888888888888888888888888quick_chat=",strstr)
+        if(KBEngine.app.player().id==eid) {
+            this.seat1.getComponent("Seat").chat(strstr)
+            //this.seat1.getComponent("Seat").refresh();  
+        }
+        else{
+            this.seat2.getComponent("Seat").chat(strstr)
+            //this.seat2.getComponent("Seat").refresh();  
+        }
+    },
+    onemoji:function(eid,name){
+        //cc.log("888888888888888888888888888888888888emoji=",name)
+        if(KBEngine.app.player().id==eid) {
+            this.seat1.getComponent("Seat").emoji(name)
+            //this.seat1.getComponent("Seat").refresh();  
+        }
+        else{
+            this.seat2.getComponent("Seat").emoji(name)
+            //this.seat2.getComponent("Seat").refresh();  
+        }
+    },
+    oniptChat:function(eid,strstr){
+        cc.log("888888888888888888888888888888888888eiptChat=",strstr)
+        if(KBEngine.app.player().id==eid) {
+            this.seat1.getComponent("Seat").chat(strstr)
+           // this.seat1.getComponent("Seat").refresh();  
+        }
+        else{
+            this.seat2.getComponent("Seat").chat(strstr)
+            //this.seat2.getComponent("Seat").refresh();     
+        }
+    },
     playerReadyStateChange:function(eid,state){
         cc.log("playerReadyStateChange")
         if(KBEngine.app.player().id==eid) {   
@@ -563,6 +636,7 @@ cc.Class({
             this.seat2.active=false;
         }
         else{
+            this.gameHint.node.active=true
             this.gameHint.string = "其他玩家掉线，请等待.......";
         }
         this.gameHint.node.opacity=255
@@ -706,6 +780,9 @@ cc.Class({
     },
 
     newTurn: function(avatar,eid, second,card01,card02,card03,card04){
+        window.AudioMgr.stopBGM()
+        window.AudioMgr.playSFX("turn")
+
         this.gameState.newTurn(second);
         this.clock.active=true
         if(!this.gameState.isGameStart()) {

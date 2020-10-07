@@ -1,6 +1,5 @@
 cc.Class({
     extends: cc.Component,
-
     properties: {
       
         _btnYXOpen:{
@@ -56,10 +55,10 @@ cc.Class({
         this.initButtonHandler(this.node.getChildByName("btn_exit"));
         
         
-       // this.initButtonHandler(this._btnYXOpen);
-        ///this.initButtonHandler(this._btnYXClose);
-        //this.initButtonHandler(this._btnYYOpen);
-        //this.initButtonHandler(this._btnYYClose);
+        this.initButtonHandler(this._btnYXOpen);
+        this.initButtonHandler(this._btnYXClose);
+        this.initButtonHandler(this._btnYYOpen);
+        this.initButtonHandler(this._btnYYClose);
         
 
         var slider = this.node.getChildByName("yinxiao").getChildByName("progress");
@@ -110,6 +109,7 @@ cc.Class({
     },
     
     onBtnClicked:function(event){
+        window.AudioMgr.playSFX("ui_click")
         cc.log("onBtnClicked",event.target.name)
         if(event.target.name == "btn_close"){
             this.node.active = false;

@@ -37,6 +37,36 @@ KBEngine.Avatar = KBEngine.Entity.extend({
             }
 
         },
+        quick_chat:function(idx){
+            cc.log("quick_chat:cellCall",idx)
+            this.cellCall("quick_chat",idx);
+        },
+        emoji:function(name){
+            cc.log("emoji:cellCall",name)
+            this.cellCall("emoji",name);
+        },
+        iptChat:function(strstr){
+            cc.log("iptChat:cellCall",strstr)
+            this.cellCall("iptChat",strstr);
+        },
+        onquick_chat:function(eid,idx){
+            cc.log("quick_chat:receive",eid,idx)
+            if(this.isPlayer()) {
+                KBEngine.Event.fire("onquick_chat", eid,idx);
+            }
+        },
+        onemoji:function(eid,name){
+            cc.log("emoji:receive",eid,name)
+            if(this.isPlayer()) {
+                KBEngine.Event.fire("onemoji", eid,name);
+            }
+        },
+        oniptChat:function(eid,strstr){
+            cc.log("iptChat:receive",eid,strstr)
+            if(this.isPlayer()) {
+                KBEngine.Event.fire("oniptChat", eid,strstr);
+            }
+        },
         joinRoom: function()
         {
             KBEngine.INFO_MSG("avatar " + this.id + " join room");

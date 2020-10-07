@@ -1,3 +1,5 @@
+var KBEngine = require("kbengine");
+
 cc.Class({
     extends: cc.Component,
 
@@ -31,7 +33,7 @@ cc.Class({
         //this._btnChat = this.node.getChildByName("btn_chat");
         //this._btnChat.active = cc.vv.replayMgr.isReplay() == false;
         
-        this._chatRoot = this.node
+        this._chatRoot = this.node.getChildByName("chat");
         this._chatRoot.active = false;
         
         this._tabQuick = this._chatRoot.getChildByName("quickchatlist");
@@ -52,12 +54,13 @@ cc.Class({
         this._quickChatInfo["item8"] = {index:8,content:"不要吵了，专心玩游戏吧！",sound:"fix_msg_9.mp3"};
     },
     
-    getQuickChatInfo(index){
+    getQuickChatInfo:function(index){
         var key = "item" + index;
         return this._quickChatInfo[key];   
     },
     
     onBtnChatClicked:function(){
+        window.AudioMgr.playSFX("ui_click")
         this._chatRoot.active = true;
     },
     
@@ -66,6 +69,7 @@ cc.Class({
     },
     
     onTabClicked:function(event){
+        window.AudioMgr.playSFX("ui_click")
         if(event.target.name == "tabQuick"){
             this._tabQuick.active = true;
             this._tabEmoji.active = false;
@@ -77,23 +81,38 @@ cc.Class({
     },
     
     onQuickChatItemClicked:function(event){
+        window.AudioMgr.playSFX("ui_click")
         this._chatRoot.active = false;
         var info = this._quickChatInfo[event.target.name];
         //cc.vv.net.send("quick_chat",info.index); 
+        var player = KBEngine.app.player();
+        if(player){
+            player.quick_chat(info.index)
+        }
     },
     
     onEmojiItemClicked:function(event){
-        console.log(event.target.name);
+        window.AudioMgr.playSFX("ui_click")
+        cc.log(event.target.name);
         this._chatRoot.active = false;
         //cc.vv.net.send("emoji",event.target.name);
+        var player = KBEngine.app.player();
+        if(player){
+            player.emoji(event.target.name)
+        }
     },
     
     onBtnSendChatClicked:function(){
+        window.AudioMgr.playSFX("ui_click")
         this._chatRoot.active = false;
         if(this._iptChat.string == ""){
             return;
         }
         //cc.vv.net.send("chat",this._iptChat.string);
+        var player = KBEngine.app.player();
+        if(player){
+            player.iptChat(this._iptChat.string)
+        }
         this._iptChat.string = "";
     },
 

@@ -46,22 +46,42 @@ cc.Class({
     // },
     
     getUrl:function(url){
-        return cc.url.raw("resources/sounds/" + url);
+        //return cc.url.raw("sound/" + url);
+        return "sound/" + url
     },
-    
+    stopBGM(){
+        cc.log("stopBGMstopBGMstopBGMstopBGM")
+        if(this.bgmAudioID >= 0){
+            cc.audioEngine.stop(this.bgmAudioID);
+            this.bgmAudioID=-1;
+        }
+
+    },
     playBGM(url){
         var audioUrl = this.getUrl(url);
-        console.log(audioUrl);
+        cc.log(audioUrl);
         if(this.bgmAudioID >= 0){
             cc.audioEngine.stop(this.bgmAudioID);
         }
-        this.bgmAudioID = cc.audioEngine.play(audioUrl,true,this.bgmVolume);
+        //this.bgmAudioID = cc.audioEngine.play(audioUrl,true,this.bgmVolume);
+        
+        var self=this
+        cc.loader.loadRes(audioUrl,cc.AudioClip, function (err, clip) {
+            self.bgmAudioID=cc.audioEngine.play(clip,true,this.bgmVolume);
+            //cc.log("888888888888888888888888888self.bgmAudioID=",self.bgmAudioID)
+        });
+        
     },
     
     playSFX(url){
         var audioUrl = this.getUrl(url);
         if(this.sfxVolume > 0){
-            var audioId = cc.audioEngine.play(audioUrl,false,this.sfxVolume);    
+            //var audioId = cc.audioEngine.play(audioUrl,false,this.sfxVolume);
+            var self=this
+            cc.loader.loadRes(audioUrl,cc.AudioClip, function (err, clip) {
+                var audioId=cc.audioEngine.play(clip,false,self.sfxVolume);
+                //cc.log("888888888888888888888888888self.bgmAudioID=",self.bgmAudioID)
+            });    
         }
     },
     

@@ -33,9 +33,11 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
     EditBoxclick:function(){
         cc.log("EditBoxclick")
+        window.AudioMgr.playSFX("ui_click")
         this.userName=this.textinput_name.string
     },
     onLoad: function () {
+        
         this.initKbengine();
         this.installEvents();
         //this.loadItemPrefab();
@@ -60,6 +62,7 @@ cc.Class({
             this.textinput_name.placeholder="请输入你的昵称..."
             this.userName=this.textinput_name.string         
         }
+        window.AudioMgr.playBGM("bgm")
      },
 
      hello () {
@@ -402,6 +405,7 @@ cc.Class({
      },
  
     startGame: function (event) {
+        window.AudioMgr.playSFX("ui_click")
         //cc.log("cc.sys.platform",cc.sys.platform,cc.sys.WECHAT_GAME)
         if(cc.sys.platform == cc.sys.WECHAT_GAME){
             this.userName=cc.sys.localStorage.getItem("userName");

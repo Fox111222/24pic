@@ -19,6 +19,7 @@ cc.Class({
         _isReady:false,
         _userId:null,
         _holds:[],
+        _chatstr:"",
         //avatarUrl:"",
     },
 
@@ -64,6 +65,7 @@ cc.Class({
         if(this._emoji != null){
             this._emoji.active = false;
         }
+        /*
         var self=this
         var randvalue=Math.floor((Math.random()*3))  //0--3之间整数
         if(this.avatarUrl ==""){
@@ -71,6 +73,7 @@ cc.Class({
                 self.icon.spriteFrame= spriteFrame
                 });
         }
+        */
         this.refresh();
         
         //if(this._sprIcon && this._userId){
@@ -215,7 +218,7 @@ cc.Class({
    
     // called every frame, uncomment this function to activate update callback
     update: function (dt) {
-        /*
+        
         if(this._lastChatTime > 0){
             this._lastChatTime -= dt;
             if(this._lastChatTime < 0){
@@ -223,7 +226,7 @@ cc.Class({
                 this._emoji.active = false;
                 this._emoji.getComponent(cc.Animation).stop();
             }
-        }*/
+        }
     },
     
 });

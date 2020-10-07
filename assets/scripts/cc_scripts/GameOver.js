@@ -33,6 +33,9 @@ cc.Class({
         rankingScrollView: cc.Sprite,
     },
     onLoad () {
+
+        window.AudioMgr.playSFX("win")
+
         this.isShowRankingView = false;
         this.buttonRanking.node.active = false;
         this.rankingView.active = false;
@@ -82,6 +85,7 @@ cc.Class({
     },
 
     continueGame: function() {
+        window.AudioMgr.playSFX("ui_click")
         var player = KBEngine.app.player();
         if(player == undefined || !player.inWorld)
             return;
@@ -92,6 +96,7 @@ cc.Class({
     },
 
     onDisplayRankingView() {
+        window.AudioMgr.playSFX("ui_click")
         if (window.wx == undefined)  return;
        
         this.isShowRankingView = !this.isShowRankingView;
@@ -106,6 +111,7 @@ cc.Class({
     },
 
     onCloseRankingView(){
+        window.AudioMgr.playSFX("ui_click")
         this.rankingView.active = false;
         KBEngine.INFO_MSG("close ranking view: ");
         // 发消息给子域
