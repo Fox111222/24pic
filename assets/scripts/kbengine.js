@@ -1764,6 +1764,7 @@ KBEngine.Entity = KBEngine.Class.extend(
 
 	onEnterWorld : function()
 	{
+		cc.log("entity.onEnterWorld")
 	},
 		
 	leaveWorld : function()

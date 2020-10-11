@@ -134,7 +134,7 @@ cc.Class({
             this.card.active=true
         }
         var self=this
-        if(this.avatarUrl !=""){
+        if(this.avatarUrl !="" && this.avatarUrl !=null){
             cc.log("this.avatarUrl=",this.avatarUrl)
             cc.loader.load({url:this.avatarUrl,type:'jpg'},function(err,tex){
                 self.icon.spriteFrame = new cc.SpriteFrame(tex);

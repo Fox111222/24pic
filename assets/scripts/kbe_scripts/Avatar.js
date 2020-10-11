@@ -80,9 +80,19 @@ KBEngine.Avatar = KBEngine.Entity.extend({
         },
         onEnterWorld : function()
         {
+            cc.log("avatar.onEnterWorld.......")
             this._super();
             if(this.isPlayer()) {
                 KBEngine.Event.fire("onAvatarEnterWorld", this);
+            }		
+        },
+        onEnterWorld2 : function(eid)
+        {
+            cc.log("avatar.onEnterWorld2.......",this.id , KBEngine.app.entity_id)
+
+            //this._super();
+            if(this.isPlayer()) {
+                KBEngine.Event.fire("onEnterWorld2", eid);
             }		
         },
 
@@ -236,7 +246,9 @@ KBEngine.Avatar = KBEngine.Entity.extend({
             KBEngine.INFO_MSG("Game is over: avatar " + this.id + "win= " + isWin.toString());
             KBEngine.Event.fire("onGameOver", this.id, isWin, hitRate, totalTime, totalHarm, score);
         },
-
+        updategamestuts:function(num){
+            KBEngine.Event.fire("updategamestuts",num);
+        },
         //石头出界，重置石头
         resetItem: function(itemID)
         {

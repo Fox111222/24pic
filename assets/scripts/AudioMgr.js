@@ -67,7 +67,7 @@ cc.Class({
         
         var self=this
         cc.loader.loadRes(audioUrl,cc.AudioClip, function (err, clip) {
-            self.bgmAudioID=cc.audioEngine.play(clip,true,this.bgmVolume);
+            self.bgmAudioID=cc.audioEngine.play(clip,true,self.bgmVolume);
             //cc.log("888888888888888888888888888self.bgmAudioID=",self.bgmAudioID)
         });
         

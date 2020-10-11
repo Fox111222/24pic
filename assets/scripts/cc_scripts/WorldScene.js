@@ -455,6 +455,10 @@ cc.Class({
         KBEngine.Event.register("onquick_chat", this, "onquick_chat");
         KBEngine.Event.register("onemoji", this, "onemoji");
         KBEngine.Event.register("oniptChat", this, "oniptChat");
+
+        KBEngine.Event.register("onEnterWorld2", this, "onEnterWorld2");
+        KBEngine.Event.register("updategamestuts", this, "updategamestuts");
+        
         
         /*
         // common
@@ -544,6 +548,9 @@ cc.Class({
         KBEngine.Event.deregister("onquick_chat", this, "onquick_chat");
         KBEngine.Event.deregister("onemoji", this, "onemoji");
         KBEngine.Event.deregister("oniptChat", this, "oniptChat");
+
+        KBEngine.Event.deregister("onEnterWorld2", this, "onEnterWorld2");
+        KBEngine.Event.deregister("updategamestuts", this, "updategamestuts");
         /*
         cc.log("test3")
         KBEngine.INFO_MSG("world scene unInstallEvents ......");
@@ -629,20 +636,28 @@ cc.Class({
         this.newTurn(curID,time)
 
     },
+    updategamestuts:function(num){
+        if(num==1){//服务器正在playing中
+            this.node.getChildByName("start").active=false
+        }
+        else{//一局已结束
+            this.node.getChildByName("start").active=true
+        }
+    },
     onotherNetcut:function(curID){
-        cc.log("onotherNetcut")
+        cc.log("onotherNetcut。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。")
         if(curID==0){
             this.gameHint.string = "其他玩逃命，游戏马上结束.......";
             this.seat2.active=false;
         }
         else{
             this.gameHint.node.active=true
-            this.gameHint.string = "其他玩家掉线，请等待.......";
+            this.gameHint.string = "玩家"+KBEngine.app.entities[curID].accountName +"掉线，请等待.......";
         }
         this.gameHint.node.opacity=255
         var action = cc.fadeTo(13.0, 0);
         this.gameHint.node.runAction(action);
-        this.gameState.newTurn(15);
+        //this.gameState.newTurn(15);
 
         
     },
@@ -743,7 +758,31 @@ cc.Class({
                 }    
             }
     },
-
+    
+    onEnterWorld2: function (entityID) {
+        cc.log("onEnterWorld2")
+        var entity=KBEngine.app.entities[entityID]
+        //SCALE=1;
+        cc.log("onEnterWorld entity.id=",entity.id)
+            if(KBEngine.app.player().id==entity.id) {    
+                    this.seat1.active=true
+                    //this.seat1.getComponent("Seat")._isReady=false
+                    this.seat1.getComponent("Seat")._userName=entity.accountName
+                    this.seat1.getComponent("Seat").avatarUrl=entity.avatarUrl
+                    this.seat1.getComponent("Seat").refresh();  
+                    //this.entities[entity.id] = entity;  
+                    cc.log("WorldScene::onEnterWorld=",this.seat1.getComponent("Seat")._isReady)
+            }else{  //scalex==-1,
+                    this.node.getChildByName("bg2").getChildByName("matching").active=false;
+                    this.seat2.active=true
+                    //this.seat2.getComponent("Seat")._isReady=true
+                    this.seat2.getComponent("Seat")._userName=entity.accountName
+                    this.seat2.getComponent("Seat").avatarUrl=entity.avatarUrl
+                    this.seat2.getComponent("Seat").refresh();   
+                    //this.entities[entity.id] = entity; 
+                    cc.log("WorldScene::onEnterWorld=",this.seat2.getComponent("Seat")._isReady)
+                }    
+    },
     onLeaveWorld: function (entity) {
         cc.log("onLeaveWorld",entity.id,entity.className)
         /*
@@ -858,6 +897,7 @@ cc.Class({
             A_act4=cc.moveTo(1,cc.v2(x2,y2))
         }
         else if(eid==KBEngine.app.player().id){
+            cc.log("eid==KBEngine.app.player().id,moveto seat1",eid,KBEngine.app.player().id)
             A_act1=cc.moveTo(1,cc.v2(x1,y1))
             A_act2=cc.moveTo(1,cc.v2(x1,y1))
             A_act3=cc.moveTo(1,cc.v2(x1,y1))
@@ -865,6 +905,7 @@ cc.Class({
 
         }
         else{
+            cc.log("eid!=KBEngine.app.player().id,moveto seat2",eid,KBEngine.app.player().id)
             A_act1=cc.moveTo(1,cc.v2(x2,y2))
             A_act2=cc.moveTo(1,cc.v2(x2,y2))
             A_act3=cc.moveTo(1,cc.v2(x2,y2))

@@ -352,7 +352,7 @@ cc.Class({
         }                
         cc.director.loadScene("WorldScene", ()=> {
             KBEngine.INFO_MSG("load world scene finished");
-            var player = KBEngine.app.player();
+            var player = KBEngine.app.player();//KBEngine.app.entities[KBEngine.app.entity_id];
             if(player){
                 player.joinRoom();
             }
