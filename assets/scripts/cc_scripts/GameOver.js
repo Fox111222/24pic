@@ -34,19 +34,19 @@ cc.Class({
     },
     onLoad () {
 
-        window.AudioMgr.playSFX("win")
+        //window.AudioMgr.playSFX("win")
 
         this.isShowRankingView = false;
         this.buttonRanking.node.active = false;
         this.rankingView.active = false;
         var result = null;
     
-        KBEngine.INFO_MSG("game is over, result: rate=%f harm=%f time=%f score=%f", HIT_RATE, TOTAL_HARM, TOTAL_TIME, SCORE);
-        var rate = HIT_RATE * 100;
-        this.labelHitRate.string = rate.toFixed(0) + '%';
-        this.labelTotalHarm.string = TOTAL_HARM;
+        KBEngine.INFO_MSG("game is over, result: rate=%f harm=%f time=%f score=%f", HP, OtherHP, TOTAL_TIME, SCORE);
+        //var rate = HIT_RATE * 100;
+        this.labelHitRate.string = HP;//提交成功次数
+        this.labelTotalHarm.string = OtherHP;
         this.labelTotalTime.string = TOTAL_TIME + 'S';
-        this.labelScore.string = SCORE;
+        this.labelScore.string = Math.round(100*SCORE)+"%";
 
         cc.director.preloadScene("WorldScene");
     },
@@ -85,7 +85,7 @@ cc.Class({
     },
 
     continueGame: function() {
-        window.AudioMgr.playSFX("ui_click")
+        //window.AudioMgr.playSFX("ui_click")
         var player = KBEngine.app.player();
         if(player == undefined || !player.inWorld)
             return;
@@ -96,7 +96,7 @@ cc.Class({
     },
 
     onDisplayRankingView() {
-        window.AudioMgr.playSFX("ui_click")
+        //window.AudioMgr.playSFX("ui_click")
         if (window.wx == undefined)  return;
        
         this.isShowRankingView = !this.isShowRankingView;
@@ -111,7 +111,7 @@ cc.Class({
     },
 
     onCloseRankingView(){
-        window.AudioMgr.playSFX("ui_click")
+        //window.AudioMgr.playSFX("ui_click")
         this.rankingView.active = false;
         KBEngine.INFO_MSG("close ranking view: ");
         // 发消息给子域

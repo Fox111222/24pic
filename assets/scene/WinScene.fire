@@ -198,7 +198,7 @@
       "array": [
         0,
         0,
-        274.57337012725503,
+        269.42050840313846,
         0,
         0,
         0,
@@ -335,7 +335,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "31427520-a11f-4c55-ac95-2c9aceb2a9cf"
+      "__uuid__": "f2187681-ff8e-4ed8-af25-f9a7f0fe4865"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -348,7 +348,9 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_atlas": null,
+    "_atlas": {
+      "__uuid__": "fbecc999-2095-4f59-a466-b33e2ad60d71"
+    },
     "_id": "a1ZrZVUsNFs4VqGg8OiyHp"
   },
   {
@@ -429,7 +431,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "e2f3799f-6df8-4c38-986d-804a2bda441d"
+      "__uuid__": "61264a1d-ed06-4a5b-94b1-3f83e92ad04a"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -442,7 +444,9 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_atlas": null,
+    "_atlas": {
+      "__uuid__": "fbecc999-2095-4f59-a466-b33e2ad60d71"
+    },
     "_id": "d5Ty1ZoaRDcZjkOs7v4rTO"
   },
   {
@@ -535,7 +539,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 131.11,
+      "width": 171.11,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -547,8 +551,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -51,
-        8,
+        -84.312,
+        6.185,
         0,
         0,
         0,
@@ -586,8 +590,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "命中率:",
-    "_N$string": "命中率:",
+    "_string": "抢答次数:",
+    "_N$string": "抢答次数:",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -788,7 +792,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 131.11,
+      "width": 211.11,
       "height": 90.4
     },
     "_anchorPoint": {
@@ -800,7 +804,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
+        -8.892,
         -3,
         0,
         0,
@@ -839,8 +843,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "总时间:\n",
-    "_N$string": "总时间:\n",
+    "_string": "比赛总时间:\n",
+    "_N$string": "比赛总时间:\n",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -1041,7 +1045,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 131.11,
+      "width": 251.11,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1053,8 +1057,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
-        0,
+        -69.24,
+        2.436,
         0,
         0,
         0,
@@ -1092,8 +1096,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "总伤害:",
-    "_N$string": "总伤害:",
+    "_string": "对方抢答次数:",
+    "_N$string": "对方抢答次数:",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -1294,7 +1298,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 131.11,
+      "width": 200,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1306,7 +1310,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
+        -1.173,
         0,
         0,
         0,
@@ -1345,8 +1349,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "总得分:",
-    "_N$string": "总得分:",
+    "_string": "胜利比率：",
+    "_N$string": "胜利比率：",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -1450,7 +1454,7 @@
     "_batchAsBitmap": false,
     "_styleFlags": 0,
     "_underlineHeight": 0,
-    "_N$horizontalAlign": 1,
+    "_N$horizontalAlign": 0,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
@@ -2335,7 +2339,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "79OZEvpalGy5OKBAjFLtA+"
+    "_id": "ecnP10Zb1A6K2buJ9uLDCS"
   },
   {
     "__type__": "cc.Label",
@@ -2367,7 +2371,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "1dVtIkeb1PW4tnGKMnmTCG"
+    "_id": "14NtpE+MNHDJA22XXfSmk4"
   },
   {
     "__type__": "cc.RichText",
@@ -2563,7 +2567,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "89b743a9-1ce8-4292-a327-d16e0c26cd62"
+      "__uuid__": "34747685-4f53-48f9-b059-e834e82a42da"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -2576,7 +2580,9 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_atlas": null,
+    "_atlas": {
+      "__uuid__": "fbecc999-2095-4f59-a466-b33e2ad60d71"
+    },
     "_id": "2aVuw4lppMkYTGsnxY6oH3"
   },
   {
@@ -2587,7 +2593,9 @@
       "__id__": 50
     },
     "_enabled": true,
-    "_normalMaterial": null,
+    "_normalMaterial": {
+      "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+    },
     "_grayMaterial": null,
     "duration": 0.1,
     "zoomScale": 1.2,
@@ -2643,23 +2651,13 @@
       "a": 255
     },
     "_N$normalSprite": {
-      "__uuid__": "89b743a9-1ce8-4292-a327-d16e0c26cd62"
+      "__uuid__": "34747685-4f53-48f9-b059-e834e82a42da"
     },
-    "_N$pressedSprite": {
-      "__uuid__": "89b743a9-1ce8-4292-a327-d16e0c26cd62"
-    },
-    "pressedSprite": {
-      "__uuid__": "89b743a9-1ce8-4292-a327-d16e0c26cd62"
-    },
-    "_N$hoverSprite": {
-      "__uuid__": "89b743a9-1ce8-4292-a327-d16e0c26cd62"
-    },
-    "hoverSprite": {
-      "__uuid__": "89b743a9-1ce8-4292-a327-d16e0c26cd62"
-    },
-    "_N$disabledSprite": {
-      "__uuid__": "89b743a9-1ce8-4292-a327-d16e0c26cd62"
-    },
+    "_N$pressedSprite": null,
+    "pressedSprite": null,
+    "_N$hoverSprite": null,
+    "hoverSprite": null,
+    "_N$disabledSprite": null,
     "_N$target": {
       "__id__": 50
     },

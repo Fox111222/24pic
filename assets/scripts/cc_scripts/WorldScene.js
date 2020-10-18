@@ -9,8 +9,8 @@
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
 var KBEngine = require("kbengine");
-
-var cal=require("eval")
+//var bindjs=require("eval")
+var bindjs=require("eval2")
 
 cc.Class({
     extends: cc.Component,
@@ -25,6 +25,7 @@ cc.Class({
             default: null,
             type: cc.Node,
         },
+        /*
         setting:{
             default: null,
             type: cc.Prefab,
@@ -33,6 +34,7 @@ cc.Class({
             default: null,
             type: cc.Prefab,
         },
+        */
         /*
         player: {
             default: null,
@@ -86,13 +88,13 @@ cc.Class({
     },
 
     showsetting:function(){
-        window.AudioMgr.playSFX("ui_click")
+       // window.AudioMgr.playSFX("ui_click")
         this.isshowsetting = !this.settingNode.active;
         this.settingNode.active = this.isshowsetting;
 
     },
     showchat:function(){
-        window.AudioMgr.playSFX("ui_click")
+        //window.AudioMgr.playSFX("ui_click")
         this.isshowchat = !this.chatNode.active;
         this.chatNode.active = this.isshowchat;
         cc.log("showchat")
@@ -115,7 +117,7 @@ cc.Class({
                                 }
                             })
         */
-        window.AudioMgr.playBGM("bgMain")
+        //window.AudioMgr.playBGM("bgMain")
 
         this._timeLabel = cc.find("Canvas/bg2/time").getComponent(cc.Label);
         this.isshowsetting=false
@@ -232,7 +234,7 @@ cc.Class({
         */
     },
     onTouchEndedcard1:function(){
-        window.AudioMgr.playSFX("ui_click")
+        //window.AudioMgr.playSFX("ui_click")
         if(this.act.length-1>=0){
             if(this.act[this.act.length-1]==this.card1num ||this.act[this.act.length-1]==this.card2num||this.act[this.act.length-1]==this.card3num||this.act[this.act.length-1]==this.card4num)
             return
@@ -253,7 +255,7 @@ cc.Class({
         }*/
     },
     onTouchEndedcard2:function(){
-        window.AudioMgr.playSFX("ui_click")
+        //window.AudioMgr.playSFX("ui_click")
         if(this.act.length-1>=0){
             if(this.act[this.act.length-1]==this.card1num ||this.act[this.act.length-1]==this.card2num||this.act[this.act.length-1]==this.card3num||this.act[this.act.length-1]==this.card4num)
             return
@@ -275,7 +277,7 @@ cc.Class({
 
     },
     onTouchEndedcard3:function(){
-        window.AudioMgr.playSFX("ui_click")
+        //window.AudioMgr.playSFX("ui_click")
         if(this.act.length-1>=0){
             if(this.act[this.act.length-1]==this.card1num ||this.act[this.act.length-1]==this.card2num||this.act[this.act.length-1]==this.card3num||this.act[this.act.length-1]==this.card4num)
             return
@@ -297,7 +299,7 @@ cc.Class({
 
     },
     onTouchEndedcard4:function(){
-        window.AudioMgr.playSFX("ui_click")
+        //window.AudioMgr.playSFX("ui_click")
         if(this.act.length-1>=0){
             if(this.act[this.act.length-1]==this.card1num ||this.act[this.act.length-1]==this.card2num||this.act[this.act.length-1]==this.card3num||this.act[this.act.length-1]==this.card4num)
             return
@@ -353,37 +355,37 @@ cc.Class({
         
     },
     onaddact:function(){
-        window.AudioMgr.playSFX("ui_click")
+        //window.AudioMgr.playSFX("ui_click")
         this.act.push("+")
 
     },
     onreduceact:function(){
-        window.AudioMgr.playSFX("ui_click")
+        //window.AudioMgr.playSFX("ui_click")
         this.act.push("-")
 
     },
     onmulact:function(){
-        window.AudioMgr.playSFX("ui_click")
+        //window.AudioMgr.playSFX("ui_click")
         this.act.push("*")
 
     },
     ondivact:function(){
-        window.AudioMgr.playSFX("ui_click")
+        //window.AudioMgr.playSFX("ui_click")
         this.act.push("/")
 
     },
     onlefact:function(){
-        window.AudioMgr.playSFX("ui_click")
+        //window.AudioMgr.playSFX("ui_click")
         this.act.push("(")
 
     },
     onrigact:function(){
-        window.AudioMgr.playSFX("ui_click")
+        //window.AudioMgr.playSFX("ui_click")
         this.act.push(")")
 
     },
     ondelact:function(){
-        window.AudioMgr.playSFX("ui_click")
+        //window.AudioMgr.playSFX("ui_click")
         var num=this.act.pop()
         if(this.lasttouchcard==null){
             return
@@ -397,7 +399,7 @@ cc.Class({
 
     },
     onsureact:function(){
-        window.AudioMgr.playSFX("ui_click")
+        //window.AudioMgr.playSFX("ui_click")
         this.card1selected=false
         this.card2selected=false
         this.card3selected=false
@@ -411,7 +413,8 @@ cc.Class({
         var str=this.act.join("")
         try{
             //var res=eval(str);
-            var res= cal(str)
+            //var res= window.binding.eval(str)
+            var res=window.eval2(str)
             cc.log("ttttttttttttttt",res)
         }
         catch{
@@ -819,8 +822,8 @@ cc.Class({
     },
 
     newTurn: function(avatar,eid, second,card01,card02,card03,card04){
-        window.AudioMgr.stopBGM()
-        window.AudioMgr.playSFX("turn")
+        //window.AudioMgr.stopBGM()
+        //window.AudioMgr.playSFX("turn")
 
         this.gameState.newTurn(second);
         this.clock.active=true
@@ -1049,11 +1052,11 @@ cc.Class({
         
     },
 
-    onGameOver: function(avatarID, isWin, hitRate, totalTime, totalHarm, score) {
+    onGameOver: function(avatarID, isWin, hp, totalTime, totalHarm, score) {
         if(avatarID == KBEngine.app.player().id) {
-            HIT_RATE = hitRate;
+            HP = hp;
             TOTAL_TIME = totalTime;
-            TOTAL_HARM = totalHarm;
+            OtherHP = totalHarm;
             SCORE = score;
             this.unInstallEvents();
             if(isWin) {

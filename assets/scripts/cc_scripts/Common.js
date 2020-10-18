@@ -20,9 +20,9 @@ window.PIPI_WIN = 0;
 window.PIPI_LOSE = 1;
 window.POP_WIN = 2;
 window.POP_LOSE = 3;
-window.HIT_RATE = 0.0;
+window.HP = 0.0;
 window.TOTAL_TIME = 0;
-window.TOTAL_HARM = 0;
+window.OtherHP = 0;
 window.SCORE = 0;
 
 window.PLAYER_NAME = '';
