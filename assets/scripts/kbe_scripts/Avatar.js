@@ -67,10 +67,23 @@ KBEngine.Avatar = KBEngine.Entity.extend({
                 KBEngine.Event.fire("oniptChat", eid,strstr);
             }
         },
+        onjoinPrivateRoom:function(){
+            cc.log("onjoinPrivateRoom")
+        },
         joinRoom: function()
         {
             KBEngine.INFO_MSG("avatar " + this.id + " join room");
             this.baseCall("joinRoom");
+        },
+        createPrivateRoom: function()
+        {
+            KBEngine.INFO_MSG("avatar " + this.id + " join room");
+            this.baseCall("createPrivateRoom");
+        },
+        joinPrivateRoom: function(roomkey)
+        {
+            KBEngine.INFO_MSG("avatar " + this.id + " join room"+ roomkey);
+            this.baseCall("joinPrivateRoom",roomkey);
         },
         game_begin_push:function(holds)   {
             cc.log("Avatar::game_begin_push")

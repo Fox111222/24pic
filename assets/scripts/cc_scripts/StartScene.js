@@ -15,10 +15,6 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        btn_start: {
-            default: null,
-            type: cc.Button,
-        },
         textinput_name:{
             default: null,
             type: cc.EditBox,
@@ -40,6 +36,19 @@ cc.Class({
         
         this.initKbengine();
         this.installEvents();
+        cc.loader.loadRes("prefab/JoinGame", cc.Prefab, function (err, prefab) {
+            if (err) {
+                cc.log("cc.loader.loadRes fail")
+                return;
+            }
+            //cc.log("cc.loader.loadRes success")
+            this.JoinGame = cc.instantiate(prefab);
+            this.JoinGame.active=false
+            this.node.getChildByName("start_bg").addChild(this.JoinGame)
+//                this.FlyPoolDict[this.FlyPoolid]=newNode
+//                this.FlyPoolid++;
+        }.bind(this));
+        this.btn_start=this.node.getChildByName("start_bg").getChildByName("btn_start")
         //this.loadItemPrefab();
         //window.AudioMgr=this.node.addComponent("AudioMgr")      
         var AudioMgr = require("AudioMgr");
@@ -47,13 +56,13 @@ cc.Class({
         window.AudioMgr.init();
 
         this.userName = cc.sys.platform != cc.sys.WECHAT_GAME ? this.randomstring(4): '';
-        this.btn_start.node.on('click', this.startGame, this);
+        //this.btn_start.node.on('click', this.startGame, this);
         this.code = "";
         
         cc.director.preloadScene("WorldScene");
 
         if(cc.sys.platform == cc.sys.WECHAT_GAME) {
-            this.btn_start.node.active = false;
+            this.btn_start.active = false;
             this.textinput_name.node.active = false;
             this.enableWxShare();
             this.wxLoginNative();
@@ -84,7 +93,7 @@ cc.Class({
      },
 
     wxLoginNative: function(){
-       //this.btn_start.node.active = true;
+       this.btn_start.active = true;
         var self=this;
         wx.login({
             success: (res) => {
@@ -98,7 +107,7 @@ cc.Class({
                     wx.getUserInfo({
                         withCredentials:1,
                         success: (res) => {
-                            sself.btn_start.node.active = true;
+                            sself.btn_start.active = true;
                             //sself.userName = this.code;                            
                             cc.sys.localStorage.setItem("encryptedData", res.encryptedData);
                             cc.sys.localStorage.setItem("iv", res.iv);
@@ -143,7 +152,7 @@ cc.Class({
                                     cc.sys.localStorage.setItem("iv", uinfo.iv);
                                     //sf.label_hint.string = "uinfo.encryptedData="+uinfo.encryptedData+"/"+uinfo.iv;
                                     sf.label_hint.string = uinfo.encryptedData ;
-                                    sf.btn_start.node.active = true;
+                                    sf.btn_start.active = true;
                                 }else {
                                     console.log("wxLogin auth fail");
                                     wx.showToast({title:"授权失败"});
@@ -273,7 +282,7 @@ cc.Class({
         var logStr = "";
 		if(!success) {
             logStr = " Connect(" + KBEngine.app.ip + ":" + KBEngine.app.port + ") is error! (连接错误)";
-            this.btn_start.node.active = true;
+            this.btn_start.active = true;
             this.label_hint.string = "连接错误onerror_before_onopen";
         }
 		else {
@@ -286,7 +295,7 @@ cc.Class({
         var logStr = "";
 		if(!success) {
             logStr = " Connect(" + KBEngine.app.ip + ":" + KBEngine.app.port + ") is error! (连接错误)";
-            this.btn_start.node.active = true;
+            this.btn_start.active = true;
             this.label_hint.string = "连接错误socket not is null";
         }
 		else {
@@ -308,12 +317,12 @@ cc.Class({
         }    
         
         this.label_hint.string = "登陆失败," +  KBEngine.app.serverErr(failedcode);
-        this.btn_start.node.active = true;
+        this.btn_start.active = true;
         KBEngine.INFO_MSG(logStr);	
      },
 
      onReloginBaseappFailed: function(failedcode){
-        this.btn_start.node.active = true;
+        this.btn_start.active = true;
         KBEngine.INFO_MSG("reogin is failed(断线重连失败), err=" + KBEngine.app.serverErr(failedcode))
      },
 
@@ -322,7 +331,7 @@ cc.Class({
     },
 
      onLoginBaseappFailed : function(failedcode) {
-        this.btn_start.node.active = true;
+        this.btn_start.active = true;
         KBEngine.INFO_MSG("LoginBaseapp is failed(登陆网关失败), err=" + KBEngine.app.serverErr(failedcode));
      },
 
@@ -348,6 +357,43 @@ cc.Class({
             var iv = cc.sys.localStorage.getItem("iv");
             cc.log("encryptedData && iv",encryptedData , iv)
             this.label_hint.string = "base.decodeEncryptedData()=" + encryptedData + "/" + iv;
+            player.decodeEncryptedData();
+        } 
+        //var player = KBEngine.app.player();//KBEngine.app.entities[KBEngine.app.entity_id];    
+        //player.joinRoom()
+         
+        cc.director.loadScene("WorldScene", ()=> {
+            KBEngine.INFO_MSG("load world scene finished");
+            var player = KBEngine.app.player();//KBEngine.app.entities[KBEngine.app.entity_id];
+            window.type=1
+           
+            if(player){
+                if (window.type==1){
+                    player.joinRoom();
+                }
+                if (window.type==2){
+                    player.createPrivateRoom();
+                    
+                }
+                if (window.type==3 && window.privateRoomID.length>0){
+                    player.joinPrivateRoom(window.privateRoomID);                    
+                }                
+            }           
+        });
+             
+        
+
+        this.unInstallEvents();
+        
+         /*
+        KBEngine.INFO_MSG("Login is successfully!(登陆成功!)");
+        this.label_hint.string = "登陆成功 !!!";
+        if(cc.sys.platform == cc.sys.WECHAT_GAME){
+            var player = KBEngine.app.player();
+            var encryptedData = cc.sys.localStorage.getItem("encryptedData");
+            var iv = cc.sys.localStorage.getItem("iv");
+            cc.log("encryptedData && iv",encryptedData , iv)
+            this.label_hint.string = "base.decodeEncryptedData()=" + encryptedData + "/" + iv;
             //player.decodeEncryptedData();
         }                
         cc.director.loadScene("WorldScene", ()=> {
@@ -358,9 +404,8 @@ cc.Class({
             }
                 
         });
-        
-
         this.unInstallEvents();
+        */
      },
  
      onLoginBaseapp : function() {
@@ -404,33 +449,105 @@ cc.Class({
         return dictString;
      },
  
-    startGame: function (event) {
-       // window.AudioMgr.playSFX("ui_click")
-        //cc.log("cc.sys.platform",cc.sys.platform,cc.sys.WECHAT_GAME)
-        if(cc.sys.platform == cc.sys.WECHAT_GAME){
-            this.userName=cc.sys.localStorage.getItem("userName");
-        }
-        if(this.userName.length == 0)
-        {
-            this.label_hint.string = "用户名不能为空";
-            return;
-        }
-        ///////////////////////////////////////////////////
+     startGame: function (event) {
+        
+        // window.AudioMgr.playSFX("ui_click")
+         //cc.log("cc.sys.platform",cc.sys.platform,cc.sys.WECHAT_GAME)
+         window.type=1
+         if(cc.sys.platform == cc.sys.WECHAT_GAME){
+             this.userName=cc.sys.localStorage.getItem("userName");
+         }
+         if(this.userName.length == 0)
+         {
+             this.label_hint.string = "用户名不能为空";
+             return;
+         }
+         ///////////////////////////////////////////////////
+ 
+ 
+         //////////////////////////////////////////////////
+         cc.log("this.userName=",this.userName)  
+         var datas = {};
+         datas["platform"] = cc.sys.platform;
+         datas = this.createDictString(datas);
+         KBEngine.INFO_MSG("login name=" + this.userName);
+         //var temp1=UnicodeToUtf8(this.userName)
+         //this.userName =java.net.URLDecoder.decode(temp,"UTF-8"); 
+         //this.userName =Utf8ToUnicode(temp1)
+         //cc.log("this.userName=",this.userName)  
+         KBEngine.Event.fire("login", this.userName, "123456", datas);  
+         this.label_hint.string = "登陆中 ... ...";
+         this.btn_start.active = false;
+         
+ 
+ 
+      },
+      createPrivateRoom: function (event) {
+         window.type=2
+         // window.AudioMgr.playSFX("ui_click")
+          //cc.log("cc.sys.platform",cc.sys.platform,cc.sys.WECHAT_GAME)
+          if(cc.sys.platform == cc.sys.WECHAT_GAME){
+              this.userName=cc.sys.localStorage.getItem("userName");
+          }
+          if(this.userName.length == 0)
+          {
+              this.label_hint.string = "用户名不能为空";
+              return;
+          }
+          cc.log("this.userName=",this.userName)  
+          var datas = {};
+          datas["platform"] = cc.sys.platform;
+          datas = this.createDictString(datas);
+          KBEngine.INFO_MSG("login name=" + this.userName);
+          //var temp1=UnicodeToUtf8(this.userName)
+          //this.userName =java.net.URLDecoder.decode(temp,"UTF-8"); 
+          //this.userName =Utf8ToUnicode(temp1)
+          //cc.log("this.userName=",this.userName)  
+          KBEngine.Event.fire("login", this.userName, "123456", datas);  
+          this.label_hint.string = "登陆中 ... ...";
+          this.btn_start.active = false;
+       },
+       joinPrivateRoominputcallback:function(roomId){ //参数是数组
+         window.type=3
+ 
+         window.privateRoomID=roomId
+         this.JoinGame.active=false
+           //////////////////////////////////////////////////
+          cc.log("this.userName=",this.userName,roomId)  
+          var datas = {};
+          datas["platform"] = cc.sys.platform;
+          datas = this.createDictString(datas);
+          KBEngine.INFO_MSG("login name=" + this.userName);
+          //var temp1=UnicodeToUtf8(this.userName)
+          //this.userName =java.net.URLDecoder.decode(temp,"UTF-8"); 
+          //this.userName =Utf8ToUnicode(temp1)
+          //cc.log("this.userName=",this.userName)  
+          KBEngine.Event.fire("login", this.userName, "123456", datas);  
+          this.label_hint.string = "登陆中 ... ...";
+          this.btn_start.active = false;
+ 
+       },
+       joinPrivateRoom: function (event) {
+         
+         //window.AudioMgr.playSFX("ui_click")
+          //cc.log("cc.sys.platform",cc.sys.platform,cc.sys.WECHAT_GAME)
+ 
+          
+          if(cc.sys.platform == cc.sys.WECHAT_GAME){
+              this.userName=cc.sys.localStorage.getItem("userName");
+          }
+          if(this.userName.length == 0)
+          {
+              this.label_hint.string = "用户名不能为空";
+              return;
+          }
+          this.JoinGame.active=true
+          ///////////////////////////////////////////////////
+  
+  
+          
+       },
 
 
-        //////////////////////////////////////////////////
-        cc.log("this.userName=",this.userName)  
-        var datas = {};
-        datas["platform"] = cc.sys.platform;
-        datas = this.createDictString(datas);
-        KBEngine.INFO_MSG("login name=" + this.userName);
-        //var temp1=UnicodeToUtf8(this.userName)
-        //this.userName =java.net.URLDecoder.decode(temp,"UTF-8"); 
-        //this.userName =Utf8ToUnicode(temp1)
-        //cc.log("this.userName=",this.userName)  
-        KBEngine.Event.fire("login", this.userName, "123456", datas);  
-        this.label_hint.string = "登陆中 ... ...";
-        this.btn_start.node.active = false;
-     },
 
 });

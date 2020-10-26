@@ -1574,6 +1574,7 @@ KBEngine.Entity = KBEngine.Class.extend(
 		this.isOnGround = false;
 
 		this.holds=[]
+		this.roomKeyc=[]
 		
 
         return true;
@@ -1803,6 +1804,13 @@ KBEngine.Entity = KBEngine.Class.extend(
 
 	onLeaveSpace : function()
 	{
+	},
+	set_roomKeyc : function(old)
+	{
+		
+		cc.log("kbengine.entity ::set_roomkeyc",this.roomKeyc.join(""))
+		KBEngine.Event.fire("entity_updateroomkey",this.roomKeyc,this);
+		
 	},
 	set_holds : function(old)
 	{

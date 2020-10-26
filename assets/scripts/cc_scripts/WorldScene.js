@@ -102,6 +102,7 @@ cc.Class({
     },
     onLoad () {
         this.installEvents();
+        this.RoomID=cc.find("Canvas/bg2/RoomID").getComponent(cc.RichText)
         /*
         this._MusicDict = {}
         var _this = this;
@@ -461,6 +462,7 @@ cc.Class({
 
         KBEngine.Event.register("onEnterWorld2", this, "onEnterWorld2");
         KBEngine.Event.register("updategamestuts", this, "updategamestuts");
+        KBEngine.Event.register("entity_updateroomkey", this, "entity_updateroomkey");
         
         
         /*
@@ -491,7 +493,11 @@ cc.Class({
 
         */
     },
+    entity_updateroomkey:function(roomKeyc,avatar){
+        cc.log("entity_updateroomkeyentity_updateroomkey=",roomKeyc)
+        this.RoomID.string="房间号:"+roomKeyc.join("")
 
+    },
     enableWxShare: function () {
         wx.showShareMenu({
             withShareTicket:true,
@@ -554,6 +560,7 @@ cc.Class({
 
         KBEngine.Event.deregister("onEnterWorld2", this, "onEnterWorld2");
         KBEngine.Event.deregister("updategamestuts", this, "updategamestuts");
+        KBEngine.Event.deregister("entity_updateroomkey", this, "entity_updateroomkey");
         /*
         cc.log("test3")
         KBEngine.INFO_MSG("world scene unInstallEvents ......");
