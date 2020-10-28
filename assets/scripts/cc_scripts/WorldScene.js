@@ -183,12 +183,16 @@ cc.Class({
         this.card3origpos=this.card3.position
         this.card4origpos=this.card4.position
         
+
+        window.delta=this.node.getChildByName("bg2").getChildByName("seat1").getChildByName("card").getComponent(cc.Sprite).spriteFrame.getOriginalSize().height*0.8
+        //
         var out=cc.v2(0, 0)
         //var seat1cardpos=cc.v2(0, 0)
         var seat1cardpos=this.node.getChildByName("bg2").getChildByName("seat1").getChildByName("card").position
         this.node.getChildByName("bg2").getChildByName("seat1").convertToWorldSpaceAR (seat1cardpos, out)
         this.seat1cardpos=this.node.convertToNodeSpaceAR(out)
-
+        this.seat1cardpos.y=this.seat1cardpos.y-this.node.getChildByName("bg2").getChildByName("seat1").getChildByName("card").getComponent(cc.Sprite).spriteFrame.getOriginalSize().height*0.8
+        //this.node.getChildByName("bg2").getChildByName("seat1").y=this.node.getChildByName("bg2").getChildByName("seat1").y+window.delta
         //var seat2cardpos=cc.v2(0, 0)
         out=cc.v2(0, 0)
         var seat2cardpos=this.node.getChildByName("bg2").getChildByName("seat2").getChildByName("card").position
@@ -464,34 +468,6 @@ cc.Class({
         KBEngine.Event.register("updategamestuts", this, "updategamestuts");
         KBEngine.Event.register("entity_updateroomkey", this, "entity_updateroomkey");
         
-        
-        /*
-        // common
-        KBEngine.INFO_MSG("world scene installEvents ......");
-
-
-        // in world
-        
-
-
-        KBEngine.Event.register("updatePosition", this, "updatePosition");
-       
-        KBEngine.Event.register("set_position", this, "set_position");
-        
-
-        KBEngine.Event.register("otherAvatarOnJump", this, "otherAvatarOnJump");
-        KBEngine.Event.register("otherAvatarOnRightJump", this, "otherAvatarOnRightJump");
-        KBEngine.Event.register("otherAvatarOnLeftJump", this, "otherAvatarOnLeftJump");
-        KBEngine.Event.register("otherAvatarOnPickUpItem", this, "otherAvatarOnPickUpItem");
-        KBEngine.Event.register("otherAvatarThrowItem", this, "otherAvatarThrowItem");
-        KBEngine.Event.register("otherAvatarOnStopWalk", this, "otherAvatarOnStopWalk");
-        KBEngine.Event.register("otherAvatarOnStartWalk", this, "otherAvatarOnStartWalk");
-        KBEngine.Event.register("otherAvatarRecoverItem", this, "otherAvatarRecoverItem");
-        KBEngine.Event.register("onRecvDamage", this, "onRecvDamage");
-        KBEngine.Event.register("onAvatarDie", this, "onAvatarDie");
-        KBEngine.Event.register("onResetItem", this, "onResetItem");
-
-        */
     },
     entity_updateroomkey:function(roomKeyc,avatar){
         cc.log("entity_updateroomkeyentity_updateroomkey=",roomKeyc)
@@ -561,36 +537,6 @@ cc.Class({
         KBEngine.Event.deregister("onEnterWorld2", this, "onEnterWorld2");
         KBEngine.Event.deregister("updategamestuts", this, "updategamestuts");
         KBEngine.Event.deregister("entity_updateroomkey", this, "entity_updateroomkey");
-        /*
-        cc.log("test3")
-        KBEngine.INFO_MSG("world scene unInstallEvents ......");
- 
-
-        // in world       
-
-
-        KBEngine.Event.deregister("updatePosition", this, "updatePosition");
-       
-        KBEngine.Event.deregister("set_position", this, "set_position");
-        
-
-        KBEngine.Event.deregister("otherAvatarOnJump", this);
-        KBEngine.Event.deregister("otherAvatarOnRightJump", this);
-        KBEngine.Event.deregister("otherAvatarOnLeftJump", this);
-        KBEngine.Event.deregister("otherAvatarOnPickUpItem", this);
-        KBEngine.Event.deregister("otherAvatarThrowItem", this);
-        KBEngine.Event.deregister("otherAvatarOnStopWalk", this);
-        KBEngine.Event.deregister("otherAvatarOnStartWalk", this);
-        KBEngine.Event.deregister("otherAvatarRecoverItem", this);
-        KBEngine.Event.deregister("onRecvDamage", this);
-        KBEngine.Event.deregister("onAvatarDie", this);
-
-        KBEngine.Event.deregister("onupdateGamestates", this);
-
-
-        KBEngine.Event.deregister("onResetItem", this);
-
-        */
     },
 
     onquick_chat:function(eid,idx){
@@ -795,6 +741,8 @@ cc.Class({
     },
     onLeaveWorld: function (entity) {
         cc.log("onLeaveWorld",entity.id,entity.className)
+        this.node.getChildByName("bg2").getChildByName("matching").active=true;
+        this.seat2.active=false
         /*
         cc.log("onLeaveWorld",entity.id,entity.className)
         if(this.entities[entity.id] && entity.className == "Avatar"){
@@ -932,6 +880,16 @@ cc.Class({
         if (this.card3num>10) {this.card3num=1}
         if (this.card4num>10) {this.card4num=1}
 
+        var funcount1=cc.callFunc(function(target){
+            this.seat1.getComponent("Seat").refreshcount1()
+            this.seat2.getComponent("Seat").refreshcount1()
+        }, this);
+
+        var funcount2=cc.callFunc(function(target){
+            this.seat1.getComponent("Seat").refreshcount2()
+            this.seat2.getComponent("Seat").refreshcount2()
+        }, this);
+
         var self=this
         var fun1=cc.callFunc(function(target){
             target.x=x1,
@@ -991,18 +949,18 @@ cc.Class({
         B_act3=cc.moveTo(1,cc.v2(card3origposx,card3origposy))
         B_act4=cc.moveTo(1,cc.v2(card4origposx,card4origposy))
 
-        if(eid==12345){
-            this.card1.runAction(cc.sequence(fun1,B_act1,fun11))
-            this.card2.runAction(cc.sequence(fun2,B_act2,fun22))
-            this.card3.runAction(cc.sequence(fun3,B_act3,fun33))
-            this.card4.runAction(cc.sequence(fun4,B_act4,fun44))
+        if(eid==12345){//各回各家2张
+            this.card1.runAction(cc.sequence(fun1,B_act1,fun11,funcount2))
+            this.card2.runAction(cc.sequence(fun2,B_act2,fun22,funcount2))
+            this.card3.runAction(cc.sequence(fun3,B_act3,fun33,funcount2))
+            this.card4.runAction(cc.sequence(fun4,B_act4,fun44,funcount2))
 
         }
-        else{
-            this.card1.runAction(cc.sequence(A_act1,fun1,cc.delayTime(1),B_act1,fun11))
-            this.card2.runAction(cc.sequence(A_act2,fun2,cc.delayTime(1),B_act2,fun22))
-            this.card3.runAction(cc.sequence(A_act3,fun3,cc.delayTime(1),B_act3,fun33))
-            this.card4.runAction(cc.sequence(A_act4,fun4,cc.delayTime(1),B_act4,fun44))
+        else{ //一家四张
+            this.card1.runAction(cc.sequence(A_act1,fun1,funcount1,cc.delayTime(1),B_act1,fun11,funcount2))
+            this.card2.runAction(cc.sequence(A_act2,fun2,funcount1,cc.delayTime(1),B_act2,fun22,funcount2))
+            this.card3.runAction(cc.sequence(A_act3,fun3,funcount1,cc.delayTime(1),B_act3,fun33,funcount2))
+            this.card4.runAction(cc.sequence(A_act4,fun4,funcount1,cc.delayTime(1),B_act4,fun44,funcount2))
         }
 
         /////////////////////////////

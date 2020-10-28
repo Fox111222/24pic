@@ -198,7 +198,7 @@
       "array": [
         0,
         0,
-        269.42050840313846,
+        361.392416856645,
         0,
         0,
         0,
@@ -489,8 +489,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        350,
-        82,
+        -12.293,
+        57.97,
         0,
         0,
         0,
@@ -742,8 +742,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        280,
-        8,
+        -119.261,
+        -125.087,
         0,
         0,
         0,
@@ -793,7 +793,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 211.11,
-      "height": 90.4
+      "height": 50.4
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -804,8 +804,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -12.907,
-        5.214,
+        -18.452,
+        31.092,
         0,
         0,
         0,
@@ -843,8 +843,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "比赛总时间:\n",
-    "_N$string": "比赛总时间:\n",
+    "_string": "比赛总时间:",
+    "_N$string": "比赛总时间:",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -898,8 +898,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        100,
-        0,
+        149.907,
+        11.09,
         0,
         0,
         0,
@@ -995,8 +995,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        41,
-        -280,
+        -103.178,
+        -191.275,
         0,
         0,
         0,
@@ -1151,8 +1151,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        137.263,
-        -1.997,
+        163.141,
+        1.7,
         0,
         0,
         0,
@@ -1248,8 +1248,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        290,
-        -50,
+        -61.202,
+        -13.031,
         0,
         0,
         0,
@@ -1404,8 +1404,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        120,
-        0,
+        116.303,
+        7.394,
         0,
         0,
         0,
@@ -2064,7 +2064,7 @@
         "__id__": 50
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [],
     "_prefab": null,
     "_opacity": 255,
@@ -2282,7 +2282,7 @@
       "__id__": 44
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 46
@@ -2335,7 +2335,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "94gMChGMtO0L/DreT9GJ2W"
+    "_id": "f35WVZouhC3pqA6yzV5eL7"
   },
   {
     "__type__": "cc.Label",
@@ -2367,7 +2367,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "3avYx+BBBCc5BuUVf+KlSV"
+    "_id": "f0CliazwlKxYwV22ljI8qk"
   },
   {
     "__type__": "cc.RichText",

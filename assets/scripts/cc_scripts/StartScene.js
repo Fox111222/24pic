@@ -48,6 +48,16 @@ cc.Class({
 //                this.FlyPoolDict[this.FlyPoolid]=newNode
 //                this.FlyPoolid++;
         }.bind(this));
+        /*
+        // load the sprite frame of (project/assets/resources/imgs/cocos.png) from resources folder
+        cc.loader.loadRes('prefab/bg', cc.SpriteFrame, function (err, spriteFrame) {
+            if (err) {
+                cc.log("cc.loader.loadRes fail")
+                return;
+            }
+            this.node.getChildByName("start_bg").getComponent(cc.Sprite).spriteFrame=spriteFrame
+        }.bind(this));
+        */
         this.btn_start=this.node.getChildByName("start_bg").getChildByName("btn_start")
         //this.loadItemPrefab();
         //window.AudioMgr=this.node.addComponent("AudioMgr")      

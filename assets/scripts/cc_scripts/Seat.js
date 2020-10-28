@@ -57,6 +57,8 @@ cc.Class({
         //this._nddayingjia = this.node.getChildByName("dayingjia");
         
         this._chatBubble = this.node.getChildByName("ChatBubble");
+        //this._chatBubble.setLocalZOrder(9999)
+        //this._chatBubble.zIndex=99999
         if(this._chatBubble != null){
             this._chatBubble.active = false;            
         }
@@ -74,6 +76,7 @@ cc.Class({
                 });
         }
         */
+       this._lblScore.node.active=false
         this.refresh();
         
         //if(this._sprIcon && this._userId){
@@ -115,14 +118,30 @@ cc.Class({
 
     },
     */
+   refreshcount1:function(){
+        this._score=this._holds.length+2
+        if(this._lblScore != null && this._score>0){
+            this._lblScore.node.active=true
+            this._lblScore.string = "余"+this._score+"张";            
+        }
+        else{
+            this._lblScore.node.active=false
+        } 
+   },
+   refreshcount2:function(){
+    this._score=this._holds.length
+    if(this._lblScore != null && this._score>0){
+        this._lblScore.node.active=true
+        this._lblScore.string = "余"+this._score+"张";            
+    }
+    else{
+        this._lblScore.node.active=false
+    } 
+},
     refresh:function(){
         if(this._lblName != null){
             this._lblName.string = this._userName;    
-        }
-        this._score=this._holds.length
-        if(this._lblScore != null){
-            this._lblScore.string = this._score;            
-        }        
+        }       
         if(this._ready){
             this._ready.active = this._isReady; 
         }

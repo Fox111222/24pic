@@ -198,7 +198,7 @@
       "array": [
         0,
         0,
-        269.42050840313846,
+        361.392416856645,
         0,
         0,
         0,
@@ -390,7 +390,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
+        -18.205,
         200,
         0,
         0,
@@ -489,8 +489,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        313,
-        82,
+        5,
+        78.303,
         0,
         0,
         0,
@@ -645,8 +645,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        68,
-        8,
+        55.061,
+        2.455,
         0,
         0,
         0,
@@ -742,8 +742,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        246,
-        8,
+        -83.375,
+        -109.613,
         0,
         0,
         0,
@@ -793,7 +793,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 211.11,
-      "height": 90.4
+      "height": 50.4
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -804,8 +804,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -8.892,
-        -3,
+        -38.119,
+        29.691,
         0,
         0,
         0,
@@ -843,8 +843,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "比赛总时间:\n",
-    "_N$string": "比赛总时间:\n",
+    "_string": "比赛总时间:",
+    "_N$string": "比赛总时间:",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -898,8 +898,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        100,
-        0,
+        122.988,
+        9.823,
         0,
         0,
         0,
@@ -995,8 +995,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        260,
-        -50,
+        5,
+        -1.941,
         0,
         0,
         0,
@@ -1057,8 +1057,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -69.24,
-        2.436,
+        -120.996,
+        7.981,
         0,
         0,
         0,
@@ -1151,8 +1151,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        120,
-        0,
+        62.699,
+        9.242,
         0,
         0,
         0,
@@ -1248,8 +1248,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        10,
-        -281,
+        -67.528,
+        -172.523,
         0,
         0,
         0,
@@ -1310,8 +1310,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -1.173,
-        0,
+        -2.674,
+        7.507,
         0,
         0,
         0,
@@ -1404,8 +1404,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        130,
-        0,
+        152.181,
+        5.545,
         0,
         0,
         0,
@@ -2068,7 +2068,7 @@
         "__id__": 50
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [],
     "_prefab": null,
     "_opacity": 255,
@@ -2286,7 +2286,7 @@
       "__id__": 44
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 46
@@ -2339,7 +2339,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "ecnP10Zb1A6K2buJ9uLDCS"
+    "_id": "70DpWTWalM9p17jE+bTu7o"
   },
   {
     "__type__": "cc.Label",
@@ -2371,7 +2371,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "14NtpE+MNHDJA22XXfSmk4"
+    "_id": "b6zq1N1ZdFN7r7uLmP+qlM"
   },
   {
     "__type__": "cc.RichText",
