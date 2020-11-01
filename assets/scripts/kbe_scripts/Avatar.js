@@ -17,7 +17,11 @@ KBEngine.Avatar = KBEngine.Entity.extend({
                 KBEngine.Event.fire("enterScene");
             }
         },
+        onSetSpaceData:function(){
+            cc.log("initSpaceDatainitSpaceDatainitSpaceDatainitSpaceData")
+            KBEngine.Event.fire("onSetSpaceData");
 
+        },
         decodeEncryptedData: function()
         {
             var encryptedData = cc.sys.localStorage.getItem("encryptedData");
@@ -55,6 +59,12 @@ KBEngine.Avatar = KBEngine.Entity.extend({
                 KBEngine.Event.fire("onquick_chat", eid,idx);
             }
         },
+        onjoinPrivateRoom:function(num){
+            cc.log("onjoinPrivateRoom", num)
+            if(this.isPlayer()) {
+                KBEngine.Event.fire("onjoinPrivateRoom", num);
+            }
+        },
         onemoji:function(eid,name){
             cc.log("emoji:receive",eid,name)
             if(this.isPlayer()) {
@@ -67,9 +77,6 @@ KBEngine.Avatar = KBEngine.Entity.extend({
                 KBEngine.Event.fire("oniptChat", eid,strstr);
             }
         },
-        onjoinPrivateRoom:function(){
-            cc.log("onjoinPrivateRoom")
-        },
         joinRoom: function()
         {
             KBEngine.INFO_MSG("avatar " + this.id + " join room");
@@ -77,12 +84,12 @@ KBEngine.Avatar = KBEngine.Entity.extend({
         },
         createPrivateRoom: function()
         {
-            KBEngine.INFO_MSG("avatar " + this.id + " join room");
+            KBEngine.INFO_MSG("avatar " + this.id + " createPrivateRoom");
             this.baseCall("createPrivateRoom");
         },
         joinPrivateRoom: function(roomkey)
         {
-            KBEngine.INFO_MSG("avatar " + this.id + " join room"+ roomkey);
+            KBEngine.INFO_MSG("avatar " + this.id + " joinPrivateRoom"+ roomkey);
             this.baseCall("joinPrivateRoom",roomkey);
         },
         game_begin_push:function(holds)   {
@@ -209,8 +216,16 @@ KBEngine.Avatar = KBEngine.Entity.extend({
             KBEngine.INFO_MSG("avatar " + eid + " on new turn");
 		    KBEngine.Event.fire("newTurn", this,eid,second,card1,card2,card3,card4);
         }, 
-        onsureact:function(){
-            this.cellCall("onsureact");
+        onsureact:function(strr){
+            this.cellCall("onsureact", strr);
+        },
+        onsyncsureact:function(eid , strr){
+            cc.log("avatar::onsyncsureact== ", strr);
+            //KBEngine.Event.fire("onsyncsureact", strr);
+            if(this.isPlayer()) {
+                KBEngine.Event.fire("oniptChat", eid,strr);
+            }
+
         },
         newTurn : function()
 	    {

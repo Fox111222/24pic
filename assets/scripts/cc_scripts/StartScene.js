@@ -32,6 +32,22 @@ cc.Class({
        // window.AudioMgr.playSFX("ui_click")
         this.userName=this.textinput_name.string
     },
+    update:function(){
+        if(window.loginres==0){
+            this.label_hint.string = "输入房间ID无效,请重新输入房号";
+            this.label_hint.node.opacity=255
+            //var action = cc.fadeTo(13.0, 0);
+            //this.label_hint.node.runAction(action);
+            //window.loginres=100
+        }
+        else if(window.loginres==1){
+            this.label_hint.string = "房间已满！请重新输入房号";
+            this.label_hint.node.opacity=255
+            //var action = cc.fadeTo(13.0, 0);
+            //this.label_hint.node.runAction(action);
+            //window.loginres=100
+        }
+    },
     onLoad: function () {
         
         this.initKbengine();
@@ -82,6 +98,7 @@ cc.Class({
             this.userName=this.textinput_name.string         
         }
         //window.AudioMgr.playBGM("bgm")
+        cc.log("window.loginres=",window.loginres)
      },
 
      hello () {
@@ -274,7 +291,9 @@ cc.Class({
 		KBEngine.Event.register("enterScene", this, "enterScene");
         KBEngine.Event.register("onReloginBaseappFailed", this, "onReloginBaseappFailed");
         KBEngine.Event.register("onReloginBaseappSuccessfully", this, "onReloginBaseappSuccessfully");
-		KBEngine.Event.register("onLoginBaseapp", this, "onLoginBaseapp");
+        KBEngine.Event.register("onLoginBaseapp", this, "onLoginBaseapp");
+        KBEngine.Event.register("onSetSpaceData", this, "onSetSpaceData");
+        
      },
 
      unInstallEvents() {
@@ -285,7 +304,9 @@ cc.Class({
 		KBEngine.Event.deregister("enterScene", this, "enterScene");
         KBEngine.Event.deregister("onReloginBaseappFailed", this, "onReloginBaseappFailed");
         KBEngine.Event.deregister("onReloginBaseappSuccessfully", this, "onReloginBaseappSuccessfully");
-		KBEngine.Event.deregister("onLoginBaseapp", this, "onLoginBaseapp");
+        KBEngine.Event.deregister("onLoginBaseapp", this, "onLoginBaseapp");
+        KBEngine.Event.deregister("onSetSpaceData", this, "onSetSpaceData");
+        
      },
 
      onConnectionState : function(success) {
@@ -357,7 +378,9 @@ cc.Class({
             console.log('解密后 data: ', data)
         }
      },
-         
+     onSetSpaceData:function(){
+         cc.log("startscene.onSetSpaceData")
+     },  
      enterScene : function() {
         KBEngine.INFO_MSG("Login is successfully!(登陆成功!)");
         this.label_hint.string = "登陆成功 !!!";
@@ -371,12 +394,11 @@ cc.Class({
         } 
         //var player = KBEngine.app.player();//KBEngine.app.entities[KBEngine.app.entity_id];    
         //player.joinRoom()
-         
+
         cc.director.loadScene("WorldScene", ()=> {
             KBEngine.INFO_MSG("load world scene finished");
             var player = KBEngine.app.player();//KBEngine.app.entities[KBEngine.app.entity_id];
-            window.type=1
-           
+            //window.type=1
             if(player){
                 if (window.type==1){
                     player.joinRoom();
@@ -388,12 +410,11 @@ cc.Class({
                 if (window.type==3 && window.privateRoomID.length>0){
                     player.joinPrivateRoom(window.privateRoomID);                    
                 }                
-            }           
+            }
+            this.unInstallEvents();           
         });
-             
-        
-
-        this.unInstallEvents();
+           
+     
         
          /*
         KBEngine.INFO_MSG("Login is successfully!(登陆成功!)");
@@ -460,7 +481,7 @@ cc.Class({
      },
  
      startGame: function (event) {
-        
+        window.loginres=100;
         // window.AudioMgr.playSFX("ui_click")
          //cc.log("cc.sys.platform",cc.sys.platform,cc.sys.WECHAT_GAME)
          window.type=1
@@ -476,7 +497,7 @@ cc.Class({
  
  
          //////////////////////////////////////////////////
-         cc.log("this.userName=",this.userName)  
+         cc.log("this.userName=", this.userName)  
          var datas = {};
          datas["platform"] = cc.sys.platform;
          datas = this.createDictString(datas);
@@ -489,10 +510,23 @@ cc.Class({
          this.label_hint.string = "登陆中 ... ...";
          this.btn_start.active = false;
          
- 
+         /*
+	    this.login = function(username, password, datas)
+	    {  
+		    KBEngine.app.reset();
+		    KBEngine.app.username = username;
+		    KBEngine.app.password = password;
+		    KBEngine.app.clientdatas = datas;
+		
+		    KBEngine.app.login_loginapp(true);
+	    }
+
+
+         */
  
       },
       createPrivateRoom: function (event) {
+        window.loginres=100; 
          window.type=2
          // window.AudioMgr.playSFX("ui_click")
           //cc.log("cc.sys.platform",cc.sys.platform,cc.sys.WECHAT_GAME)
@@ -519,7 +553,7 @@ cc.Class({
        },
        joinPrivateRoominputcallback:function(roomId){ //参数是数组
          window.type=3
- 
+         window.loginres=100;
          window.privateRoomID=roomId
          this.JoinGame.active=false
            //////////////////////////////////////////////////

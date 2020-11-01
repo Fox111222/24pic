@@ -43,10 +43,10 @@ cc.Class({
     
         KBEngine.INFO_MSG("game is over, result: rate=%f harm=%f time=%f score=%f", HP, OtherHP, TOTAL_TIME, SCORE);
         //var rate = HIT_RATE * 100;
-        this.labelHitRate.string = HP;//提交成功次数
-        this.labelTotalHarm.string = OtherHP;
+        this.labelHitRate.string = HP;//抢答次数
+        this.labelTotalHarm.string = OtherHP; //对方抢答次数
         this.labelTotalTime.string = TOTAL_TIME + 'S';
-        this.labelScore.string = Math.round(100*SCORE)+"%";
+        this.labelScore.string = Math.round(100*SCORE)+"%"; //胜利比率
 
         cc.director.preloadScene("WorldScene");
     },
@@ -69,7 +69,7 @@ cc.Class({
             this.sharedCanvas.height = 720;
 
             wx.setUserCloudStorage({  //存储数据
-                KVDataList: [{ key: 'score', value: ""+SCORE }],
+                KVDataList: [{ key: 'score', value: ""+ LVlevel }],
                 success: function (res) {
                     KBEngine.INFO_MSG('setUserCloudStorage  success' + JSON.stringify(res));
                 },

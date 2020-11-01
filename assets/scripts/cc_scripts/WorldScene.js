@@ -86,7 +86,12 @@ cc.Class({
         gameHint: cc.Label,
         */
     },
-
+    showwangfa:function(){
+        this.introduce.active=true
+    },
+    hidewangfa:function(){
+        this.introduce.active=false
+    },
     showsetting:function(){
        // window.AudioMgr.playSFX("ui_click")
         this.isshowsetting = !this.settingNode.active;
@@ -102,7 +107,24 @@ cc.Class({
     },
     onLoad () {
         this.installEvents();
-        this.RoomID=cc.find("Canvas/bg2/RoomID").getComponent(cc.RichText)
+        this.RoomID=cc.find("Canvas/bg2/RoomID").getComponent(cc.Label)
+        this.introduce=this.node.getChildByName("introduce")
+        this.introduce.active=false
+
+        if(window.type==1){
+            this.matching=this.node.getChildByName("bg2").getChildByName("matching")
+            
+        }
+        else{
+            this.matching=this.node.getChildByName("bg2").getChildByName("matching2")
+        }
+        //this.node.getChildByName("bg2").getChildByName("matching").active=true
+        this.matching.active=true
+        this.matching.stopAllActions()
+        var action1 = cc.fadeIn(0.5);//渐显
+        var action2 = cc.fadeOut(0.5);//渐隐效果
+        var repeat=cc.repeatForever(cc.sequence(action2,action1))
+        this.matching.runAction(repeat);
         /*
         this._MusicDict = {}
         var _this = this;
@@ -357,6 +379,7 @@ cc.Class({
 
         var power = cc.find("Canvas/bg2/power")
         power.scaleX = this.getBatteryPercent();
+
         
     },
     onaddact:function(){
@@ -404,6 +427,26 @@ cc.Class({
 
     },
     onsureact:function(){
+        if(this.card1selected==false||this.card2selected==false||this.card3selected==false||this.card4selected==false){
+            this.gameHint.node.active=true
+            this.gameHint.string = "四张牌都必须使用一次，请重新计算";
+            this.gameHint.node.opacity=255
+            var action = cc.fadeTo(8.0, 0);
+            this.gameHint.node.runAction(action);
+
+            this.card1selected=false
+            this.card2selected=false
+            this.card3selected=false
+            this.card4selected=false
+    
+            this.card1.setScale(0.8)
+            this.card2.setScale(0.8)
+            this.card3.setScale(0.8)
+            this.card4.setScale(0.8)
+            this.act=[]
+            return
+        }
+            
         //window.AudioMgr.playSFX("ui_click")
         this.card1selected=false
         this.card2selected=false
@@ -416,24 +459,38 @@ cc.Class({
         this.card4.setScale(0.8)
 
         var str=this.act.join("")
+        var res=0;
         try{
             //var res=eval(str);
             //var res= window.binding.eval(str)
-            var res=window.eval2(str)
-            cc.log("ttttttttttttttt",res)
+            res=window.eval2(str)
+            //cc.log("ttttttttttttttt",res)
         }
         catch{
-            res="syntax error"
+            //res="syntax error"
+            this.gameHint.node.active=true
+            this.gameHint.string = "输入无效，请重新计算";
+            this.gameHint.node.opacity=255
+            var action = cc.fadeTo(8.0, 0);
+            this.gameHint.node.runAction(action);
+            this.act=[]
         }
         //alert();
         this.act=[]
-        this.act.push(res)
+        //this.act.push(res)
         if(res==24){
             var player = KBEngine.app.player();
             if(player){
-                player.onsureact()
+                player.onsureact(str)
             }
 
+        }
+        else{
+            this.gameHint.node.active=true
+            this.gameHint.string = "计算结果为" + res + "不正确，请重新计算";
+            this.gameHint.node.opacity=255
+            var action = cc.fadeTo(8.0, 0);
+            this.gameHint.node.runAction(action);
         }
         //cc.log("submit=",res)
 
@@ -467,6 +524,9 @@ cc.Class({
         KBEngine.Event.register("onEnterWorld2", this, "onEnterWorld2");
         KBEngine.Event.register("updategamestuts", this, "updategamestuts");
         KBEngine.Event.register("entity_updateroomkey", this, "entity_updateroomkey");
+        
+        KBEngine.Event.register("onsyncsureact", this, "onsyncsureact");
+        KBEngine.Event.register("onjoinPrivateRoom", this, "onjoinPrivateRoom");
         
     },
     entity_updateroomkey:function(roomKeyc,avatar){
@@ -537,8 +597,19 @@ cc.Class({
         KBEngine.Event.deregister("onEnterWorld2", this, "onEnterWorld2");
         KBEngine.Event.deregister("updategamestuts", this, "updategamestuts");
         KBEngine.Event.deregister("entity_updateroomkey", this, "entity_updateroomkey");
-    },
 
+        KBEngine.Event.deregister("onsyncsureact", this, "onsyncsureact");
+        KBEngine.Event.deregister("onjoinPrivateRoom", this, "onjoinPrivateRoom");
+    },
+    onjoinPrivateRoom:function(num){
+
+        cc.director.loadScene("StartScene", () => {
+            window.loginres=num
+            cc.log("startscene===>wordscene")
+        });
+        this.unInstallEvents();
+        
+    },
     onquick_chat:function(eid,idx){
         //cc.log("7777777777777777777777777777777777777777quick_chat=",eid,idx)
         var strstr=this.node.getComponent("Chat").getQuickChatInfo(idx)["content"]
@@ -614,10 +685,15 @@ cc.Class({
         var action = cc.fadeTo(13.0, 0);
         this.gameHint.node.runAction(action);
         //this.gameState.newTurn(15);
-
         
     },
-
+    onsyncsureact:function(strs){
+        cc.log("world::onsyncsureact", strs)
+        //this.gameHint.node.opacity=255
+        //this.gameHint.string = strs
+        //var action = cc.fadeTo(8.0, 0);
+        //this.gameHint.node.runAction(action);
+    },
     onDisconnected : function() {
         KBEngine.INFO_MSG("disconnect! will try to reconnect...");
         //var action = cc.fadeTo(1.0, 0);
@@ -703,7 +779,7 @@ cc.Class({
                     //this.entities[entity.id] = entity;  
                     cc.log("WorldScene::onEnterWorld=",this.seat1.getComponent("Seat")._isReady)
             }else{  //scalex==-1,
-                this.node.getChildByName("bg2").getChildByName("matching").active=false;
+                    this.matching.active=false;
                     this.seat2.active=true
                     //this.seat2.getComponent("Seat")._isReady=true
                     this.seat2.getComponent("Seat")._userName=entity.accountName
@@ -729,7 +805,7 @@ cc.Class({
                     //this.entities[entity.id] = entity;  
                     cc.log("WorldScene::onEnterWorld=",this.seat1.getComponent("Seat")._isReady)
             }else{  //scalex==-1,
-                    this.node.getChildByName("bg2").getChildByName("matching").active=false;
+                    this.matching.active=false;
                     this.seat2.active=true
                     //this.seat2.getComponent("Seat")._isReady=true
                     this.seat2.getComponent("Seat")._userName=entity.accountName
@@ -741,7 +817,14 @@ cc.Class({
     },
     onLeaveWorld: function (entity) {
         cc.log("onLeaveWorld",entity.id,entity.className)
-        this.node.getChildByName("bg2").getChildByName("matching").active=true;
+        this.matching.active=true;
+
+        this.matching.stopAllActions()
+        var action1 = cc.fadeIn(0.5);//渐显
+        var action2 = cc.fadeOut(0.5);//渐隐效果
+        var repeat=cc.repeatForever(cc.sequence(action1,action2))
+        this.matching.runAction(repeat);
+
         this.seat2.active=false
         /*
         cc.log("onLeaveWorld",entity.id,entity.className)
@@ -1023,6 +1106,7 @@ cc.Class({
             TOTAL_TIME = totalTime;
             OtherHP = totalHarm;
             SCORE = score;
+            LVlevel=Math.round(100*SCORE)
             this.unInstallEvents();
             if(isWin) {
                 cc.director.loadScene("WinScene");

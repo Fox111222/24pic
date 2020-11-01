@@ -1756,16 +1756,17 @@ KBEngine.Entity = KBEngine.Class.extend(
 	
 	enterWorld : function()
 	{
-		KBEngine.INFO_MSG(this.className + '::enterWorld: ' + this.id); 
+		KBEngine.INFO_MSG(this.className + '::enterWorld: ' + this.id); //多次收到
 		this.inWorld = true;
-		this.onEnterWorld();
 		
-		KBEngine.Event.fire(KBEngine.EventTypes.onEnterWorld, this);
+		//KBEngine.Event.fire(KBEngine.EventTypes.onSetSpaceData, this);
+		this.onEnterWorld();//转到子Avatar.js 中的onEnterWorld()
 	},
 
-	onEnterWorld : function()
+	onEnterWorld : function()  
 	{
 		cc.log("entity.onEnterWorld")
+		KBEngine.Event.fire(KBEngine.EventTypes.onEnterWorld, this);
 	},
 		
 	leaveWorld : function()
@@ -4754,7 +4755,7 @@ KBEngine.KBEngineApp = function(kbengineArgs)
 			var value = stream.readString();
 			KBEngine.app.Client_setSpaceData(KBEngine.app.spaceID, key, value);
 		}
-		
+		//KBEngine.Event.fire(KBEngine.EventTypes.onSetSpaceData);
 		KBEngine.INFO_MSG("KBEngineApp::Client_initSpaceData: spaceID(" + KBEngine.app.spaceID + "), datas(" + KBEngine.app.spacedata + ")!");
 	}
 	

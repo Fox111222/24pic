@@ -24,6 +24,9 @@ window.HP = 0.0;
 window.TOTAL_TIME = 0;
 window.OtherHP = 0;
 window.SCORE = 0;
+window.LVlevel = 100;
+
+window.loginres=100;
 
 window.PLAYER_NAME = '';
 window.WEI_XIN_NICK_NAME = '';

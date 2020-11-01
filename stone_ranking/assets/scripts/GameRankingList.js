@@ -85,7 +85,7 @@ cc.Class({
                                 this.scrollViewContent.addChild(item);
 
                                 if (data[i].avatarUrl == userData.avatarUrl) {
-                                    this.myScore.string = "我的分数: " + data[i].KVDataList[0].value + ", 排名: " +  (i+1);
+                                    this.myScore.string = "我的胜率: " + data[i].KVDataList[0].value + "%, 排名: " +  (i+1);
                                 }
                             }
 
@@ -102,5 +102,10 @@ cc.Class({
                 },
             });
         }
+    },
+    onLoad:function(){
+        cc.macro.ENABLE_TRANSPARENT_CANVAS = true;//默认canvas背景是纯黑的，添加代码，让其canvas的背景为纯透明的
+        cc.director.setClearColor(new cc.Color(255,255,255,0))
+
     },
 });

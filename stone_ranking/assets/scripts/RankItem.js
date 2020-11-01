@@ -39,7 +39,7 @@ cc.Class({
         this.rankLabel.string = (rank + 1).toString();
         this.createImage(avatarUrl);
         this.nickLabel.string = nick;
-        this.topScoreLabel.string = grade.toString() + "分";
+        this.topScoreLabel.string ="胜率:" + grade.toString() + "%";
     },
 
     createImage(avatarUrl) {
