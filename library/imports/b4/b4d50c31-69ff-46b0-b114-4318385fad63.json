@@ -1,0 +1,83 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_name": "JoinRoom.plist",
+  "_objFlags": 0,
+  "_native": "",
+  "_spriteFrames": {
+    "Num1": {
+      "__uuid__": "5c54e784-7b16-49f1-94c1-b28e48b04ec4"
+    },
+    "Num10": {
+      "__uuid__": "d6993cda-18d4-46db-90f4-1c6d2872c4e8"
+    },
+    "Num11": {
+      "__uuid__": "bc0ea72e-7aca-4265-a83c-6272b41a49f2"
+    },
+    "Num12": {
+      "__uuid__": "927eaa47-8e17-493d-9c00-de1a24752692"
+    },
+    "Num13": {
+      "__uuid__": "774e9118-bd9f-4458-9655-ffce9f5dfa29"
+    },
+    "Num14": {
+      "__uuid__": "925c12a9-a3dc-4e3d-9462-9bd86867ae1f"
+    },
+    "Num15": {
+      "__uuid__": "27f1f656-36ce-46ff-b740-e15eea339558"
+    },
+    "Num16": {
+      "__uuid__": "6bf7834e-8b44-42f2-88e9-5795381bd2b0"
+    },
+    "Num17": {
+      "__uuid__": "6c36a056-50b5-4f25-8d20-902f8bc3b6f0"
+    },
+    "Num18": {
+      "__uuid__": "160f6699-1d05-4b9d-9d7a-881685f8b3d7"
+    },
+    "Num19": {
+      "__uuid__": "735f58ee-6aa3-4ef1-b85c-7cb844ad03a5"
+    },
+    "Num2": {
+      "__uuid__": "5ddd8129-2dcd-487f-a027-e0922c9d40db"
+    },
+    "Num20": {
+      "__uuid__": "c0741995-8d51-4c3b-8b01-ac3e8ebaf7f8"
+    },
+    "Num21": {
+      "__uuid__": "374be15f-01d0-4a74-aa6b-26b756d6fdf4"
+    },
+    "Num22": {
+      "__uuid__": "137ad948-8db2-46d8-a478-a401c260bb13"
+    },
+    "Num23": {
+      "__uuid__": "64a6294d-42ea-46be-8a20-8588dc8f5e0c"
+    },
+    "Num24": {
+      "__uuid__": "a707cb0d-4ebe-4376-a8f7-f44bad1e285b"
+    },
+    "Num25": {
+      "__uuid__": "1b5e3cfa-4969-4930-8223-56d16b068923"
+    },
+    "Num3": {
+      "__uuid__": "b37838de-8a4f-4372-bdd2-138a1f0d3a30"
+    },
+    "Num4": {
+      "__uuid__": "d2abb719-7ec5-41f6-8a26-475d192c4387"
+    },
+    "Num5": {
+      "__uuid__": "4ac10d30-60dd-4c41-9f75-bb5151d1bdae"
+    },
+    "Num6": {
+      "__uuid__": "cd296482-ccdc-40ce-bc87-b81a9f94c69b"
+    },
+    "Num7": {
+      "__uuid__": "4d0fb175-138c-4ad9-a906-0a8cbec39ed9"
+    },
+    "Num8": {
+      "__uuid__": "77f1b081-e303-4e3c-9ed7-1f34ce5c9056"
+    },
+    "Num9": {
+      "__uuid__": "a7e1e80f-bfa8-432a-9c9d-f96fc574517a"
+    }
+  }
+}

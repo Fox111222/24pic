@@ -1,0 +1,41 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_name": "setting.plist",
+  "_objFlags": 0,
+  "_native": "",
+  "_spriteFrames": {
+    "setting1": {
+      "__uuid__": "29e92ea8-1b76-42ad-b0bc-217b8916cd7a"
+    },
+    "setting10": {
+      "__uuid__": "b19a71c4-4a6a-4e09-b860-e1acbd487d88"
+    },
+    "setting11": {
+      "__uuid__": "ac1b451a-6de0-409c-a058-1eb9e04aa7b0"
+    },
+    "setting12": {
+      "__uuid__": "302e3089-8f45-4aa1-becc-1d7766bbffbb"
+    },
+    "setting2": {
+      "__uuid__": "78898f5e-5863-44a1-8f8c-c1f7b7632cca"
+    },
+    "setting3": {
+      "__uuid__": "376f7c2d-bcb8-414a-8d39-60bb1c3c0c43"
+    },
+    "setting4": {
+      "__uuid__": "8418e7ac-abe1-46c5-9eeb-53c6bd9ce369"
+    },
+    "setting5": {
+      "__uuid__": "60508981-099f-4f2e-9c73-8d1f7d2125d9"
+    },
+    "setting6": {
+      "__uuid__": "67510e19-d33c-4a2a-b3ef-392156e1a5b8"
+    },
+    "setting8": {
+      "__uuid__": "2dd938b6-a8fc-4121-9bff-3836a96506a6"
+    },
+    "setting9": {
+      "__uuid__": "3a439c06-b95f-4c2c-998b-8a7c8fc1e9aa"
+    }
+  }
+}

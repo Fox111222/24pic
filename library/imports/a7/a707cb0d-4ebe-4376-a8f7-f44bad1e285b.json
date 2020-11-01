@@ -1,0 +1,29 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "Num24",
+    "texture": "6a8a9b06-254d-47c9-8d95-bba5984a24aa",
+    "atlas": "b4d50c31-69ff-46b0-b114-4318385fad63",
+    "rect": [
+      849,
+      2,
+      259,
+      87
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      259,
+      87
+    ],
+    "rotated": 1,
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

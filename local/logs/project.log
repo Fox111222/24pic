@@ -1,0 +1,76 @@
+2020-11-01T14:35:59.860Z - normal: Load ~/.CocosCreator/settings.json
+2020-11-01T14:35:59.907Z - normal: Initializing Asset Database
+2020-11-01T14:35:59.909Z - normal: checking language setting...
+2020-11-01T14:35:59.909Z - normal: Language: zh
+2020-11-01T14:36:01.087Z - success: preview server running at http://localhost:7456
+2020-11-01T14:36:01.092Z - success: protocol editor-framework registered
+2020-11-01T14:36:01.092Z - success: protocol app registered
+2020-11-01T14:36:01.092Z - success: protocol theme registered
+2020-11-01T14:36:01.092Z - success: protocol packages registered
+2020-11-01T14:36:01.092Z - success: protocol uuid registerred
+2020-11-01T14:36:01.092Z - success: protocol db registerred
+2020-11-01T14:36:01.092Z - success: protocol thumbnail registerred
+2020-11-01T14:36:01.092Z - success: protocol unpack registerred
+2020-11-01T14:36:01.092Z - success: protocol disable-commonjs registerred
+2020-11-01T14:36:01.332Z - normal: connected!
+2020-11-01T14:36:01.333Z - normal: Check project D:\Users\13328\Documents\cocoscreator_assets2
+2020-11-01T14:36:01.334Z - normal: Initializing project D:\Users\13328\Documents\cocoscreator_assets2
+2020-11-01T14:36:01.369Z - success: adapters loaded
+2020-11-01T14:36:01.373Z - success: asset-db-debugger loaded
+2020-11-01T14:36:01.440Z - success: fb-audience-network loaded
+2020-11-01T14:36:01.476Z - success: fb-live-stream loaded
+2020-11-01T14:36:01.479Z - success: google-play-instant loaded
+2020-11-01T14:36:01.479Z - success: huawei-adapter loaded
+2020-11-01T14:36:01.480Z - success: jkw-adapter loaded
+2020-11-01T14:36:01.480Z - success: jsb-adapter loaded
+2020-11-01T14:36:01.480Z - success: oppo-adapter loaded
+2020-11-01T14:36:01.483Z - success: package-manager loaded
+2020-11-01T14:36:01.483Z - success: qtt-adapter loaded
+2020-11-01T14:36:01.485Z - success: runtime-dev-tools loaded
+2020-11-01T14:36:01.489Z - success: sdkbox loaded
+2020-11-01T14:36:01.491Z - success: ui-kit-preview-extra loaded
+2020-11-01T14:36:01.493Z - success: ui-kit-preview loaded
+2020-11-01T14:36:01.495Z - success: vivo-adapter loaded
+2020-11-01T14:36:01.544Z - success: alipay-minigame loaded
+2020-11-01T14:36:01.591Z - success: assets loaded
+2020-11-01T14:36:01.594Z - success: baidugame-opendata loaded
+2020-11-01T14:36:01.595Z - success: baidugame loaded
+2020-11-01T14:36:01.598Z - success: builder loaded
+2020-11-01T14:36:01.603Z - success: cloud-function loaded
+2020-11-01T14:36:01.768Z - success: cocos-services loaded
+2020-11-01T14:36:01.771Z - success: console loaded
+2020-11-01T14:36:01.772Z - success: curve-editor loaded
+2020-11-01T14:36:01.781Z - success: fb-instant-games loaded
+2020-11-01T14:36:01.783Z - success: game-window loaded
+2020-11-01T14:36:01.784Z - success: google-instant-games loaded
+2020-11-01T14:36:01.786Z - success: hierarchy loaded
+2020-11-01T14:36:01.789Z - success: huawei-runtime loaded
+2020-11-01T14:36:01.791Z - success: inspector loaded
+2020-11-01T14:36:01.870Z - success: cpk-publish loaded
+2020-11-01T14:36:01.870Z - success: keystore loaded
+2020-11-01T14:36:01.880Z - success: node-library loaded
+2020-11-01T14:36:01.880Z - success: open-recent-items loaded
+2020-11-01T14:36:01.884Z - success: oppo-runtime loaded
+2020-11-01T14:36:01.886Z - success: package-asset loaded
+2020-11-01T14:36:01.888Z - success: preferences loaded
+2020-11-01T14:36:01.890Z - success: project-importer loaded
+2020-11-01T14:36:01.891Z - success: project-settings loaded
+2020-11-01T14:36:01.904Z - success: qtt-runtime loaded
+2020-11-01T14:36:01.906Z - success: scene loaded
+2020-11-01T14:36:01.907Z - success: simulator-debugger loaded
+2020-11-01T14:36:01.908Z - success: sprite-editor loaded
+2020-11-01T14:36:01.951Z - success: store loaded
+2020-11-01T14:36:01.953Z - success: timeline loaded
+2020-11-01T14:36:01.957Z - success: vivo-runtime loaded
+2020-11-01T14:36:01.959Z - success: wechatgame-opendata loaded
+2020-11-01T14:36:01.963Z - success: wechatgame loaded
+2020-11-01T14:36:01.967Z - success: xiaomi-runtime loaded
+2020-11-01T14:36:02.315Z - success: im-plugin loaded
+2020-11-01T14:36:03.406Z - normal: Initializing Cocos2d
+2020-11-01T14:36:03.889Z - normal: Initializing engine extends
+2020-11-01T14:36:08.982Z - normal: Loading packages
+2020-11-01T14:36:08.986Z - normal: Watching packages
+2020-11-01T14:36:09.381Z - normal: Run Application
+2020-11-01T14:36:12.354Z - info: Cocos Service load base data!
+2020-11-01T14:38:10.166Z - failed: Can not found the asset db://assets/resources/fonts/bitmap-font.png/bitmap-font
+2020-11-01T14:49:26.729Z - info: shutdown preview server

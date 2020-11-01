@@ -1,0 +1,137 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_name": "gamepics.plist",
+  "_objFlags": 0,
+  "_native": "",
+  "_spriteFrames": {
+    "14": {
+      "__uuid__": "9f6e7889-6c87-4896-93ef-0ba925b07ffc"
+    },
+    "35": {
+      "__uuid__": "63c63637-cdf9-4ae5-b33a-34e64f641752"
+    },
+    "36": {
+      "__uuid__": "b96ab6f3-7622-4aee-acd1-24a5fe4509c6"
+    },
+    "Z_chat_bottom_1": {
+      "__uuid__": "df232298-9569-45a6-996e-576f0ea00b1a"
+    },
+    "Z_money_frame": {
+      "__uuid__": "4e881b2c-19bf-49d2-9fbe-03ced2272767"
+    },
+    "Z_nobody": {
+      "__uuid__": "b98f9e9c-5875-4838-9595-20c409e993ff"
+    },
+    "Z_power": {
+      "__uuid__": "a77ed39c-5023-4d71-88f3-eb0c18b7e4c2"
+    },
+    "Z_user": {
+      "__uuid__": "804d9a8f-8326-4ba6-98e6-9ecd9ed6d3e0"
+    },
+    "Z_zhunbeizhuangt": {
+      "__uuid__": "7aaced11-c8c1-4d59-9526-a48a4fe3648f"
+    },
+    "adj": {
+      "__uuid__": "30a3d1bb-a968-4fc7-820e-7d6859fb4221"
+    },
+    "btn_start": {
+      "__uuid__": "04d25d41-0b00-4eae-97ae-36679b106842"
+    },
+    "button_1019@2x": {
+      "__uuid__": "3c7d6497-8a38-4ae8-a63c-27d648cc296d"
+    },
+    "button_1020@2x": {
+      "__uuid__": "2e1b3ec6-73cb-4ba0-95f7-3604944fd196"
+    },
+    "chat_backbg": {
+      "__uuid__": "7b6ba52a-514a-44b6-97f4-6051593a7e47"
+    },
+    "chat_chick": {
+      "__uuid__": "18f4af87-d7e3-46e2-b27d-1dbf7b23a12b"
+    },
+    "chat_easychat": {
+      "__uuid__": "348bebd9-e277-4464-8161-bd23b49db0f2"
+    },
+    "chat_easychat1": {
+      "__uuid__": "d0733c37-2fca-477b-8c67-7bc91b505135"
+    },
+    "chat_emoji": {
+      "__uuid__": "420274f8-80c1-4bbb-86a4-8ee14fda4f76"
+    },
+    "chat_emoji1": {
+      "__uuid__": "463c0108-2f42-4cde-bd01-9039b13d08ff"
+    },
+    "chat_normol": {
+      "__uuid__": "f721ad82-932e-465e-8b53-fd050dcf623c"
+    },
+    "chatbg_ld": {
+      "__uuid__": "6fc7d92a-33b2-4407-b982-d79b2c2aeb49"
+    },
+    "chatbg_lt": {
+      "__uuid__": "58e76ddc-2f51-4100-838f-b25dc75d7d4c"
+    },
+    "chatbg_rd": {
+      "__uuid__": "cd94aeaf-af61-4b58-90a6-1d4a28038b6c"
+    },
+    "close": {
+      "__uuid__": "34747685-4f53-48f9-b059-e834e82a42da"
+    },
+    "default_sprite": {
+      "__uuid__": "206b7f1c-fb02-4a2c-9149-6fb15c9bc799"
+    },
+    "dialog_loading_bg.9": {
+      "__uuid__": "163c5127-7b5c-46c6-8d3d-948592508372"
+    },
+    "head1": {
+      "__uuid__": "2d0ba20c-e471-4929-bb45-33a1ca9e915f"
+    },
+    "head2": {
+      "__uuid__": "bf163b88-af38-43b8-9c38-5c23bbf558d7"
+    },
+    "icon_1032@2x": {
+      "__uuid__": "1abb52eb-5fbc-4e7f-9f76-c16f6c07e8c0"
+    },
+    "input": {
+      "__uuid__": "91c04b59-a3d3-4c6e-8e30-aa9213fa5f6a"
+    },
+    "lose": {
+      "__uuid__": "f3b5e846-6d64-48c0-a329-745e8a781530"
+    },
+    "lose_bg": {
+      "__uuid__": "b4ab3387-5176-449f-83c1-2cd54951b01c"
+    },
+    "mahjong_table": {
+      "__uuid__": "3cc20f31-5d3a-4198-a0ba-b8c5d083d579"
+    },
+    "matching ": {
+      "__uuid__": "5e5e5d4b-14be-49e4-b5b0-048a00d8ae4b"
+    },
+    "playerinfoline": {
+      "__uuid__": "a1fb8b87-cc61-4363-b0f9-0e42511f5f41"
+    },
+    "powerG": {
+      "__uuid__": "e19b3b02-8b9a-4b7e-9735-45886924581f"
+    },
+    "send": {
+      "__uuid__": "90aa13b7-5255-4871-893c-fcd76aef9fca"
+    },
+    "send_h": {
+      "__uuid__": "7f7f7cba-663e-4360-86c0-0e3d7709a6ff"
+    },
+    "win": {
+      "__uuid__": "61264a1d-ed06-4a5b-94b1-3f83e92ad04a"
+    },
+    "win_bg": {
+      "__uuid__": "f2187681-ff8e-4ed8-af25-f9a7f0fe4865"
+    },
+    "yellowBg": {
+      "__uuid__": "dcbebbdb-ac18-4073-812b-2dddc3f45cd0"
+    },
+    "yuyin_bg": {
+      "__uuid__": "3de38c19-72a4-427b-9703-347c253510ce"
+    },
+    "yyDialog": {
+      "__uuid__": "5101d492-8fb1-412a-a0e4-d2a14ed39928"
+    }
+  }
+}

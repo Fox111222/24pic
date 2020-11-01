@@ -1,0 +1,49 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "shaoxiang",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.08333333333333333,
+  "sample": 60,
+  "speed": 0.1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "d3d93b91-5ef4-40df-9456-d6915b2098a5"
+            }
+          },
+          {
+            "frame": 0.016666666666666666,
+            "value": {
+              "__uuid__": "1272c881-cc49-4cca-be3f-1dfd7be3a100"
+            }
+          },
+          {
+            "frame": 0.03333333333333333,
+            "value": {
+              "__uuid__": "31e651f0-4cf7-4da8-a63c-d112bfb9f786"
+            }
+          },
+          {
+            "frame": 0.05,
+            "value": {
+              "__uuid__": "f8357817-9926-4db9-a88c-9a171b5d3fea"
+            }
+          },
+          {
+            "frame": 0.06666666666666667,
+            "value": {
+              "__uuid__": "1be49286-2bf6-4081-9470-97cad682f5f9"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}
