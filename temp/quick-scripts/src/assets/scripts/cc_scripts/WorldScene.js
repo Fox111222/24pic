@@ -104,8 +104,11 @@ cc.Class({
     cc.log("showchat");
   },
   onLoad: function onLoad() {
+    this.roomKeyc = "";
     this.installEvents();
     this.RoomID = cc.find("Canvas/bg2/RoomID").getComponent(cc.Label);
+    this.yaoqing = cc.find("Canvas/bg2/yaoqing");
+    this.yaoqing.active = false;
     this.introduce = this.node.getChildByName("introduce");
     this.introduce.active = false;
 
@@ -227,6 +230,7 @@ cc.Class({
 
     if (cc.sys.platform == cc.sys.WECHAT_GAME) {
       this.enableWxShare();
+      if (window.type == 2) this.yaoqing.active = true;
     } // this.seat2cardpos=this.node.getChildByName("bg2").getChildByName("seat2").getChildByName("card").getPosition()
 
     /*
@@ -499,15 +503,18 @@ cc.Class({
   entity_updateroomkey: function entity_updateroomkey(roomKeyc, avatar) {
     cc.log("entity_updateroomkeyentity_updateroomkey=", roomKeyc);
     this.RoomID.string = "房间号:" + roomKeyc.join("");
+    this.roomKeyc = roomKeyc.join("");
   },
   enableWxShare: function enableWxShare() {
     wx.showShareMenu({
       withShareTicket: true
     });
+    var self = this;
     wx.onShareAppMessage(function () {
       return {
-        title: "投石作战",
-        imageUrl: SHARE_PICTURE
+        title: "才艺24点小PK",
+        imageUrl: SHARE_PICTURE //roomID:sekf.RoomID.string,
+
       };
     });
   },
@@ -1011,6 +1018,32 @@ cc.Class({
         this.player.removeFromParent(true)
     }
     */
+  },
+  invatefriend: function invatefriend() {
+    //this.yaoqing.active=false
+    var self = this;
+    wx.shareAppMessage({
+      title: self.RoomID.string,
+      imageUrl: SHARE_PICTURE,
+      //query: "Roomid=" + self.roomKeyc + "&UserName=" + KBEngine.app.entities[KBEngine.app.player().id].accountName,// 别人点击链接时会得到的数据
+      //query: "nick=" + nick + "&gender=" + gender + "&city=" + city,
+      query: "Roomid=" + self.roomKeyc + "&UserName=" + KBEngine.app.entities[KBEngine.app.player().id].accountName,
+      success: function success(res) {
+        wx.showToast({
+          title: "分享成功"
+        });
+        cc.log("分享成功" + res);
+        this.yaoqing.active = false;
+        wx.showShareMenu({
+          // 要求小程序返回分享目标信息
+          withShareTicket: true
+        });
+      },
+      fail: function fail(res) {
+        cc.log("分享失败" + res);
+        this.yaoqing.active = true;
+      }
+    });
   },
   createPlayer: function createPlayer(avatar) {
     // SCALE=1;

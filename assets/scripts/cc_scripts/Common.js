@@ -27,6 +27,7 @@ window.SCORE = 0;
 window.LVlevel = 100;
 
 window.loginres=100;
+window.roomIID=[]
 
 window.PLAYER_NAME = '';
 window.WEI_XIN_NICK_NAME = '';

@@ -29,13 +29,61 @@ cc.Class({
       type: cc.Label
     }
   },
+  start: function start() {
+    if (cc.sys.platform == cc.sys.WECHAT_GAME) {
+      this.getQuery();
+    }
+  },
+  parseRoomID: function parseRoomID(nums) {
+    //var str = "";
+    nums.forEach(function (item, index) {
+      nums[index] = parseInt(nums[index]);
+    });
+    return nums; //转成数字数组
+  },
+  getQuery: function getQuery() {
+    var qData = {};
+    var obj = wx.getLaunchOptionsSync(); //this.label_hint.string = obj.query["UserName"];
+    //this.label_hint.node.opacity=255
+
+    for (var s in obj.query) //obj.query={}
+    {
+      //this.label_hint.string = "" + obj.query["Roomid"];
+      //this.label_hint.node.opacity=255
+      if (s == "Roomid") {
+        qData.Roomid = obj.query[s]; //this.label_hint.string = "邀请ID" + qData.Roomid;
+        //this.label_hint.node.opacity=255
+
+        var string2Result = qData.Roomid.split(''); //字符串变成字符串数组
+
+        window.roomIID = this.parseRoomID(string2Result); //string2Result.map(window.roomID)
+        //window.roomID=qData.Roomid
+      }
+
+      if (s == "UserName") {
+        qData.UserName = obj.query[s];
+        window.invateAcountname = obj.query[s]; //this.label_hint.string = obj.query[s] + "邀请";
+        //this.label_hint.node.opacity=255
+      } //    qData.gender = obj.query[s];
+      //if(s == "city")
+      //     qData.city = obj.query[s];
+
+    } //this.label_hint.string = qData.UserName + "邀请ID" + qData.Roomid;
+    //this.label_hint.node.opacity=255
+    //window.invateAcountname=qData.UserName
+
+
+    return qData;
+  },
   // LIFE-CYCLE CALLBACKS:
   EditBoxclick: function EditBoxclick() {
     cc.log("EditBoxclick"); // window.AudioMgr.playSFX("ui_click")
 
     this.userName = this.textinput_name.string;
   },
-  update: function update() {
+  update: function update(dt) {
+    this.sum = this.sum + dt;
+
     if (window.loginres == 0) {
       this.label_hint.string = "输入房间ID无效,请重新输入房号";
       this.label_hint.node.opacity = 255; //var action = cc.fadeTo(13.0, 0);
@@ -46,9 +94,36 @@ cc.Class({
       this.label_hint.node.opacity = 255; //var action = cc.fadeTo(13.0, 0);
       //this.label_hint.node.runAction(action);
       //window.loginres=100
+    } //cc.log("roomid=", window.roomID)
+
+
+    if (window.roomIID.length > 0) {
+      //if(cc.sys.localStorage.getItem("userName").length == 0) return
+
+      /*
+      if(cc.sys.platform == cc.sys.WECHAT_GAME){
+          this.userName=cc.sys.localStorage.getItem("userName");
+      }
+      if(this.userName.length == 0)
+      {
+          this.label_hint.string = "用户名不能为空";
+          return;
+      }
+      
+      this.joinPrivateRoominputcallback(window.roomIID)
+      window.roomID=undefined
+      */
+      this.btn_accept.active = true;
+      this.btn_accept.getChildByName("Background").getChildByName("Label").getComponent(cc.Label).string = "确认接受" + window.invateAcountname + "的邀请！"; //this.btn_start.active=false;
     }
   },
+  accept_wx: function accept_wx() {
+    this.btn_accept.active = false;
+    this.userName = cc.sys.localStorage.getItem("userName");
+    this.joinPrivateRoominputcallback(window.roomIID);
+  },
   onLoad: function onLoad() {
+    this.sum = 0;
     this.initKbengine();
     this.installEvents();
     cc.loader.loadRes("prefab/JoinGame", cc.Prefab, function (err, prefab) {
@@ -74,7 +149,9 @@ cc.Class({
     }.bind(this));
     */
 
-    this.btn_start = this.node.getChildByName("start_bg").getChildByName("btn_start"); //this.loadItemPrefab();
+    this.btn_start = this.node.getChildByName("start_bg").getChildByName("btn_start");
+    this.btn_accept = this.node.getChildByName("start_bg").getChildByName("accept");
+    this.btn_accept.active = false; //this.loadItemPrefab();
     //window.AudioMgr=this.node.addComponent("AudioMgr")      
 
     var AudioMgr = require("AudioMgr");
@@ -399,8 +476,9 @@ cc.Class({
           player.createPrivateRoom();
         }
 
-        if (window.type == 3 && window.privateRoomID.length > 0) {
-          player.joinPrivateRoom(window.privateRoomID);
+        if (window.type == 3 && window.roomIID.length > 0) {
+          player.joinPrivateRoom(window.roomIID);
+          window.roomIID = [];
         }
       }
 
@@ -541,8 +619,8 @@ cc.Class({
     //参数是数组
     window.type = 3;
     window.loginres = 100;
-    window.privateRoomID = roomId;
-    this.JoinGame.active = false; //////////////////////////////////////////////////
+    window.roomIID = roomId;
+    if (this.JoinGame) this.JoinGame.active = false; //////////////////////////////////////////////////
 
     cc.log("this.userName=", this.userName, roomId);
     var datas = {};
