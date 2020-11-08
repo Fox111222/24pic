@@ -1,7 +1,7 @@
 cc.Class({
     extends: cc.Component,
+    
     properties: {
-      
         _btnYXOpen:{
             default:null,
             type:cc.Node,
@@ -50,23 +50,7 @@ cc.Class({
         this._btnYXClose = this.node.getChildByName("yinxiao").getChildByName("btn_yx_close");
         this._btnYYOpen = this.node.getChildByName("yinyue").getChildByName("btn_yy_open");
         this._btnYYClose = this.node.getChildByName("yinyue").getChildByName("btn_yy_close");
-        
-        this.initButtonHandler(this.node.getChildByName("btn_close"));
-        this.initButtonHandler(this.node.getChildByName("btn_exit"));
-        
-        
-        this.initButtonHandler(this._btnYXOpen);
-        this.initButtonHandler(this._btnYXClose);
-        this.initButtonHandler(this._btnYYOpen);
-        this.initButtonHandler(this._btnYYClose);
-        
-
-        var slider = this.node.getChildByName("yinxiao").getChildByName("progress");
-        this.addSlideEvent(slider,this.node,"Settings","onSlided");
-        
-        var slider = this.node.getChildByName("yinyue").getChildByName("progress");
-        this.addSlideEvent(slider,this.node,"Settings","onSlided");
-        
+      
         this.refreshVolume();
     },
     
@@ -83,7 +67,7 @@ cc.Class({
     initButtonHandler:function(btn){
         this.addClickEvent(btn,this.node,"Settings","onBtnClicked");    
     },
-    
+
     refreshVolume:function(){
         
         this._btnYXClose.active = window.AudioMgr.sfxVolume > 0;
@@ -93,7 +77,9 @@ cc.Class({
         var width = 430 * window.AudioMgr.sfxVolume;
         var progress = yx.getChildByName("progress")
         progress.getComponent(cc.Slider).progress = window.AudioMgr.sfxVolume;
-        progress.getChildByName("progress").width = width;  
+        //progress.getChildByName("progress").width = width; 
+        progress.getChildByName("progress").scaleX =window.AudioMgr.sfxVolume; 
+         
         //yx.getChildByName("btn_progress").x = progress.x + width;
         
         
@@ -104,13 +90,14 @@ cc.Class({
         var progress = yy.getChildByName("progress");
         progress.getComponent(cc.Slider).progress =window.AudioMgr.bgmVolume; 
         
-        progress.getChildByName("progress").width = width;
+        //progress.getChildByName("progress").width = width;
+        progress.getChildByName("progress").scaleX = window.AudioMgr.bgmVolume;
         //yy.getChildByName("btn_progress").x = progress.x + width;
     },
     
     onBtnClicked:function(event){
         window.AudioMgr.playSFX("ui_click")
-        cc.log("onBtnClicked",event.target.name)
+        //cc.log("onBtnClicked",event.target.name)
         if(event.target.name == "btn_close"){
             this.node.active = false;
             

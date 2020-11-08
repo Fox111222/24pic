@@ -85,7 +85,7 @@ cc.Class({
     },
 
     continueGame: function() {
-        //window.AudioMgr.playSFX("ui_click")
+        window.AudioMgr.playSFX("ui_click")
         var player = KBEngine.app.player();
         if(player == undefined || !player.inWorld)
             return;
@@ -111,7 +111,7 @@ cc.Class({
     },
 
     onCloseRankingView(){
-        //window.AudioMgr.playSFX("ui_click")
+        window.AudioMgr.playSFX("ui_click")
         this.rankingView.active = false;
         KBEngine.INFO_MSG("close ranking view: ");
         // 发消息给子域

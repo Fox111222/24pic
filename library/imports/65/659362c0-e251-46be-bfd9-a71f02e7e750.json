@@ -1063,8 +1063,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -12.723,
-        -11.179,
+        356.379,
+        81.096,
         0,
         0,
         0,
@@ -1267,7 +1267,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "04d25d41-0b00-4eae-97ae-36679b106842"
+      "__uuid__": "f67d4f5f-2dd0-4f1e-a27f-71e04996c49f"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -1281,7 +1281,7 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_atlas": {
-      "__uuid__": "fbecc999-2095-4f59-a466-b33e2ad60d71"
+      "__uuid__": "d53c97af-053a-4a3d-a299-f9cd92bc7619"
     },
     "_id": "66cm1SEmxCVp6AD6AfZoBG"
   },
@@ -1450,14 +1450,14 @@
       "ctor": "Float64Array",
       "array": [
         360,
-        10.604,
+        -47.774,
         0,
         0,
         0,
         0,
         1,
-        2,
-        2,
+        1.5,
+        1.5,
         1
       ]
     },
@@ -1653,7 +1653,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "8249d192-b053-4e24-b2c3-2edc39817883"
+      "__uuid__": "3d2fcaec-9477-4c60-82bb-b11b92bf6e27"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -1666,7 +1666,9 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_atlas": null,
+    "_atlas": {
+      "__uuid__": "d53c97af-053a-4a3d-a299-f9cd92bc7619"
+    },
     "_id": "c8ZjRa1cVNtYO0xA+fakRQ"
   },
   {
@@ -1761,9 +1763,7 @@
       "b": 120,
       "a": 200
     },
-    "_N$normalSprite": {
-      "__uuid__": "8249d192-b053-4e24-b2c3-2edc39817883"
-    },
+    "_N$normalSprite": null,
     "_N$pressedSprite": {
       "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
     },
@@ -1842,8 +1842,8 @@
         0,
         0,
         1,
-        2,
-        2,
+        1.5,
+        1.5,
         1
       ]
     },
@@ -2039,7 +2039,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "a98db73d-d5de-44ff-952c-b5bbbcadd7e1"
+      "__uuid__": "059928c6-6bee-4cd8-bbe3-ab34a51428bb"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -2052,7 +2052,9 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_atlas": null,
+    "_atlas": {
+      "__uuid__": "d53c97af-053a-4a3d-a299-f9cd92bc7619"
+    },
     "_id": "00SV+O/DBJFI/LgfhY50Sr"
   },
   {
@@ -2147,9 +2149,7 @@
       "b": 120,
       "a": 200
     },
-    "_N$normalSprite": {
-      "__uuid__": "a98db73d-d5de-44ff-952c-b5bbbcadd7e1"
-    },
+    "_N$normalSprite": null,
     "_N$pressedSprite": null,
     "pressedSprite": null,
     "_N$hoverSprite": {
@@ -2313,8 +2313,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -18.355,
-        99.425,
+        -21.465,
+        100.164,
         0,
         0,
         0,
@@ -2483,8 +2483,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "接受好友邀请",
-    "_N$string": "接受好友邀请",
+    "_string": "同意好友邀请",
+    "_N$string": "同意好友邀请",
     "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": false,
@@ -2517,7 +2517,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "f0048c10-f03e-4c97-b9d3-3506e1d58952"
+      "__uuid__": "7685e293-5ce2-4eb3-9490-ebfd67c5ea2b"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -2530,7 +2530,9 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_atlas": null,
+    "_atlas": {
+      "__uuid__": "d53c97af-053a-4a3d-a299-f9cd92bc7619"
+    },
     "_id": "473fAreqxM3o7pkYqOCK+Z"
   },
   {
@@ -2674,7 +2676,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "4741de5b-9657-4c77-8b97-1ebc2b5003b6"
+      "__uuid__": "53721c2d-fb38-4667-a01a-c6ac7af6671d"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -2687,7 +2689,9 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_atlas": null,
+    "_atlas": {
+      "__uuid__": "d53c97af-053a-4a3d-a299-f9cd92bc7619"
+    },
     "_id": "3dqlSde3lL+IId+HpuSh/l"
   },
   {

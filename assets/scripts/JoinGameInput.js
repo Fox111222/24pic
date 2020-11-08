@@ -47,6 +47,7 @@ cc.Class({
     },
     
     onInput:function(num){
+        window.AudioMgr.playSFX("ui_click")
         if(this._inputIndex >= this.nums.length){
             return;
         }

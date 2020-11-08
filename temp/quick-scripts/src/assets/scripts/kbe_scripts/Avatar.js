@@ -121,74 +121,6 @@ KBEngine.Avatar = KBEngine.Entity.extend({
       KBEngine.Event.fire("onEnterWorld2", eid);
     }
   },
-  startWalk: function startWalk(moveFlag) {
-    KBEngine.INFO_MSG("avatar " + this.id + " start walk: " + moveFlag);
-    this.cellCall("startWalk", moveFlag);
-  },
-  onStartWalk: function onStartWalk(moveFlag) {
-    KBEngine.INFO_MSG("other avatar " + this.id + " on start walk: " + moveFlag);
-    KBEngine.Event.fire("otherAvatarOnStartWalk", this.id, moveFlag);
-  },
-  stopWalk: function stopWalk(pos) {
-    cc.log("avatar %d stop walk, pos(%f, %f)", this.id, pos.x, pos.y);
-    var vec3 = new KBEngine.Vector3();
-    vec3.x = pos.x;
-    vec3.y = pos.y;
-    vec3.z = 0.0;
-    this.cellCall("stopWalk", pos);
-  },
-  onStopWalk: function onStopWalk(pos) {
-    var v2 = new cc.Vec2();
-    v2.x = pos.x;
-    v2.y = pos.y;
-    cc.log("other avatar %d stop walk, pos(%f, %f)", this.id, v2.x, v2.y);
-    KBEngine.Event.fire("otherAvatarOnStopWalk", this.id, v2);
-  },
-  jump: function jump() {
-    cc.log("avatar %d cell jump", this.id);
-    this.cellCall("jump");
-  },
-  onJump: function onJump() {
-    cc.log("other avatar %d on jump", this.id);
-    KBEngine.Event.fire("otherAvatarOnJump", this);
-  },
-  rightJump: function rightJump() {
-    this.cellCall("rightJump");
-    KBEngine.INFO_MSG("avatar " + this.id + " right jump");
-  },
-  onRightJump: function onRightJump() {
-    KBEngine.Event.fire("otherAvatarOnRightJump", this.id);
-  },
-  leftJump: function leftJump() {
-    this.cellCall("leftJump");
-    KBEngine.INFO_MSG("avatar " + this.id + " left jump");
-  },
-  onLeftJump: function onLeftJump() {
-    KBEngine.Event.fire("otherAvatarOnLeftJump", this.id);
-  },
-  onPickUpItem: function onPickUpItem(itemID, positon) {
-    var point = new cc.Vec2(positon.x, positon.y);
-    KBEngine.Event.fire("otherAvatarOnPickUpItem", this.id, itemID, point);
-  },
-  pickUpItem: function pickUpItem(itemID, pos) {
-    var vec3 = new KBEngine.Vector3();
-    vec3.x = pos.x;
-    vec3.y = pos.y;
-    vec3.z = 0.0;
-    this.cellCall("pickUpItem", itemID, vec3);
-  },
-  //把力道给每个客户端，根本不会记录最终位置坐标到服务器，所以断线重连后Item的位置坐标都是起始值            
-  throwItem: function throwItem(itemID, force) {
-    var vec3 = new KBEngine.Vector3();
-    vec3.x = force.x;
-    vec3.y = force.y;
-    vec3.z = 0.0;
-    this.cellCall("throwItem", itemID, vec3);
-  },
-  onThrowItem: function onThrowItem(itemID, force) {
-    var v2 = new cc.Vec2(force.x, force.y);
-    KBEngine.Event.fire("otherAvatarThrowItem", this.id, itemID, v2);
-  },
   onNewTurn: function onNewTurn(eid, second, card1, card2, card3, card4) {
     KBEngine.INFO_MSG("avatar " + eid + " on new turn");
     KBEngine.Event.fire("newTurn", this, eid, second, card1, card2, card3, card4);
@@ -205,21 +137,6 @@ KBEngine.Avatar = KBEngine.Entity.extend({
   },
   newTurn: function newTurn() {
     this.cellCall("newTurn");
-  },
-  //捡起石头，时间到了，不扔石头，就还原石头的位置
-  recoverItem: function recoverItem(itemID) {
-    this.cellCall("recoverItem", itemID);
-  },
-  onRecoverItem: function onRecoverItem(itemID) {
-    KBEngine.Event.fire("otherAvatarRecoverItem", this.id, itemID);
-  },
-  recvDamage: function recvDamage(itemID) {
-    this.cellCall("recvDamage", itemID);
-    KBEngine.INFO_MSG("avatar " + this.id + " recvDamage from item=" + itemID);
-  },
-  onRecvDamage: function onRecvDamage(avatarID, harm, hp) {
-    KBEngine.INFO_MSG("avatar " + avatarID + " recv harm=" + harm + " hp=" + hp);
-    KBEngine.Event.fire("onRecvDamage", avatarID, harm, hp);
   },
   onupdateGamestates: function onupdateGamestates(curID, time) {
     KBEngine.INFO_MSG("onupdateGamestates " + curID + "/" + time);
@@ -239,24 +156,6 @@ KBEngine.Avatar = KBEngine.Entity.extend({
   },
   updategamestuts: function updategamestuts(num) {
     KBEngine.Event.fire("updategamestuts", num);
-  },
-  //石头出界，重置石头
-  resetItem: function resetItem(itemID) {
-    KBEngine.INFO_MSG("reset item ......");
-    this.cellCall("resetItem", itemID);
-  },
-  uploaditempos: function uploaditempos(itemID, itempos) {
-    KBEngine.INFO_MSG("uploaditempos ......");
-    this.cellCall("uploaditempos", itemID, itempos);
-  },
-  onResetItem: function onResetItem(itemID, position) {
-    KBEngine.INFO_MSG("on reset item position(" + position.x + ", " + position.y + ", " + position.z + ")");
-    KBEngine.Event.fire("onResetItem", itemID, position);
-  },
-  //没石头扔，就产生石头
-  addItem: function addItem(left) {
-    KBEngine.INFO_MSG("add item ......: " + left.toString());
-    this.cellCall("addItem", left);
   },
   continueGame: function continueGame() {
     this.cellCall("continueGame");

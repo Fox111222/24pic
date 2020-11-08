@@ -10,7 +10,7 @@
                     };
                     function __define (exports, require, module) {
                         if (!nodeEnv) {__quick_compile_project__.registerModule(__filename, module);}"use strict";
-cc._RF.push(module, 'ca093See4RPkILNQ+LDlk8g', 'RadioButton');
+cc._RF.push(module, '5b2b6Z2HphE2pSYy/hZDq4x', 'RadioButton');
 // scripts/RadioButton.js
 
 "use strict";

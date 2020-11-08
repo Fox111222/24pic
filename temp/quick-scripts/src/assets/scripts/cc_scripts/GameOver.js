@@ -80,7 +80,7 @@ cc.Class({
     }
   },
   continueGame: function continueGame() {
-    //window.AudioMgr.playSFX("ui_click")
+    window.AudioMgr.playSFX("ui_click");
     var player = KBEngine.app.player();
     if (player == undefined || !player.inWorld) return;
     cc.director.loadScene("WorldScene", function () {
@@ -102,7 +102,7 @@ cc.Class({
     });
   },
   onCloseRankingView: function onCloseRankingView() {
-    //window.AudioMgr.playSFX("ui_click")
+    window.AudioMgr.playSFX("ui_click");
     this.rankingView.active = false;
     KBEngine.INFO_MSG("close ranking view: "); // 发消息给子域
 

@@ -10,7 +10,7 @@
                     };
                     function __define (exports, require, module) {
                         if (!nodeEnv) {__quick_compile_project__.registerModule(__filename, module);}"use strict";
-cc._RF.push(module, 'f7247+4OudImovSZdyqtrL0', 'RadioGroupMgr');
+cc._RF.push(module, '9946flv84BDVbsN/HE7ao9/', 'RadioGroupMgr');
 // scripts/RadioGroupMgr.js
 
 "use strict";

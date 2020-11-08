@@ -1,0 +1,47 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_name": "ui.plist",
+  "_objFlags": 0,
+  "_native": "",
+  "_spriteFrames": {
+    "PopupScene14": {
+      "__uuid__": "059928c6-6bee-4cd8-bbe3-ab34a51428bb"
+    },
+    "PopupScene8": {
+      "__uuid__": "3d2fcaec-9477-4c60-82bb-b11b92bf6e27"
+    },
+    "bg": {
+      "__uuid__": "53721c2d-fb38-4667-a01a-c6ac7af6671d"
+    },
+    "btn_game_wanfa": {
+      "__uuid__": "25622b95-d45d-4743-914e-a07557d2d7d5"
+    },
+    "btn_invite": {
+      "__uuid__": "f9453175-43f9-431f-9f80-2d6bef392bcd"
+    },
+    "btn_ok": {
+      "__uuid__": "c586901c-3550-419c-8ebd-5e42707471cd"
+    },
+    "btn_start": {
+      "__uuid__": "c78e35e3-67f6-4890-a008-65561a791875"
+    },
+    "kuang": {
+      "__uuid__": "7685e293-5ce2-4eb3-9490-ebfd67c5ea2b"
+    },
+    "lose": {
+      "__uuid__": "7c5ee21c-30c9-49aa-b137-1821c890d1a6"
+    },
+    "men_head": {
+      "__uuid__": "326540b4-a0cd-4a0a-bbce-26e131073b1f"
+    },
+    "quick_start_btn": {
+      "__uuid__": "f67d4f5f-2dd0-4f1e-a27f-71e04996c49f"
+    },
+    "win": {
+      "__uuid__": "5226cdff-9b20-4cba-b759-107d98cf037d"
+    },
+    "women_head": {
+      "__uuid__": "90900068-cdd5-493d-8db1-4c42f1227d61"
+    }
+  }
+}

@@ -58,7 +58,7 @@ cc.Class({
         var key = "item" + index;
         return this._quickChatInfo[key];   
     },
-    
+
     onBtnChatClicked:function(){
         window.AudioMgr.playSFX("ui_click")
         this._chatRoot.active = true;

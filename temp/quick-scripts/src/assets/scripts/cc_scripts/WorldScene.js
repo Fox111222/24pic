@@ -29,76 +29,22 @@ cc.Class({
       "default": null,
       type: cc.Node
     }
-    /*
-    setting:{
-        default: null,
-        type: cc.Prefab,
-    },
-    chat:{
-        default: null,
-        type: cc.Prefab,
-    },
-    */
-
-    /*
-    player: {
-        default: null,
-        type: cc.Node,
-    },
-    
-    pipiPrefab: {
-        default: null,
-        type: cc.Prefab,
-    },
-      popPrefab: {
-        default: null,
-        type: cc.Prefab,
-    },
-    archerPrefab: {
-        default: null,
-        type: cc.Prefab,
-    },
-      archerPrefab2: {
-        default: null,
-        type: cc.Prefab,
-    },
-      joyStickPrefab: {
-        default: null,
-        type: cc.Prefab,
-    },
-    touchRange: {
-        default: null,
-        type: cc.Prefab,
-    },
-    camera: {
-        default: null,
-        type: cc.Camera,
-    },
-      cameraControl: {
-        default: null,
-        type: cc.Node,
-    },
-      gameState: {
-        default: null,
-        type: cc.Node,
-    },
-      gameHint: cc.Label,
-    */
-
   },
   showwangfa: function showwangfa() {
+    window.AudioMgr.playSFX("ui_click");
     this.introduce.active = true;
   },
   hidewangfa: function hidewangfa() {
+    window.AudioMgr.playSFX("ui_click");
     this.introduce.active = false;
   },
   showsetting: function showsetting() {
-    // window.AudioMgr.playSFX("ui_click")
+    window.AudioMgr.playSFX("ui_click");
     this.isshowsetting = !this.settingNode.active;
     this.settingNode.active = this.isshowsetting;
   },
   showchat: function showchat() {
-    //window.AudioMgr.playSFX("ui_click")
+    window.AudioMgr.playSFX("ui_click");
     this.isshowchat = !this.chatNode.active;
     this.chatNode.active = this.isshowchat;
     cc.log("showchat");
@@ -127,23 +73,7 @@ cc.Class({
 
     var repeat = cc.repeatForever(cc.sequence(action2, action1));
     this.matching.runAction(repeat);
-    /*
-    this._MusicDict = {}
-    var _this = this;
-    cc.loader.loadResDir('sound/', function (count, totalCount, res) {
-                        }, function (err, res) {
-                            if (err == null) {
-                                _this._MusicDict = {};
-                                res.forEach(clip => {
-                                _this._MusicDict[clip.name] = clip;
-                                });
-                            } else {
-                                console.error(err);
-                            }
-                        })
-    */
-    //window.AudioMgr.playBGM("bgMain")
-
+    window.AudioMgr.playBGM("bgBet");
     this._timeLabel = cc.find("Canvas/bg2/time").getComponent(cc.Label);
     this.isshowsetting = false; //this.settingNode=cc.instantiate(this.setting)
     //this.node.addChild(this.settingNode)
@@ -213,13 +143,7 @@ cc.Class({
     out = cc.v2(0, 0);
     var seat2cardpos = this.node.getChildByName("bg2").getChildByName("seat2").getChildByName("card").position;
     this.node.getChildByName("bg2").getChildByName("seat2").convertToWorldSpaceAR(seat2cardpos, out);
-    this.seat2cardpos = this.node.convertToNodeSpaceAR(out); //cc.log("ddddddddddddddddddddthis.seat2cardpos=",this.seat2cardpos.x,this.seat2cardpos.y)
-    //cc.log("ddddddddddddddddddddthis.seat1cardpos=",this.seat1cardpos.x,this.seat1cardpos.y)
-    //cc.log("ddddddddddddddddddddthis..card1origpos=",this.card1origpos.x,this.card1origpos.y)
-    //cc.log("ddddddddddddddddddddthis..card2origpos=",this.card2origpos.x,this.card2origpos.y)
-    //cc.log("ddddddddddddddddddddthis..card2origpos=",this.card3origpos.x,this.card3origpos.y)
-    //cc.log("ddddddddddddddddddddthis..card2origpos=",this.card4origpos.x,this.card4origpos.y)
-
+    this.seat2cardpos = this.node.convertToNodeSpaceAR(out);
     this.gameHint = this.node.getChildByName("gameHint").getComponent(cc.Label);
     this.gameHint.node.opacity = 0;
     this.gameHint.node.active = false;
@@ -231,25 +155,11 @@ cc.Class({
     if (cc.sys.platform == cc.sys.WECHAT_GAME) {
       this.enableWxShare();
       if (window.type == 2) this.yaoqing.active = true;
-    } // this.seat2cardpos=this.node.getChildByName("bg2").getChildByName("seat2").getChildByName("card").getPosition()
-
-    /*
-    this.keyBoardListener = null;
-    this.mouseListener = null;
-    this.entities = {};
-    this.playerControl = null;
-    this.curAvatarID = 0;
-    this.cameraControl = this.camera.getComponent("CameraControl");
-      this.enablePhysicManager();
-    //this.enablePhysicsDebugDraw();
-    this.installEvents();
-    this.items = new Array();
-    //this.node.getChildByName("sky_bg").on(cc.Node.EventType.TOUCH_START, this.pickUped, this);
-      */
-
+    }
   },
   onTouchEndedcard1: function onTouchEndedcard1() {
-    //window.AudioMgr.playSFX("ui_click")
+    window.AudioMgr.playSFX("ui_click");
+
     if (this.act.length - 1 >= 0) {
       if (this.act[this.act.length - 1] == this.card1num || this.act[this.act.length - 1] == this.card2num || this.act[this.act.length - 1] == this.card3num || this.act[this.act.length - 1] == this.card4num) return;
     }
@@ -260,19 +170,10 @@ cc.Class({
       this.card1.setScale(1);
       this.act.push(this.card1num);
     }
-    /*
-    else{
-       this.card1selected=false
-       this.card1.setScale(0.8)
-       var index = this.act.indexOf(this.card1num)
-       if (index > -1) {
-           this.act.splice(index, 1);
-       }
-    }*/
-
   },
   onTouchEndedcard2: function onTouchEndedcard2() {
-    //window.AudioMgr.playSFX("ui_click")
+    window.AudioMgr.playSFX("ui_click");
+
     if (this.act.length - 1 >= 0) {
       if (this.act[this.act.length - 1] == this.card1num || this.act[this.act.length - 1] == this.card2num || this.act[this.act.length - 1] == this.card3num || this.act[this.act.length - 1] == this.card4num) return;
     }
@@ -283,18 +184,10 @@ cc.Class({
       this.act.push(this.card2num);
       this.lasttouchcard = this.card2;
     }
-    /*else{
-        this.card2selected=false
-        this.card2.setScale(0.8)
-        var index = this.act.indexOf(this.card2num)
-        if (index > -1) {
-            this.act.splice(index, 1);
-        }
-    }*/
-
   },
   onTouchEndedcard3: function onTouchEndedcard3() {
-    //window.AudioMgr.playSFX("ui_click")
+    window.AudioMgr.playSFX("ui_click");
+
     if (this.act.length - 1 >= 0) {
       if (this.act[this.act.length - 1] == this.card1num || this.act[this.act.length - 1] == this.card2num || this.act[this.act.length - 1] == this.card3num || this.act[this.act.length - 1] == this.card4num) return;
     }
@@ -305,28 +198,13 @@ cc.Class({
       this.act.push(this.card3num);
       this.lasttouchcard = this.card3;
     }
-    /*else{
-        this.card3selected=false
-        this.card3.setScale(0.8)
-        var index = this.act.indexOf(this.card3num)
-        if (index > -1) {
-            this.act.splice(index, 1);
-        }
-    }*/
-
   },
   onTouchEndedcard4: function onTouchEndedcard4() {
-    //window.AudioMgr.playSFX("ui_click")
+    window.AudioMgr.playSFX("ui_click");
+
     if (this.act.length - 1 >= 0) {
       if (this.act[this.act.length - 1] == this.card1num || this.act[this.act.length - 1] == this.card2num || this.act[this.act.length - 1] == this.card3num || this.act[this.act.length - 1] == this.card4num) return;
     }
-    /*
-    var ind = this.act.indexOf(this.card4num)
-    if (ind > -1) {
-        return
-    }
-    */
-
 
     if (this.card4selected == false) {
       this.card4selected = true;
@@ -334,15 +212,6 @@ cc.Class({
       this.act.push(this.card4num);
       this.lasttouchcard = this.card4;
     }
-    /*else{
-        this.card4selected=false
-        this.card4.setScale(0.8)
-        var index = this.act.indexOf(this.card4num)
-        if (index > -1) {
-            this.act.splice(index, 1);
-        }
-    }*/
-
   },
   getBatteryPercent: function getBatteryPercent() {
     if (cc.sys.isNative) {
@@ -373,31 +242,31 @@ cc.Class({
     power.scaleX = this.getBatteryPercent();
   },
   onaddact: function onaddact() {
-    //window.AudioMgr.playSFX("ui_click")
+    window.AudioMgr.playSFX("ui_click");
     this.act.push("+");
   },
   onreduceact: function onreduceact() {
-    //window.AudioMgr.playSFX("ui_click")
+    window.AudioMgr.playSFX("ui_click");
     this.act.push("-");
   },
   onmulact: function onmulact() {
-    //window.AudioMgr.playSFX("ui_click")
+    window.AudioMgr.playSFX("ui_click");
     this.act.push("*");
   },
   ondivact: function ondivact() {
-    //window.AudioMgr.playSFX("ui_click")
+    window.AudioMgr.playSFX("ui_click");
     this.act.push("/");
   },
   onlefact: function onlefact() {
-    //window.AudioMgr.playSFX("ui_click")
+    window.AudioMgr.playSFX("ui_click");
     this.act.push("(");
   },
   onrigact: function onrigact() {
-    //window.AudioMgr.playSFX("ui_click")
+    window.AudioMgr.playSFX("ui_click");
     this.act.push(")");
   },
   ondelact: function ondelact() {
-    //window.AudioMgr.playSFX("ui_click")
+    window.AudioMgr.playSFX("ui_click");
     var num = this.act.pop();
 
     if (this.lasttouchcard == null) {
@@ -412,6 +281,8 @@ cc.Class({
     this.lasttouchcard = null;
   },
   onsureact: function onsureact() {
+    window.AudioMgr.playSFX("ui_click");
+
     if (this.card1selected == false || this.card2selected == false || this.card3selected == false || this.card4selected == false) {
       this.gameHint.node.active = true;
       this.gameHint.string = "四张牌都必须使用一次，请重新计算";
@@ -506,16 +377,24 @@ cc.Class({
     this.roomKeyc = roomKeyc.join("");
   },
   enableWxShare: function enableWxShare() {
-    wx.showShareMenu({
-      withShareTicket: true
-    });
-    var self = this;
-    wx.onShareAppMessage(function () {
-      return {
-        title: "才艺24点小PK",
-        imageUrl: SHARE_PICTURE //roomID:sekf.RoomID.string,
-
-      };
+    wx.showShareMenu();
+    cc.loader.loadRes("sound/share", function (err, data) {
+      // wx.shareAppMessage({   //打开小游戏自动分享
+      wx.onShareAppMessage(function (res) {
+        return {
+          title: "24点 智力小PK",
+          imageUrl: data.url,
+          //query: "Roomid=" + self.roomKeyc + "&UserName=" + KBEngine.app.entities[KBEngine.app.player().id].accountName,// 别人点击链接时会得到的数据
+          //query: "nick=" + nick + "&gender=" + gender + "&city=" + city,
+          //query:"Roomid="+ self.roomKeyc+"&UserName="+ KBEngine.app.entities[KBEngine.app.player().id].accountName,
+          success: function success(res) {
+            cc.log("分享成功" + res); //this.yaoqing.active=false                      
+          },
+          fail: function fail(res) {
+            cc.log("分享失败" + res); //this.yaoqing.active=true
+          }
+        };
+      });
     });
   },
   enablePhysicManager: function enablePhysicManager() {
@@ -586,8 +465,7 @@ cc.Class({
     }
   },
   oniptChat: function oniptChat(eid, strstr) {
-    cc.log("888888888888888888888888888888888888eiptChat=", strstr);
-
+    //cc.log("888888888888888888888888888888888888eiptChat=",strstr)
     if (KBEngine.app.player().id == eid) {
       this.seat1.getComponent("Seat").chat(strstr); // this.seat1.getComponent("Seat").refresh();  
     } else {
@@ -595,8 +473,7 @@ cc.Class({
     }
   },
   playerReadyStateChange: function playerReadyStateChange(eid, state) {
-    cc.log("playerReadyStateChange");
-
+    //cc.log("playerReadyStateChange")
     if (KBEngine.app.player().id == eid) {
       this.seat1.active = true;
       this.seat1.getComponent("Seat")._isReady = true;
@@ -608,7 +485,7 @@ cc.Class({
     }
   },
   onupdateGamestates: function onupdateGamestates(curID, time) {
-    cc.log("onupdateGamestates");
+    //cc.log("onupdateGamestates")
     this.newTurn(curID, time);
   },
   updategamestuts: function updategamestuts(num) {
@@ -672,6 +549,7 @@ cc.Class({
     }
   },
   reqChangeReadyState: function reqChangeReadyState() {
+    window.AudioMgr.playSFX("ui_click");
     this.node.getChildByName("start").active = false;
     var player = KBEngine.app.player();
 
@@ -974,19 +852,6 @@ cc.Class({
     this.opt.active = true;
     this.act = [];
   },
-  resetItem: function resetItem() {},
-  otherAvatarOnPickUpItem: function otherAvatarOnPickUpItem(avatarID, itemID, position) {},
-  otherAvatarThrowItem: function otherAvatarThrowItem(avatarID, itemID, force) {},
-  otherAvatarOnStopWalk: function otherAvatarOnStopWalk(avatarID, pos) {},
-  otherAvatarOnStartWalk: function otherAvatarOnStartWalk(avatarID, moveFlag) {},
-  otherAvatarRecoverItem: function otherAvatarRecoverItem(avatarID, itemID) {//cc.log("test18")
-  },
-  otherAvatarOnLeftJump: function otherAvatarOnLeftJump(avatarID) {},
-  otherAvatarOnRightJump: function otherAvatarOnRightJump(avatarID) {},
-  onRecvDamage: function onRecvDamage(avatarID, harm, hp) {//cc.log("WorldScene::otherAvatarRecvDamage: avatarID=%d, harm=%d, hp=%d ", avatarID, harm, hp);
-  },
-  onAvatarDie: function onAvatarDie(avatarID) {//cc.log("WorldScene::onAvatarDie, avatarid=%d", avatarID)
-  },
   onGameOver: function onGameOver(avatarID, isWin, hp, totalTime, totalHarm, score) {
     if (avatarID == KBEngine.app.player().id) {
       HP = hp;
@@ -1008,42 +873,50 @@ cc.Class({
 
     this.player = null;
   },
-  onResetItem: function onResetItem(itemID, position) {///SCALE=1;
-    //item.setPosition(position.x*SCALE, position.z*SCALE);
-  },
-  Destroyplayer: function Destroyplayer() {
-    /*
-    cc.log("Avatar client die so destroy WorldScene playerprefab")
-    if(this.player) {
-        this.player.removeFromParent(true)
-    }
-    */
-  },
   invatefriend: function invatefriend() {
-    //this.yaoqing.active=false
-    var self = this;
+    window.AudioMgr.playSFX("ui_click"); //this.yaoqing.active=false
+
+    var self = this; ///////////////////////////
+
+    cc.loader.loadRes("sound/share", function (err, data) {
+      var selff = self;
+      wx.shareAppMessage({
+        title: self.RoomID.string,
+        imageUrl: data.url,
+        //query: "Roomid=" + self.roomKeyc + "&UserName=" + KBEngine.app.entities[KBEngine.app.player().id].accountName,// 别人点击链接时会得到的数据
+        //query: "nick=" + nick + "&gender=" + gender + "&city=" + city,
+        query: "Roomid=" + self.roomKeyc + "&UserName=" + KBEngine.app.entities[KBEngine.app.player().id].accountName,
+        success: function success(res) {
+          cc.log("分享成功" + res);
+          selff.yaoqing.active = false;
+        },
+        fail: function fail(res) {
+          cc.log("分享失败" + res); //this.yaoqing.active=true
+        }
+      });
+    }); /////////////////////////
+
+    /*
     wx.shareAppMessage({
-      title: self.RoomID.string,
-      imageUrl: SHARE_PICTURE,
-      //query: "Roomid=" + self.roomKeyc + "&UserName=" + KBEngine.app.entities[KBEngine.app.player().id].accountName,// 别人点击链接时会得到的数据
-      //query: "nick=" + nick + "&gender=" + gender + "&city=" + city,
-      query: "Roomid=" + self.roomKeyc + "&UserName=" + KBEngine.app.entities[KBEngine.app.player().id].accountName,
-      success: function success(res) {
-        wx.showToast({
-          title: "分享成功"
-        });
-        cc.log("分享成功" + res);
-        this.yaoqing.active = false;
-        wx.showShareMenu({
-          // 要求小程序返回分享目标信息
-          withShareTicket: true
-        });
-      },
-      fail: function fail(res) {
-        cc.log("分享失败" + res);
-        this.yaoqing.active = true;
-      }
+        title: self.RoomID.string,
+        imageUrl: data.url,
+        //query: "Roomid=" + self.roomKeyc + "&UserName=" + KBEngine.app.entities[KBEngine.app.player().id].accountName,// 别人点击链接时会得到的数据
+        //query: "nick=" + nick + "&gender=" + gender + "&city=" + city,
+        query:"Roomid="+ self.roomKeyc+"&UserName="+ KBEngine.app.entities[KBEngine.app.player().id].accountName,
+        success(res) {               
+           
+            
+            cc.log("分享成功" + res);
+            this.yaoqing.active=false               
+            
+              },
+        fail(res) {
+            cc.log("分享失败" + res);
+            //this.yaoqing.active=true
+        }
+        
     });
+    */
   },
   createPlayer: function createPlayer(avatar) {
     // SCALE=1;
@@ -1075,9 +948,7 @@ cc.Class({
   },
   onAvatarContinueGame: function onAvatarContinueGame(avatar) {
     this.createPlayer(avatar);
-  },
-  enableControlPlayer: function enableControlPlayer() {},
-  disEnableControlPlayer: function disEnableControlPlayer() {}
+  }
 });
 
 cc._RF.pop();

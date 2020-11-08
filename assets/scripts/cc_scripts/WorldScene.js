@@ -25,81 +25,23 @@ cc.Class({
             default: null,
             type: cc.Node,
         },
-        /*
-        setting:{
-            default: null,
-            type: cc.Prefab,
-        },
-        chat:{
-            default: null,
-            type: cc.Prefab,
-        },
-        */
-        /*
-        player: {
-            default: null,
-            type: cc.Node,
-        },
-        
-        pipiPrefab: {
-            default: null,
-            type: cc.Prefab,
-        },
-
-        popPrefab: {
-            default: null,
-            type: cc.Prefab,
-        },
-        archerPrefab: {
-            default: null,
-            type: cc.Prefab,
-        },
-
-        archerPrefab2: {
-            default: null,
-            type: cc.Prefab,
-        },
-
-        joyStickPrefab: {
-            default: null,
-            type: cc.Prefab,
-        },
-        touchRange: {
-            default: null,
-            type: cc.Prefab,
-        },
-        camera: {
-            default: null,
-            type: cc.Camera,
-        },
-
-        cameraControl: {
-            default: null,
-            type: cc.Node,
-        },
-
-        gameState: {
-            default: null,
-            type: cc.Node,
-        },
-
-        gameHint: cc.Label,
-        */
     },
     showwangfa:function(){
+        window.AudioMgr.playSFX("ui_click")
         this.introduce.active=true
     },
     hidewangfa:function(){
+        window.AudioMgr.playSFX("ui_click")
         this.introduce.active=false
     },
     showsetting:function(){
-       // window.AudioMgr.playSFX("ui_click")
+        window.AudioMgr.playSFX("ui_click")
         this.isshowsetting = !this.settingNode.active;
         this.settingNode.active = this.isshowsetting;
 
     },
     showchat:function(){
-        //window.AudioMgr.playSFX("ui_click")
+        window.AudioMgr.playSFX("ui_click")
         this.isshowchat = !this.chatNode.active;
         this.chatNode.active = this.isshowchat;
         cc.log("showchat")
@@ -130,22 +72,7 @@ cc.Class({
         var action2 = cc.fadeOut(0.5);//渐隐效果
         var repeat=cc.repeatForever(cc.sequence(action2,action1))
         this.matching.runAction(repeat);
-        /*
-        this._MusicDict = {}
-        var _this = this;
-        cc.loader.loadResDir('sound/', function (count, totalCount, res) {
-                            }, function (err, res) {
-                                if (err == null) {
-                                    _this._MusicDict = {};
-                                    res.forEach(clip => {
-                                    _this._MusicDict[clip.name] = clip;
-                                    });
-                                } else {
-                                    console.error(err);
-                                }
-                            })
-        */
-        //window.AudioMgr.playBGM("bgMain")
+       window.AudioMgr.playBGM("bgBet")
 
         this._timeLabel = cc.find("Canvas/bg2/time").getComponent(cc.Label);
         this.isshowsetting=false
@@ -227,14 +154,6 @@ cc.Class({
         this.seat2cardpos=this.node.convertToNodeSpaceAR(out)
 
 
-        //cc.log("ddddddddddddddddddddthis.seat2cardpos=",this.seat2cardpos.x,this.seat2cardpos.y)
-        //cc.log("ddddddddddddddddddddthis.seat1cardpos=",this.seat1cardpos.x,this.seat1cardpos.y)
-        //cc.log("ddddddddddddddddddddthis..card1origpos=",this.card1origpos.x,this.card1origpos.y)
-        //cc.log("ddddddddddddddddddddthis..card2origpos=",this.card2origpos.x,this.card2origpos.y)
-        //cc.log("ddddddddddddddddddddthis..card2origpos=",this.card3origpos.x,this.card3origpos.y)
-        //cc.log("ddddddddddddddddddddthis..card2origpos=",this.card4origpos.x,this.card4origpos.y)
-
-
         this.gameHint=this.node.getChildByName("gameHint").getComponent(cc.Label)
         this.gameHint.node.opacity=0;
         this.gameHint.node.active=false;
@@ -248,27 +167,9 @@ cc.Class({
             if(window.type==2)
                 this.yaoqing.active=true
         }
-
-       // this.seat2cardpos=this.node.getChildByName("bg2").getChildByName("seat2").getChildByName("card").getPosition()
-        
-        /*
-        this.keyBoardListener = null;
-        this.mouseListener = null;
-        this.entities = {};
-        this.playerControl = null;
-        this.curAvatarID = 0;
-        this.cameraControl = this.camera.getComponent("CameraControl");
-
-        this.enablePhysicManager();
-        //this.enablePhysicsDebugDraw();
-        this.installEvents();
-        this.items = new Array();
-        //this.node.getChildByName("sky_bg").on(cc.Node.EventType.TOUCH_START, this.pickUped, this);
-
-        */
     },
     onTouchEndedcard1:function(){
-        //window.AudioMgr.playSFX("ui_click")
+        window.AudioMgr.playSFX("ui_click")
         if(this.act.length-1>=0){
             if(this.act[this.act.length-1]==this.card1num ||this.act[this.act.length-1]==this.card2num||this.act[this.act.length-1]==this.card3num||this.act[this.act.length-1]==this.card4num)
             return
@@ -278,18 +179,10 @@ cc.Class({
             this.card1selected=true
             this.card1.setScale(1)
             this.act.push(this.card1num)
-        }/*
-        else{
-            this.card1selected=false
-            this.card1.setScale(0.8)
-            var index = this.act.indexOf(this.card1num)
-            if (index > -1) {
-                this.act.splice(index, 1);
-            }
-        }*/
+        }
     },
     onTouchEndedcard2:function(){
-        //window.AudioMgr.playSFX("ui_click")
+        window.AudioMgr.playSFX("ui_click")
         if(this.act.length-1>=0){
             if(this.act[this.act.length-1]==this.card1num ||this.act[this.act.length-1]==this.card2num||this.act[this.act.length-1]==this.card3num||this.act[this.act.length-1]==this.card4num)
             return
@@ -300,18 +193,10 @@ cc.Class({
             this.act.push(this.card2num)
             this.lasttouchcard=this.card2
         }
-        /*else{
-            this.card2selected=false
-            this.card2.setScale(0.8)
-            var index = this.act.indexOf(this.card2num)
-            if (index > -1) {
-                this.act.splice(index, 1);
-            }
-        }*/
 
     },
     onTouchEndedcard3:function(){
-        //window.AudioMgr.playSFX("ui_click")
+        window.AudioMgr.playSFX("ui_click")
         if(this.act.length-1>=0){
             if(this.act[this.act.length-1]==this.card1num ||this.act[this.act.length-1]==this.card2num||this.act[this.act.length-1]==this.card3num||this.act[this.act.length-1]==this.card4num)
             return
@@ -322,42 +207,20 @@ cc.Class({
             this.act.push(this.card3num)
             this.lasttouchcard=this.card3
         }
-        /*else{
-            this.card3selected=false
-            this.card3.setScale(0.8)
-            var index = this.act.indexOf(this.card3num)
-            if (index > -1) {
-                this.act.splice(index, 1);
-            }
-        }*/
 
     },
     onTouchEndedcard4:function(){
-        //window.AudioMgr.playSFX("ui_click")
+        window.AudioMgr.playSFX("ui_click")
         if(this.act.length-1>=0){
             if(this.act[this.act.length-1]==this.card1num ||this.act[this.act.length-1]==this.card2num||this.act[this.act.length-1]==this.card3num||this.act[this.act.length-1]==this.card4num)
             return
         }
-        /*
-        var ind = this.act.indexOf(this.card4num)
-        if (ind > -1) {
-            return
-        }
-        */
         if(this.card4selected==false){
             this.card4selected=true
             this.card4.setScale(1)
             this.act.push(this.card4num)
             this.lasttouchcard=this.card4
         }
-        /*else{
-            this.card4selected=false
-            this.card4.setScale(0.8)
-            var index = this.act.indexOf(this.card4num)
-            if (index > -1) {
-                this.act.splice(index, 1);
-            }
-        }*/
     },
     getBatteryPercent:function(){
         if(cc.sys.isNative){
@@ -390,37 +253,37 @@ cc.Class({
         
     },
     onaddact:function(){
-        //window.AudioMgr.playSFX("ui_click")
+        window.AudioMgr.playSFX("ui_click")
         this.act.push("+")
 
     },
     onreduceact:function(){
-        //window.AudioMgr.playSFX("ui_click")
+        window.AudioMgr.playSFX("ui_click")
         this.act.push("-")
 
     },
     onmulact:function(){
-        //window.AudioMgr.playSFX("ui_click")
+        window.AudioMgr.playSFX("ui_click")
         this.act.push("*")
 
     },
     ondivact:function(){
-        //window.AudioMgr.playSFX("ui_click")
+        window.AudioMgr.playSFX("ui_click")
         this.act.push("/")
 
     },
     onlefact:function(){
-        //window.AudioMgr.playSFX("ui_click")
+        window.AudioMgr.playSFX("ui_click")
         this.act.push("(")
 
     },
     onrigact:function(){
-        //window.AudioMgr.playSFX("ui_click")
+        window.AudioMgr.playSFX("ui_click")
         this.act.push(")")
 
     },
     ondelact:function(){
-        //window.AudioMgr.playSFX("ui_click")
+        window.AudioMgr.playSFX("ui_click")
         var num=this.act.pop()
         if(this.lasttouchcard==null){
             return
@@ -434,6 +297,7 @@ cc.Class({
 
     },
     onsureact:function(){
+        window.AudioMgr.playSFX("ui_click")
         if(this.card1selected==false||this.card2selected==false||this.card3selected==false||this.card4selected==false){
             this.gameHint.node.active=true
             this.gameHint.string = "四张牌都必须使用一次，请重新计算";
@@ -543,16 +407,30 @@ cc.Class({
 
     },
     enableWxShare: function () {
-        wx.showShareMenu({
-            withShareTicket:true,
-        });
-        var self=this
-        wx.onShareAppMessage(function() {
-            return {
-                title: "才艺24点小PK",
-                imageUrl:SHARE_PICTURE,
-                //roomID:sekf.RoomID.string,
+        wx.showShareMenu();
+
+        cc.loader.loadRes("sound/share",function(err,data){
+           // wx.shareAppMessage({   //打开小游戏自动分享
+           wx.onShareAppMessage(function(res){
+               return{
+                title: "24点 智力小PK",
+                imageUrl: data.url,
+                //query: "Roomid=" + self.roomKeyc + "&UserName=" + KBEngine.app.entities[KBEngine.app.player().id].accountName,// 别人点击链接时会得到的数据
+                //query: "nick=" + nick + "&gender=" + gender + "&city=" + city,
+                //query:"Roomid="+ self.roomKeyc+"&UserName="+ KBEngine.app.entities[KBEngine.app.player().id].accountName,
+                success(res) {               
+                   
+                    
+                    cc.log("分享成功" + res);
+                    //this.yaoqing.active=false                      
+                },
+                fail(res) {
+                    cc.log("分享失败" + res);
+                    //this.yaoqing.active=true
+                }
             }
+                
+            });
         });
      },
 
@@ -644,7 +522,7 @@ cc.Class({
         }
     },
     oniptChat:function(eid,strstr){
-        cc.log("888888888888888888888888888888888888eiptChat=",strstr)
+        //cc.log("888888888888888888888888888888888888eiptChat=",strstr)
         if(KBEngine.app.player().id==eid) {
             this.seat1.getComponent("Seat").chat(strstr)
            // this.seat1.getComponent("Seat").refresh();  
@@ -655,7 +533,7 @@ cc.Class({
         }
     },
     playerReadyStateChange:function(eid,state){
-        cc.log("playerReadyStateChange")
+        //cc.log("playerReadyStateChange")
         if(KBEngine.app.player().id==eid) {   
             this.seat1.active=true 
             this.seat1.getComponent("Seat")._isReady=true
@@ -668,7 +546,7 @@ cc.Class({
 
     },
     onupdateGamestates:function(curID,time){
-        cc.log("onupdateGamestates")
+        //cc.log("onupdateGamestates")
         this.newTurn(curID,time)
 
     },
@@ -741,6 +619,7 @@ cc.Class({
         }
     },
     reqChangeReadyState:function(){
+        window.AudioMgr.playSFX("ui_click")
         this.node.getChildByName("start").active=false
         var player = KBEngine.app.player();
         if(player){
@@ -1065,50 +944,6 @@ cc.Class({
        
     },
 
-
-    resetItem: function() {
-    
-    },
-
-    otherAvatarOnPickUpItem: function(avatarID, itemID, position) {
-        
-    },
-
-    otherAvatarThrowItem: function(avatarID, itemID, force){
-        
-    },
-
-    otherAvatarOnStopWalk: function(avatarID, pos){
-        
-    },
-
-    otherAvatarOnStartWalk: function(avatarID, moveFlag){
-        
-        
-    },
-
-    otherAvatarRecoverItem: function(avatarID, itemID) {
-        //cc.log("test18")
-    },
-
-    otherAvatarOnLeftJump: function(avatarID){
-        
-    },
-
-    otherAvatarOnRightJump: function(avatarID){
-        
-    },
-
-    onRecvDamage: function(avatarID, harm, hp) {
-        //cc.log("WorldScene::otherAvatarRecvDamage: avatarID=%d, harm=%d, hp=%d ", avatarID, harm, hp);
-        
-    },
-
-    onAvatarDie: function(avatarID) {
-        //cc.log("WorldScene::onAvatarDie, avatarid=%d", avatarID)
-        
-    },
-
     onGameOver: function(avatarID, isWin, hp, totalTime, totalHarm, score) {
         if(avatarID == KBEngine.app.player().id) {
             HP = hp;
@@ -1128,53 +963,58 @@ cc.Class({
         //this.unInstallEvents();
         this.player = null;
     },
-
-    onResetItem: function(itemID, position) {
-        ///SCALE=1;
-       
-    
-        //item.setPosition(position.x*SCALE, position.z*SCALE);
-    },
-
-    Destroyplayer:function(){
-        /*
-        cc.log("Avatar client die so destroy WorldScene playerprefab")
-        if(this.player) {
-            this.player.removeFromParent(true)
-        }
-        */
-
-    },
     invatefriend:function(){
+        window.AudioMgr.playSFX("ui_click")
         //this.yaoqing.active=false
         var self=this;
+        ///////////////////////////
+        cc.loader.loadRes("sound/share",function(err,data){
+            var selff=self;
+            wx.shareAppMessage({
+                title: self.RoomID.string,
+                imageUrl: data.url,
+                //query: "Roomid=" + self.roomKeyc + "&UserName=" + KBEngine.app.entities[KBEngine.app.player().id].accountName,// 别人点击链接时会得到的数据
+                //query: "nick=" + nick + "&gender=" + gender + "&city=" + city,
+                query:"Roomid="+ self.roomKeyc+"&UserName="+ KBEngine.app.entities[KBEngine.app.player().id].accountName,
+                success(res) {               
+                   
+                    
+                    cc.log("分享成功" + res);
+                    selff.yaoqing.active=false               
+                    
+        
+                },
+                fail(res) {
+                    cc.log("分享失败" + res);
+                    //this.yaoqing.active=true
+                }
+                
+            });
+        });
+
+        /////////////////////////
+        /*
         wx.shareAppMessage({
             title: self.RoomID.string,
-            imageUrl: SHARE_PICTURE,
+            imageUrl: data.url,
             //query: "Roomid=" + self.roomKeyc + "&UserName=" + KBEngine.app.entities[KBEngine.app.player().id].accountName,// 别人点击链接时会得到的数据
             //query: "nick=" + nick + "&gender=" + gender + "&city=" + city,
             query:"Roomid="+ self.roomKeyc+"&UserName="+ KBEngine.app.entities[KBEngine.app.player().id].accountName,
             success(res) {               
-                wx.showToast({
-                    title: "分享成功"
-                });
+               
                 
                 cc.log("分享成功" + res);
-                this.yaoqing.active=false
-                
-                wx.showShareMenu({
-                    // 要求小程序返回分享目标信息
-                    withShareTicket: true 
-                });
+                this.yaoqing.active=false               
                 
     
             },
             fail(res) {
                 cc.log("分享失败" + res);
-                this.yaoqing.active=true
+                //this.yaoqing.active=true
             }
             
         });
+        */
     },
     createPlayer: function(avatar) {
        // SCALE=1;
@@ -1208,13 +1048,5 @@ cc.Class({
 
     onAvatarContinueGame: function(avatar) {
        this.createPlayer(avatar);
-    },
-
-    enableControlPlayer: function() {
-    
-    },
-
-    disEnableControlPlayer: function() {
-        
     },
 });

@@ -1,6 +1,6 @@
 "use strict";
 cc._RF.push(module, '35e49hR44JEyKXMPDq4jIGZ', 'Settings');
-// Settings.js
+// scripts/Settings.js
 
 "use strict";
 
@@ -52,16 +52,6 @@ cc.Class({
     this._btnYXClose = this.node.getChildByName("yinxiao").getChildByName("btn_yx_close");
     this._btnYYOpen = this.node.getChildByName("yinyue").getChildByName("btn_yy_open");
     this._btnYYClose = this.node.getChildByName("yinyue").getChildByName("btn_yy_close");
-    this.initButtonHandler(this.node.getChildByName("btn_close"));
-    this.initButtonHandler(this.node.getChildByName("btn_exit"));
-    this.initButtonHandler(this._btnYXOpen);
-    this.initButtonHandler(this._btnYXClose);
-    this.initButtonHandler(this._btnYYOpen);
-    this.initButtonHandler(this._btnYYClose);
-    var slider = this.node.getChildByName("yinxiao").getChildByName("progress");
-    this.addSlideEvent(slider, this.node, "Settings", "onSlided");
-    var slider = this.node.getChildByName("yinyue").getChildByName("progress");
-    this.addSlideEvent(slider, this.node, "Settings", "onSlided");
     this.refreshVolume();
   },
   onSlided: function onSlided(slider) {
@@ -82,20 +72,21 @@ cc.Class({
     var yx = this.node.getChildByName("yinxiao");
     var width = 430 * window.AudioMgr.sfxVolume;
     var progress = yx.getChildByName("progress");
-    progress.getComponent(cc.Slider).progress = window.AudioMgr.sfxVolume;
-    progress.getChildByName("progress").width = width; //yx.getChildByName("btn_progress").x = progress.x + width;
+    progress.getComponent(cc.Slider).progress = window.AudioMgr.sfxVolume; //progress.getChildByName("progress").width = width; 
+
+    progress.getChildByName("progress").scaleX = window.AudioMgr.sfxVolume; //yx.getChildByName("btn_progress").x = progress.x + width;
 
     this._btnYYClose.active = window.AudioMgr.bgmVolume > 0;
     this._btnYYOpen.active = !this._btnYYClose.active;
     var yy = this.node.getChildByName("yinyue");
     var width = 430 * window.AudioMgr.bgmVolume;
     var progress = yy.getChildByName("progress");
-    progress.getComponent(cc.Slider).progress = window.AudioMgr.bgmVolume;
-    progress.getChildByName("progress").width = width; //yy.getChildByName("btn_progress").x = progress.x + width;
+    progress.getComponent(cc.Slider).progress = window.AudioMgr.bgmVolume; //progress.getChildByName("progress").width = width;
+
+    progress.getChildByName("progress").scaleX = window.AudioMgr.bgmVolume; //yy.getChildByName("btn_progress").x = progress.x + width;
   },
   onBtnClicked: function onBtnClicked(event) {
-    window.AudioMgr.playSFX("ui_click");
-    cc.log("onBtnClicked", event.target.name);
+    window.AudioMgr.playSFX("ui_click"); //cc.log("onBtnClicked",event.target.name)
 
     if (event.target.name == "btn_close") {
       this.node.active = false;

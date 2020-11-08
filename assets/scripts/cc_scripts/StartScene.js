@@ -42,89 +42,62 @@ cc.Class({
         {
             var qData = {};
             var obj = wx.getLaunchOptionsSync();
-            //this.label_hint.string = obj.query["UserName"];
-            //this.label_hint.node.opacity=255
             for (var s in obj.query) //obj.query={}
             {
-                //this.label_hint.string = "" + obj.query["Roomid"];
-                //this.label_hint.node.opacity=255
                 if(s == "Roomid"){
                     qData.Roomid = obj.query[s];
-                    
-                    //this.label_hint.string = "邀请ID" + qData.Roomid;
-                    //this.label_hint.node.opacity=255
+                              
 
                     var string2Result = qData.Roomid.split('') //字符串变成字符串数组
                     window.roomIID=this.parseRoomID(string2Result)
 
-                    //string2Result.map(window.roomID)
-                    //window.roomID=qData.Roomid
                     
                 }
                 if(s == "UserName"){
                     qData.UserName = obj.query[s];
                     window.invateAcountname=obj.query[s]
-                    //this.label_hint.string = obj.query[s] + "邀请";
-                    //this.label_hint.node.opacity=255
 
                 }
-                //    qData.gender = obj.query[s];
-                //if(s == "city")
-                //     qData.city = obj.query[s];
+
             }
-            //this.label_hint.string = qData.UserName + "邀请ID" + qData.Roomid;
-            //this.label_hint.node.opacity=255
-            //window.invateAcountname=qData.UserName
+
             return qData;
         },
     
     // LIFE-CYCLE CALLBACKS:
     EditBoxclick:function(){
         cc.log("EditBoxclick")
-       // window.AudioMgr.playSFX("ui_click")
+        window.AudioMgr.playSFX("ui_click")
         this.userName=this.textinput_name.string
     },
     update:function(dt){
-        this.sum=this.sum+dt;
+        //this.sum=this.sum+dt;
         if(window.loginres==0){
             this.label_hint.string = "输入房间ID无效,请重新输入房号";
             this.label_hint.node.opacity=255
-            //var action = cc.fadeTo(13.0, 0);
-            //this.label_hint.node.runAction(action);
-            //window.loginres=100
         }
         else if(window.loginres==1){
             this.label_hint.string = "房间已满！请重新输入房号";
             this.label_hint.node.opacity=255
-            //var action = cc.fadeTo(13.0, 0);
-            //this.label_hint.node.runAction(action);
-            //window.loginres=100
         }
         //cc.log("roomid=", window.roomID)
-        if(window.roomIID.length >0){
-            
-            //if(cc.sys.localStorage.getItem("userName").length == 0) return
-            /*
-            if(cc.sys.platform == cc.sys.WECHAT_GAME){
-                this.userName=cc.sys.localStorage.getItem("userName");
-            }
-            if(this.userName.length == 0)
-            {
-                this.label_hint.string = "用户名不能为空";
-                return;
-            }
-            
-            this.joinPrivateRoominputcallback(window.roomIID)
-            window.roomID=undefined
-            */
+        if(window.roomIID.length >0){           
            this.btn_accept.active=true;
            this.btn_accept.getChildByName("Background").getChildByName("Label").getComponent(cc.Label).string="确认接受"+ window.invateAcountname +"的邀请！"
            //this.btn_start.active=false;
+           this.btn_accept.stopAllActions()
+           var action1 = cc.scaleTo(0.5,1.2);//渐显
+           var action2 = cc.scaleTo(0.5,1);//渐隐效果
+           var repeat=cc.repeatForever(cc.sequence(action1,action2))
+           this.btn_accept.runAction(repeat);
+
             
         }
     },
     accept_wx(){
+        window.AudioMgr.playSFX("ui_click")
         this.btn_accept.active=false;
+        this.btn_accept.stopAllActions()
         this.userName=cc.sys.localStorage.getItem("userName");
         this.joinPrivateRoominputcallback(window.roomIID)
     },
@@ -144,25 +117,20 @@ cc.Class({
 //                this.FlyPoolDict[this.FlyPoolid]=newNode
 //                this.FlyPoolid++;
         }.bind(this));
-        /*
-        // load the sprite frame of (project/assets/resources/imgs/cocos.png) from resources folder
-        cc.loader.loadRes('prefab/bg', cc.SpriteFrame, function (err, spriteFrame) {
-            if (err) {
-                cc.log("cc.loader.loadRes fail")
-                return;
-            }
-            this.node.getChildByName("start_bg").getComponent(cc.Sprite).spriteFrame=spriteFrame
-        }.bind(this));
-        */
+        
         this.btn_start=this.node.getChildByName("start_bg").getChildByName("btn_start")
 
         this.btn_accept=this.node.getChildByName("start_bg").getChildByName("accept")
         this.btn_accept.active=false;
+        this.btn_accept.stopAllActions()
+        
         //this.loadItemPrefab();
         //window.AudioMgr=this.node.addComponent("AudioMgr")      
         var AudioMgr = require("AudioMgr");
         window.AudioMgr = new AudioMgr();
         window.AudioMgr.init();
+        window.AudioMgr.bgmVolume=0.5
+        window.AudioMgr.sfxVolume=0.5
 
         this.userName = cc.sys.platform != cc.sys.WECHAT_GAME ? this.randomstring(4): '';
         //this.btn_start.node.on('click', this.startGame, this);
@@ -192,15 +160,30 @@ cc.Class({
 
 
      enableWxShare: function () {
-        wx.showShareMenu({
-            withShareTicket:true,
-        });
+        wx.showShareMenu();
 
-        wx.onShareAppMessage(function() {
-            return {
-                title: "投石对战",
-                imageUrl:SHARE_PICTURE,
+        cc.loader.loadRes("sound/share",function(err,data){
+           // wx.shareAppMessage({   //打开小游戏自动分享
+           wx.onShareAppMessage(function(res){
+               return{
+                title: "24点 智力小PK",
+                imageUrl: data.url,
+                //query: "Roomid=" + self.roomKeyc + "&UserName=" + KBEngine.app.entities[KBEngine.app.player().id].accountName,// 别人点击链接时会得到的数据
+                //query: "nick=" + nick + "&gender=" + gender + "&city=" + city,
+                //query:"Roomid="+ self.roomKeyc+"&UserName="+ KBEngine.app.entities[KBEngine.app.player().id].accountName,
+                success(res) {               
+                   
+                    
+                    cc.log("分享成功" + res);
+                    //this.yaoqing.active=false                      
+                },
+                fail(res) {
+                    cc.log("分享失败" + res);
+                    //this.yaoqing.active=true
+                }
             }
+                
+            });
         });
      },
 
@@ -273,73 +256,7 @@ cc.Class({
                             });
 
                         },
-                    });
-
-                    /////////////////////////////
-                  
-
-
-
-                    /////////////////////////////////
-/*
-    //获取视图窗口可见区域尺寸
-    let visibleSize = cc.view.getVisibleSize(); 
-    //获取系统信息
-    let wx_size = wx.getSystemInfoSync();
-    //计算实际大小和可见区域尺寸的比例（这里以宽度为准）
-    let size_scale_width = wx_size.screenWidth / visibleSize.width;
-    //计算创建用户信息按钮需要的属性（img_auth为蓝色参考节点）
-    let x = (visibleSize.width / 2) * size_scale_width;
-    let y = ( visibleSize.height / 2 ) * size_scale_width;
-    let width = 360 * size_scale_width;
-    let height = 360 * size_scale_width;
-
-    sself.authorButton = wx.createUserInfoButton({
-      type: "text",
-      text: "授权按钮",
-      style: {
-        left: x,
-        top: y,
-        width: width,
-        height: height,
-        lineHeight: height,
-        backgroundColor: "#ffffff",
-        color: "#3296fa",
-        textAlign: "center",
-        fontSize: 16,
-        borderRadius: 0,
-      },
-    });
-    sself.authorButton.onTap((res) => {
-      if (res.errMsg == "getUserInfo:ok") {
-        cc.log("wxLoginNative() encryptedData && iv",res.encryptedData , res.iv)
-        sself.btn_start.node.active = true;
-        cc.sys.localStorage.setItem("encryptedData", res.encryptedData);
-        cc.sys.localStorage.setItem("iv", res.iv);
-        wx.showToast({
-          icon: "none",
-          title: "获取用户信息成功",
-          duration: 2000,
-        });
-        sself.authorButton.hide(); //获取用户信息成功后隐藏按钮
-      } else {
-        if (res.errMsg === "getUserInfo:fail auth deny") {
-          wx.showToast({
-            icon: "none",
-            title: "获取用户信息失败",
-            duration: 2000,
-          });
-        } else {
-          wx.showToast({
-            icon: "none",
-            title: res.errMsg,
-            duration: 2000,
-          });
-        }
-      }
-    });
-                   
-     */       
+                    });     
                 }
             }
         });
@@ -499,30 +416,6 @@ cc.Class({
             }
             this.unInstallEvents();           
         });
-           
-     
-        
-         /*
-        KBEngine.INFO_MSG("Login is successfully!(登陆成功!)");
-        this.label_hint.string = "登陆成功 !!!";
-        if(cc.sys.platform == cc.sys.WECHAT_GAME){
-            var player = KBEngine.app.player();
-            var encryptedData = cc.sys.localStorage.getItem("encryptedData");
-            var iv = cc.sys.localStorage.getItem("iv");
-            cc.log("encryptedData && iv",encryptedData , iv)
-            this.label_hint.string = "base.decodeEncryptedData()=" + encryptedData + "/" + iv;
-            //player.decodeEncryptedData();
-        }                
-        cc.director.loadScene("WorldScene", ()=> {
-            KBEngine.INFO_MSG("load world scene finished");
-            var player = KBEngine.app.player();//KBEngine.app.entities[KBEngine.app.entity_id];
-            if(player){
-                player.joinRoom();
-            }
-                
-        });
-        this.unInstallEvents();
-        */
      },
  
      onLoginBaseapp : function() {
@@ -568,7 +461,7 @@ cc.Class({
  
      startGame: function (event) {
         window.loginres=100;
-        // window.AudioMgr.playSFX("ui_click")
+        window.AudioMgr.playSFX("ui_click")
          //cc.log("cc.sys.platform",cc.sys.platform,cc.sys.WECHAT_GAME)
          window.type=1
          if(cc.sys.platform == cc.sys.WECHAT_GAME){
@@ -579,42 +472,20 @@ cc.Class({
              this.label_hint.string = "用户名不能为空";
              return;
          }
-         ///////////////////////////////////////////////////
- 
- 
-         //////////////////////////////////////////////////
          cc.log("this.userName=", this.userName)  
          var datas = {};
          datas["platform"] = cc.sys.platform;
          datas = this.createDictString(datas);
          KBEngine.INFO_MSG("login name=" + this.userName);
-         //var temp1=UnicodeToUtf8(this.userName)
-         //this.userName =java.net.URLDecoder.decode(temp,"UTF-8"); 
-         //this.userName =Utf8ToUnicode(temp1)
-         //cc.log("this.userName=",this.userName)  
          KBEngine.Event.fire("login", this.userName, "123456", datas);  
          this.label_hint.string = "登陆中 ... ...";
          this.btn_start.active = false;
-         
-         /*
-	    this.login = function(username, password, datas)
-	    {  
-		    KBEngine.app.reset();
-		    KBEngine.app.username = username;
-		    KBEngine.app.password = password;
-		    KBEngine.app.clientdatas = datas;
-		
-		    KBEngine.app.login_loginapp(true);
-	    }
-
-
-         */
  
       },
       createPrivateRoom: function (event) {
-        window.loginres=100; 
-         window.type=2
-         // window.AudioMgr.playSFX("ui_click")
+          window.loginres=100; 
+          window.type=2
+          window.AudioMgr.playSFX("ui_click")
           //cc.log("cc.sys.platform",cc.sys.platform,cc.sys.WECHAT_GAME)
           if(cc.sys.platform == cc.sys.WECHAT_GAME){
               this.userName=cc.sys.localStorage.getItem("userName");
@@ -649,10 +520,7 @@ cc.Class({
           datas["platform"] = cc.sys.platform;
           datas = this.createDictString(datas);
           KBEngine.INFO_MSG("login name=" + this.userName);
-          //var temp1=UnicodeToUtf8(this.userName)
-          //this.userName =java.net.URLDecoder.decode(temp,"UTF-8"); 
-          //this.userName =Utf8ToUnicode(temp1)
-          //cc.log("this.userName=",this.userName)  
+ 
           KBEngine.Event.fire("login", this.userName, "123456", datas);  
           this.label_hint.string = "登陆中 ... ...";
           this.btn_start.active = false;
@@ -660,7 +528,7 @@ cc.Class({
        },
        joinPrivateRoom: function (event) {
          
-         //window.AudioMgr.playSFX("ui_click")
+         window.AudioMgr.playSFX("ui_click")
           //cc.log("cc.sys.platform",cc.sys.platform,cc.sys.WECHAT_GAME)
  
           

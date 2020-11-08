@@ -67,57 +67,14 @@ cc.Class({
         if(this._emoji != null){
             this._emoji.active = false;
         }
-        /*
-        var self=this
-        var randvalue=Math.floor((Math.random()*3))  //0--3之间整数
-        if(this.avatarUrl ==""){
-            cc.loader.loadRes("head"+randvalue,cc.SpriteFrame,function(err,spriteFrame) {
-                self.icon.spriteFrame= spriteFrame
-                });
-        }
-        */
+    
        this._lblScore.node.active=false
         this.refresh();
         
-        //if(this._sprIcon && this._userId){
-            //this._sprIcon.setUserID(this._userId);
-        //}
     },
     
     onIconClicked:function(){
-        /*
-        var iconSprite = this._sprIcon.node.getComponent(cc.Sprite);
-        if(this._userId != null && this._userId > 0){
-           var seat = cc.vv.gameNetMgr.getSeatByID(this._userId);
-            var sex = 0;
-            if(cc.vv.baseInfoMap){
-                var info = cc.vv.baseInfoMap[this._userId];
-                if(info){
-                    sex = info.sex;
-                }                
-            }
-            //cc.vv.userinfoShow.show(seat.name,seat.userid,iconSprite,sex,seat.ip);         
-        }
-        */
     },
-    /*
-    setcards:function(card01,card02){
-        this.card1.active=true
-        this.card2.active=true
-        var self =this;
-        card01=card01+1000;
-        var url="Game/card/"+"card_"+card01+"@2x"
-        cc.loader.loadRes(url,cc.SpriteFrame,function(err,spriteFrame) {
-        self.card1.getComponent(cc.Sprite).spriteFrame= spriteFrame
-        });
-        card02=card02+1000;
-        url="Game/card/"+"card_"+card02+"@2x"
-        cc.loader.loadRes(url,cc.SpriteFrame,function(err,spriteFrame) {
-        self.card2.getComponent(cc.Sprite).spriteFrame= spriteFrame
-        });
-
-    },
-    */
    refreshcount1:function(){
         this._score=this._holds.length+2
         if(this._lblScore != null && this._score>0){

@@ -105,7 +105,9 @@
         "inspector",
         "cocos-services"
       ]
-    }
+    },
+    "worker": {},
+    "window-1604822000355": {}
   },
   "panels": {
     "project-settings": {
@@ -123,8 +125,8 @@
     "sprite-editor": {
       "x": 580,
       "y": 160,
-      "width": 517,
-      "height": 541
+      "width": 520,
+      "height": 544
     }
   },
   "panelLabelWidth": {
