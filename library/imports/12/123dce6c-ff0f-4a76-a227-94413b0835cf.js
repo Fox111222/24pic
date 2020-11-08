@@ -522,8 +522,8 @@ cc.Class({
     KBEngine.INFO_MSG("disconnect! will try to reconnect..."); //var action = cc.fadeTo(1.0, 0);
 
     this.gameHint.node.opacity = 255;
-    this.gameHint.string = "disconnect! will try to reconnect...";
-    this.Destroyplayer();
+    this.gameHint.string = "disconnect! will try to reconnect..."; //this.Destroyplayer()
+
     KBEngine.app.reloginBaseapp();
   },
   onReloginBaseappTimer: function onReloginBaseappTimer(self) {
@@ -673,6 +673,7 @@ cc.Class({
     //window.AudioMgr.playSFX("turn")
     this.gameState.newTurn(second);
     this.clock.active = true;
+    this.node.getChildByName("start").active = false;
 
     if (!this.gameState.isGameStart()) {
       this.gameState.setGameStart(true); //var action = cc.fadeTo(1.0, 0);

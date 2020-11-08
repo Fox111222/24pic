@@ -587,7 +587,7 @@ cc.Class({
         this.gameHint.node.opacity=255
         this.gameHint.string = "disconnect! will try to reconnect...";
         
-        this.Destroyplayer()
+        //this.Destroyplayer()
         KBEngine.app.reloginBaseapp();
     },
     
@@ -753,6 +753,7 @@ cc.Class({
 
         this.gameState.newTurn(second);
         this.clock.active=true
+        this.node.getChildByName("start").active=false
         if(!this.gameState.isGameStart()) {
             this.gameState.setGameStart(true);
             //var action = cc.fadeTo(1.0, 0);
