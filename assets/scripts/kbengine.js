@@ -3276,8 +3276,10 @@ KBEngine.KBEngineApp = function(kbengineArgs)
 	{  
 		KBEngine.INFO_MSG('connect close:' + KBEngine.app.currserver);
 
-		if(KBEngine.app.currconnect != KBEngine.app.currserver)
+		if(KBEngine.app.currconnect != KBEngine.app.currserver){
 			return;
+		}
+			
 
 		KBEngine.app.resetSocket();
 		KBEngine.Event.fire(KBEngine.EventTypes.onDisconnected);
@@ -3309,6 +3311,10 @@ KBEngine.KBEngineApp = function(kbengineArgs)
 			if(KBEngine.app.lastTickCBTime < KBEngine.app.lastTickTime)
 			{
 				KBEngine.ERROR_MSG("sendTick: Receive appTick timeout!");
+				////////////////////////////////////////////////
+				KBEngine.app.resetSocket();
+				KBEngine.Event.fire(KBEngine.EventTypes.onDisconnected);
+				////////////////////////////////////////////////
 				KBEngine.app.socket.close(); 
 				return; 
 			}

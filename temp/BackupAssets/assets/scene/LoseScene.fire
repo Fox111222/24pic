@@ -198,7 +198,7 @@
       "array": [
         0,
         0,
-        331.81023631642176,
+        331.1897808996627,
         0,
         0,
         0,
@@ -635,7 +635,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 66.74,
+      "width": 79.2,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -691,8 +691,10 @@
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "f515ab7e-f8c3-40ff-830d-d1c906519b8c"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_styleFlags": 0,
@@ -890,7 +892,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 48.93,
+      "width": 49.76,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -946,8 +948,10 @@
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "f515ab7e-f8c3-40ff-830d-d1c906519b8c"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_styleFlags": 0,
@@ -1145,7 +1149,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 111.23,
+      "width": 123.72,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1201,8 +1205,10 @@
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "f515ab7e-f8c3-40ff-830d-d1c906519b8c"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_styleFlags": 0,
@@ -1400,7 +1406,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 66.74,
+      "width": 70.92,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1456,8 +1462,10 @@
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "f515ab7e-f8c3-40ff-830d-d1c906519b8c"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_styleFlags": 0,
@@ -1650,7 +1658,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "f0048c10-f03e-4c97-b9d3-3506e1d58952"
+      "__uuid__": "e19b3b02-8b9a-4b7e-9735-45886924581f"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -1663,7 +1671,9 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_atlas": null,
+    "_atlas": {
+      "__uuid__": "fbecc999-2095-4f59-a466-b33e2ad60d71"
+    },
     "_id": "0eeIPjRONJkIgJj6RVOBlW"
   },
   {
@@ -1674,7 +1684,9 @@
       "__id__": 29
     },
     "_enabled": true,
-    "_normalMaterial": null,
+    "_normalMaterial": {
+      "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+    },
     "_grayMaterial": null,
     "duration": 0.1,
     "zoomScale": 1.2,
@@ -1685,8 +1697,8 @@
     ],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
-    "_N$transition": 2,
-    "transition": 2,
+    "_N$transition": 3,
+    "transition": 3,
     "_N$normalColor": {
       "__type__": "cc.Color",
       "r": 255,
@@ -1730,7 +1742,7 @@
       "a": 255
     },
     "_N$normalSprite": {
-      "__uuid__": "f0048c10-f03e-4c97-b9d3-3506e1d58952"
+      "__uuid__": "7685e293-5ce2-4eb3-9490-ebfd67c5ea2b"
     },
     "_N$pressedSprite": {
       "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
@@ -1757,8 +1769,8 @@
     "target": {
       "__id__": 2
     },
-    "component": "GameOver",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "c48efyihTZETIsXQsDfrIx0",
     "handler": "continueGame",
     "customEventData": ""
   },
@@ -1943,7 +1955,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "f0048c10-f03e-4c97-b9d3-3506e1d58952"
+      "__uuid__": "e19b3b02-8b9a-4b7e-9735-45886924581f"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -1956,7 +1968,9 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_atlas": null,
+    "_atlas": {
+      "__uuid__": "fbecc999-2095-4f59-a466-b33e2ad60d71"
+    },
     "_id": "1cppb/7AxA3rQEWuiU68n8"
   },
   {
@@ -1967,7 +1981,9 @@
       "__id__": 35
     },
     "_enabled": true,
-    "_normalMaterial": null,
+    "_normalMaterial": {
+      "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+    },
     "_grayMaterial": null,
     "duration": 0.1,
     "zoomScale": 1.2,
@@ -1978,8 +1994,8 @@
     ],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
-    "_N$transition": 2,
-    "transition": 2,
+    "_N$transition": 3,
+    "transition": 3,
     "_N$normalColor": {
       "__type__": "cc.Color",
       "r": 255,
@@ -2050,8 +2066,8 @@
     "target": {
       "__id__": 2
     },
-    "component": "GameOver",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "c48efyihTZETIsXQsDfrIx0",
     "handler": "onDisplayRankingView",
     "customEventData": ""
   },

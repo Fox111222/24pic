@@ -199,7 +199,7 @@
       "array": [
         0,
         0,
-        331.81023631642176,
+        331.1897808996627,
         0,
         0,
         0,
@@ -636,7 +636,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 66.74,
+      "width": 79.2,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -692,8 +692,10 @@
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "f515ab7e-f8c3-40ff-830d-d1c906519b8c"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_styleFlags": 0,
@@ -891,7 +893,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 48.93,
+      "width": 49.76,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -947,8 +949,10 @@
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "f515ab7e-f8c3-40ff-830d-d1c906519b8c"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_styleFlags": 0,
@@ -1146,7 +1150,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 66.74,
+      "width": 70.92,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1202,8 +1206,10 @@
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "f515ab7e-f8c3-40ff-830d-d1c906519b8c"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_styleFlags": 0,
@@ -1401,7 +1407,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 111.23,
+      "width": 123.72,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1457,8 +1463,10 @@
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "f515ab7e-f8c3-40ff-830d-d1c906519b8c"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_styleFlags": 0,
@@ -1523,7 +1531,7 @@
         1,
         1,
         1,
-        1
+        0
       ]
     },
     "_eulerAngles": {
@@ -1651,7 +1659,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "f0048c10-f03e-4c97-b9d3-3506e1d58952"
+      "__uuid__": "e19b3b02-8b9a-4b7e-9735-45886924581f"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -1664,7 +1672,9 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_atlas": null,
+    "_atlas": {
+      "__uuid__": "fbecc999-2095-4f59-a466-b33e2ad60d71"
+    },
     "_id": "8eMYCLdUhFWrzAdZuvnj4A"
   },
   {
@@ -1688,8 +1698,8 @@
     ],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
-    "_N$transition": 2,
-    "transition": 2,
+    "_N$transition": 3,
+    "transition": 3,
     "_N$normalColor": {
       "__type__": "cc.Color",
       "r": 255,
@@ -1760,8 +1770,8 @@
     "target": {
       "__id__": 2
     },
-    "component": "GameOver",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "c48efyihTZETIsXQsDfrIx0",
     "handler": "continueGame",
     "customEventData": ""
   },
@@ -1818,7 +1828,7 @@
         1,
         1,
         1,
-        1
+        0
       ]
     },
     "_eulerAngles": {
@@ -1946,7 +1956,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "f0048c10-f03e-4c97-b9d3-3506e1d58952"
+      "__uuid__": "e19b3b02-8b9a-4b7e-9735-45886924581f"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -1959,7 +1969,9 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_atlas": null,
+    "_atlas": {
+      "__uuid__": "fbecc999-2095-4f59-a466-b33e2ad60d71"
+    },
     "_id": "8eR9PP/NdEOKeCfSRaeXCZ"
   },
   {
@@ -1983,8 +1995,8 @@
     ],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
-    "_N$transition": 2,
-    "transition": 2,
+    "_N$transition": 3,
+    "transition": 3,
     "_N$normalColor": {
       "__type__": "cc.Color",
       "r": 255,

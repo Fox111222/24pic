@@ -1,3 +1,4 @@
+var KBEngine = require("kbengine");
 cc.Class({
     extends: cc.Component,
     
@@ -19,6 +20,7 @@ cc.Class({
             default:null,
         },
     },
+    /*
     addClickEvent:function(node,target,component,handler){
         cc.log(component + ":" + handler);
         var eventHandler = new cc.Component.EventHandler();
@@ -39,7 +41,11 @@ cc.Class({
         var slideEvents = node.getComponent(cc.Slider).slideEvents;
         slideEvents.push(eventHandler);
     },
+    */
     // use this for initialization
+    onBgClicked:function(event){
+        event.stopPropagation()
+    },
     onLoad: function () {
         if(window.AudioMgr== null){
             cc.log("window.AudioMgr== null")
@@ -105,7 +111,23 @@ cc.Class({
         else if(event.target.name == "btn_exit"){
             cc.sys.localStorage.removeItem("wx_account");
             cc.sys.localStorage.removeItem("wx_sign");
-            cc.director.loadScene("StartScene");
+
+            //var player = KBEngine.app.player();
+            //if(player){
+            //    player.leaverequest()
+            //}
+            
+            cc.director.loadScene("StartScene", () => {
+                //window.loginres=num
+                var player = KBEngine.app.player();
+                if(player){
+                    player.leaverequest()
+                }
+                cc.log("startscene===>wordscene")
+            });
+            //cc.director.loadScene("StartScene");
+            this.node.parent.getComponent("WorldScene").unInstallEvents();
+            
         }
         else if(event.target.name == "btn_yx_open"){
             window.AudioMgr.setSFXVolume(1.0);

@@ -2567,7 +2567,11 @@ KBEngine.KBEngineApp = function (kbengineArgs) {
 
   this.onclose = function () {
     KBEngine.INFO_MSG('connect close:' + KBEngine.app.currserver);
-    if (KBEngine.app.currconnect != KBEngine.app.currserver) return;
+
+    if (KBEngine.app.currconnect != KBEngine.app.currserver) {
+      return;
+    }
+
     KBEngine.app.resetSocket();
     KBEngine.Event.fire(KBEngine.EventTypes.onDisconnected); //if(KBEngine.app.currserver != "loginapp")
     //	KBEngine.app.reset();
@@ -2591,7 +2595,11 @@ KBEngine.KBEngineApp = function (kbengineArgs) {
       // 如果心跳回调接收时间小于心跳发送时间，说明没有收到回调
       // 此时应该通知客户端掉线了
       if (KBEngine.app.lastTickCBTime < KBEngine.app.lastTickTime) {
-        KBEngine.ERROR_MSG("sendTick: Receive appTick timeout!");
+        KBEngine.ERROR_MSG("sendTick: Receive appTick timeout!"); ////////////////////////////////////////////////
+
+        KBEngine.app.resetSocket();
+        KBEngine.Event.fire(KBEngine.EventTypes.onDisconnected); ////////////////////////////////////////////////
+
         KBEngine.app.socket.close();
         return;
       }

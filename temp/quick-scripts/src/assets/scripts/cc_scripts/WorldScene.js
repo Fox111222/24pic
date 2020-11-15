@@ -28,6 +28,10 @@ cc.Class({
     seat2: {
       "default": null,
       type: cc.Node
+    },
+    cardAtlas: {
+      "default": null,
+      type: cc.SpriteAtlas
     }
   },
   showwangfa: function showwangfa() {
@@ -49,6 +53,9 @@ cc.Class({
     this.chatNode.active = this.isshowchat;
     cc.log("showchat");
   },
+  onBgClicked: function onBgClicked(event) {
+    event.stopPropagation();
+  },
   onLoad: function onLoad() {
     this.roomKeyc = "";
     this.installEvents();
@@ -60,19 +67,19 @@ cc.Class({
 
     if (window.type == 1) {
       this.matching = this.node.getChildByName("bg2").getChildByName("matching");
+      this.matching.active = true;
+      this.matching.stopAllActions();
+      var action1 = cc.fadeIn(0.5); //渐显
+
+      var action2 = cc.fadeOut(0.5); //渐隐效果
+
+      var repeat = cc.repeatForever(cc.sequence(action2, action1));
+      this.matching.runAction(repeat);
     } else {
-      this.matching = this.node.getChildByName("bg2").getChildByName("matching2");
+      this.matching = undefined;
     } //this.node.getChildByName("bg2").getChildByName("matching").active=true
 
 
-    this.matching.active = true;
-    this.matching.stopAllActions();
-    var action1 = cc.fadeIn(0.5); //渐显
-
-    var action2 = cc.fadeOut(0.5); //渐隐效果
-
-    var repeat = cc.repeatForever(cc.sequence(action2, action1));
-    this.matching.runAction(repeat);
     window.AudioMgr.playBGM("bgBet");
     this._timeLabel = cc.find("Canvas/bg2/time").getComponent(cc.Label);
     this.isshowsetting = false; //this.settingNode=cc.instantiate(this.setting)
@@ -119,12 +126,13 @@ cc.Class({
     this.gameState = this.node.getComponent("GameState");
     this.clock = this.node.getChildByName("bg2").getChildByName("clock");
     this.clock.active = false;
-    var sp = null;
-
-    for (var i = 1061; i < 1115; i++) {
-      sp = this.node.getChildByName("card_" + i + "@2x");
-      sp.active = false;
+    /*
+    var sp=null
+    for(var i=1061;i<1115;i++){
+        sp=this.node.getChildByName("card_"+i+"@2x")
+        sp.active=false;
     }
+    */
 
     this.card1origpos = this.card1.position;
     this.card2origpos = this.card2.position;
@@ -133,15 +141,18 @@ cc.Class({
     window.delta = this.node.getChildByName("bg2").getChildByName("seat1").getChildByName("card").getComponent(cc.Sprite).spriteFrame.getOriginalSize().height * 0.8; //
 
     var out = cc.v2(0, 0); //var seat1cardpos=cc.v2(0, 0)
+    //var seat1cardpos=this.node.getChildByName("bg2").getChildByName("seat1").getChildByName("card").position
 
-    var seat1cardpos = this.node.getChildByName("bg2").getChildByName("seat1").getChildByName("card").position;
+    var seat1cardpos = this.node.getChildByName("bg2").getChildByName("seat1").getChildByName("card").getPosition();
     this.node.getChildByName("bg2").getChildByName("seat1").convertToWorldSpaceAR(seat1cardpos, out);
-    this.seat1cardpos = this.node.convertToNodeSpaceAR(out);
-    this.seat1cardpos.y = this.seat1cardpos.y - this.node.getChildByName("bg2").getChildByName("seat1").getChildByName("card").getComponent(cc.Sprite).spriteFrame.getOriginalSize().height * 0.8; //this.node.getChildByName("bg2").getChildByName("seat1").y=this.node.getChildByName("bg2").getChildByName("seat1").y+window.delta
+    this.seat1cardpos = this.node.convertToNodeSpaceAR(out); //       this.seat1cardpos.y=this.seat1cardpos.y-this.node.getChildByName("bg2").getChildByName("seat1").getChildByName("card").getComponent(cc.Sprite).spriteFrame.getOriginalSize().height*0.8
+    //this.node.getChildByName("bg2").getChildByName("seat1").y=this.node.getChildByName("bg2").getChildByName("seat1").y+window.delta
     //var seat2cardpos=cc.v2(0, 0)
+    //cc.log("--------------------------------------------------------",this.seat1cardpos.x,this.seat1cardpos.y)
 
-    out = cc.v2(0, 0);
-    var seat2cardpos = this.node.getChildByName("bg2").getChildByName("seat2").getChildByName("card").position;
+    out = cc.v2(0, 0); //var seat2cardpos=this.node.getChildByName("bg2").getChildByName("seat2").getChildByName("card").position
+
+    var seat2cardpos = this.node.getChildByName("bg2").getChildByName("seat2").getChildByName("card").getPosition();
     this.node.getChildByName("bg2").getChildByName("seat2").convertToWorldSpaceAR(seat2cardpos, out);
     this.seat2cardpos = this.node.convertToNodeSpaceAR(out);
     this.gameHint = this.node.getChildByName("gameHint").getComponent(cc.Label);
@@ -156,6 +167,19 @@ cc.Class({
       this.enableWxShare();
       if (window.type == 2) this.yaoqing.active = true;
     }
+
+    var player = KBEngine.app.player();
+
+    if (player) {
+      player.updateStaus();
+    }
+
+    this.batteryPercent = cc.find("Canvas/bg2/batteryPercent").getComponent(cc.Label);
+    this.batteryPercent.node.active = false;
+    this.power = cc.find("Canvas/bg2/power");
+    this.power.active = false;
+    this.Z_power = cc.find("Canvas/bg2/Z_power");
+    this.Z_power.active = false;
   },
   onTouchEndedcard1: function onTouchEndedcard1() {
     window.AudioMgr.playSFX("ui_click");
@@ -214,15 +238,50 @@ cc.Class({
     }
   },
   getBatteryPercent: function getBatteryPercent() {
-    if (cc.sys.isNative) {
-      if (cc.sys.os == cc.sys.OS_ANDROID) {
-        return jsb.reflection.callStaticMethod(this.ANDROID_API, "getBatteryPercent", "()F");
-      } else if (cc.sys.os == cc.sys.OS_IOS) {
-        return jsb.reflection.callStaticMethod(this.IOS_API, "getBatteryPercent");
+    //if(cc.sys.isNative){
+    //var self=this;
+    //if(cc.sys.os == cc.sys.OS_ANDROID){
+    //    return jsb.reflection.callStaticMethod(this.ANDROID_API, "getBatteryPercent", "()F");
+    //}
+    //else if(cc.sys.os == cc.sys.OS_IOS){
+    //    return jsb.reflection.callStaticMethod(this.IOS_API, "getBatteryPercent");
+    //}
+    if (cc.sys.platform == cc.sys.WECHAT_GAME) {
+      /*
+      var batteryInfo = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "getBatteryStatusInfo", "()Ljava/lang/String;")
+      if (!batteryInfo) {
+          cc.log("当前无返回！！！！！！！！！！！！！！！！！！！！！！！！");
+          return
       }
-    }
+      var info = batteryInfo.split("_");
+      var level = parseInt(info[0]);
+      var scale = parseInt(info[1]);
+      var status = info[2];
+      //this.label.string = "电量剩余：" + (level * 100) / scale + "\t" + "当前电池使用状态状态：" + status;
+      self.batteryPercent.string="电量剩余：" + (level * 100) / scale + "\t" + "当前电池使用状态状态：" + status;
+      cc.log("电量剩余：" + (level * 100) / scale + "\t" + "当前电池使用状态状态：" + status)
+      */
+      //var info=wx.getBatteryInfoSync()
+      var info = wx.getBatteryInfo({
+        success: function (info) {
+          var level = info.level;
+          var status = info.isCharging ? "充电中" : "没充电";
 
-    return 0.9;
+          if (this.batteryPercent != undefined) {
+            this.batteryPercent.string = "" + level + "%" + status;
+            this.batteryPercent.node.active = true;
+          }
+
+          if (this.power != undefined) {
+            this.power.scaleX = level / 100;
+            this.power.active = true;
+            this.Z_power.active = true;
+          }
+        }.bind(this)
+      }); //cc.log("电量剩余" +level + "%" + "电池使用状态" + status)
+      //return level;
+      //}           
+    }
   },
   update: function update(dt) {
     this.label.string = this.act.join("");
@@ -238,8 +297,9 @@ cc.Class({
       this._timeLabel.string = "" + h + ":" + m;
     }
 
-    var power = cc.find("Canvas/bg2/power");
-    power.scaleX = this.getBatteryPercent();
+    if (cc.sys.platform == cc.sys.WECHAT_GAME) {
+      this.getBatteryPercent();
+    }
   },
   onaddact: function onaddact() {
     window.AudioMgr.playSFX("ui_click");
@@ -370,11 +430,15 @@ cc.Class({
     KBEngine.Event.register("entity_updateroomkey", this, "entity_updateroomkey");
     KBEngine.Event.register("onsyncsureact", this, "onsyncsureact");
     KBEngine.Event.register("onjoinPrivateRoom", this, "onjoinPrivateRoom");
+    KBEngine.Event.register("onclientMSG", this, "onclientMSG");
   },
   entity_updateroomkey: function entity_updateroomkey(roomKeyc, avatar) {
-    cc.log("entity_updateroomkeyentity_updateroomkey=", roomKeyc);
-    this.RoomID.string = "房间号:" + roomKeyc.join("");
-    this.roomKeyc = roomKeyc.join("");
+    cc.log("entity[%d]updateroomkeyentity_updateroomkey=", avatar.id, roomKeyc);
+
+    if (avatar.id == KBEngine.app.player().id) {
+      this.RoomID.string = "房间号:" + roomKeyc.join("");
+      this.roomKeyc = roomKeyc.join("");
+    }
   },
   enableWxShare: function enableWxShare() {
     wx.showShareMenu();
@@ -438,6 +502,7 @@ cc.Class({
     KBEngine.Event.deregister("entity_updateroomkey", this, "entity_updateroomkey");
     KBEngine.Event.deregister("onsyncsureact", this, "onsyncsureact");
     KBEngine.Event.deregister("onjoinPrivateRoom", this, "onjoinPrivateRoom");
+    KBEngine.Event.deregister("onclientMSG", this, "onclientMSG");
   },
   onjoinPrivateRoom: function onjoinPrivateRoom(num) {
     cc.director.loadScene("StartScene", function () {
@@ -497,6 +562,13 @@ cc.Class({
       this.node.getChildByName("start").active = true;
     }
   },
+  onclientMSG: function onclientMSG(msg) {
+    this.gameHint.node.active = true;
+    this.gameHint.string = msg;
+    this.gameHint.node.opacity = 255;
+    var action = cc.fadeTo(13.0, 0);
+    this.gameHint.node.runAction(action);
+  },
   onotherNetcut: function onotherNetcut(curID) {
     cc.log("onotherNetcut。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。");
 
@@ -521,8 +593,12 @@ cc.Class({
   onDisconnected: function onDisconnected() {
     KBEngine.INFO_MSG("disconnect! will try to reconnect..."); //var action = cc.fadeTo(1.0, 0);
 
-    this.gameHint.node.opacity = 255;
-    this.gameHint.string = "disconnect! will try to reconnect..."; //this.Destroyplayer()
+    if (this.gameHint.node) {
+      this.gameHint.node.opacity = 255;
+      this.gameHint.string = "disconnect! will try to reconnect...";
+      this.gameHint.node.active = true;
+    } //this.Destroyplayer()
+
 
     KBEngine.app.reloginBaseapp();
   },
@@ -603,7 +679,10 @@ cc.Class({
         cc.log("WorldScene::onEnterWorld=", this.seat1.getComponent("Seat")._isReady);
       } else {
         //scalex==-1,
-        this.matching.active = false;
+        if (this.matching != undefined) {
+          this.matching.active = false;
+        }
+
         this.seat2.active = true; //this.seat2.getComponent("Seat")._isReady=true
 
         this.seat2.getComponent("Seat")._userName = entity.accountName;
@@ -630,7 +709,10 @@ cc.Class({
       cc.log("WorldScene::onEnterWorld=", this.seat1.getComponent("Seat")._isReady);
     } else {
       //scalex==-1,
-      this.matching.active = false;
+      if (this.matching != undefined) {
+        this.matching.active = false;
+      }
+
       this.seat2.active = true; //this.seat2.getComponent("Seat")._isReady=true
 
       this.seat2.getComponent("Seat")._userName = entity.accountName;
@@ -642,14 +724,22 @@ cc.Class({
   },
   onLeaveWorld: function onLeaveWorld(entity) {
     cc.log("onLeaveWorld", entity.id, entity.className);
-    this.matching.active = true;
-    this.matching.stopAllActions();
-    var action1 = cc.fadeIn(0.5); //渐显
 
-    var action2 = cc.fadeOut(0.5); //渐隐效果
+    if (this.matching != undefined) {
+      this.matching.active = true;
+      this.matching.stopAllActions();
+      var action1 = cc.fadeIn(0.5); //渐显
 
-    var repeat = cc.repeatForever(cc.sequence(action1, action2));
-    this.matching.runAction(repeat);
+      var action2 = cc.fadeOut(0.5); //渐隐效果
+
+      var repeat = cc.repeatForever(cc.sequence(action1, action2));
+      this.matching.runAction(repeat);
+    }
+
+    if (window.type != 1 && this.yaoqing != undefined) {
+      this.yaoqing.active = true;
+    }
+
     this.seat2.active = false;
     /*
     cc.log("onLeaveWorld",entity.id,entity.className)
@@ -785,8 +875,11 @@ cc.Class({
     var fun1 = cc.callFunc(function (target) {
       target.x = x1, target.y = y1;
       card01 = card01 + 1000;
-      var url = "card_" + card01 + "@2x";
-      target.getComponent(cc.Sprite).spriteFrame = self.node.getChildByName(url).getComponent(cc.Sprite).spriteFrame;
+      var url = "card_" + card01 + "@2x"; //target.getComponent(cc.Sprite).spriteFrame=self.node.getChildByName(url).getComponent(cc.Sprite).spriteFrame
+      //////////////////////////////
+
+      target.getComponent(cc.Sprite).spriteFrame = self.cardAtlas.getSpriteFrame(url); ///////////////////////////
+
       /*
       cc.loader.loadRes(url,cc.SpriteFrame,function(err,spriteFrame) {
       self.card1.getComponent(cc.Sprite).spriteFrame= spriteFrame
@@ -796,22 +889,25 @@ cc.Class({
       target.x = x1;
       target.y = y1;
       card02 = card02 + 1000;
-      var url = "card_" + card02 + "@2x";
-      target.getComponent(cc.Sprite).spriteFrame = self.node.getChildByName(url).getComponent(cc.Sprite).spriteFrame;
+      var url = "card_" + card02 + "@2x"; //target.getComponent(cc.Sprite).spriteFrame=self.node.getChildByName(url).getComponent(cc.Sprite).spriteFrame
+
+      target.getComponent(cc.Sprite).spriteFrame = self.cardAtlas.getSpriteFrame(url);
     }, this.card2);
     var fun3 = cc.callFunc(function (target) {
       target.x = x2;
       target.y = y2;
       card03 = card03 + 1000;
-      var url = "card_" + card03 + "@2x";
-      target.getComponent(cc.Sprite).spriteFrame = self.node.getChildByName(url).getComponent(cc.Sprite).spriteFrame;
+      var url = "card_" + card03 + "@2x"; //target.getComponent(cc.Sprite).spriteFrame=self.node.getChildByName(url).getComponent(cc.Sprite).spriteFrame
+
+      target.getComponent(cc.Sprite).spriteFrame = self.cardAtlas.getSpriteFrame(url);
     }, this.card3);
     var fun4 = cc.callFunc(function (target) {
       target.x = x2;
       target.y = y2;
       card04 = card04 + 1000;
-      var url = "card_" + card04 + "@2x";
-      target.getComponent(cc.Sprite).spriteFrame = self.node.getChildByName(url).getComponent(cc.Sprite).spriteFrame;
+      var url = "card_" + card04 + "@2x"; //target.getComponent(cc.Sprite).spriteFrame=self.node.getChildByName(url).getComponent(cc.Sprite).spriteFrame
+
+      target.getComponent(cc.Sprite).spriteFrame = self.cardAtlas.getSpriteFrame(url);
     }, this.card4);
     var fun11 = cc.callFunc(function (target) {
       target.x = card1origposx;
@@ -877,6 +973,8 @@ cc.Class({
   invatefriend: function invatefriend() {
     window.AudioMgr.playSFX("ui_click"); //this.yaoqing.active=false
 
+    this.matching = this.node.getChildByName("bg2").getChildByName("matching2");
+    this.matching.active = true;
     var self = this; ///////////////////////////
 
     cc.loader.loadRes("sound/share", function (err, data) {
@@ -889,35 +987,13 @@ cc.Class({
         query: "Roomid=" + self.roomKeyc + "&UserName=" + KBEngine.app.entities[KBEngine.app.player().id].accountName,
         success: function success(res) {
           cc.log("分享成功" + res);
-          selff.yaoqing.active = false;
         },
         fail: function fail(res) {
           cc.log("分享失败" + res); //this.yaoqing.active=true
         }
       });
-    }); /////////////////////////
-
-    /*
-    wx.shareAppMessage({
-        title: self.RoomID.string,
-        imageUrl: data.url,
-        //query: "Roomid=" + self.roomKeyc + "&UserName=" + KBEngine.app.entities[KBEngine.app.player().id].accountName,// 别人点击链接时会得到的数据
-        //query: "nick=" + nick + "&gender=" + gender + "&city=" + city,
-        query:"Roomid="+ self.roomKeyc+"&UserName="+ KBEngine.app.entities[KBEngine.app.player().id].accountName,
-        success(res) {               
-           
-            
-            cc.log("分享成功" + res);
-            this.yaoqing.active=false               
-            
-              },
-        fail(res) {
-            cc.log("分享失败" + res);
-            //this.yaoqing.active=true
-        }
-        
+      selff.yaoqing.active = false;
     });
-    */
   },
   createPlayer: function createPlayer(avatar) {
     // SCALE=1;
@@ -930,19 +1006,16 @@ cc.Class({
         this.seat1.getComponent("Seat").avatarUrl = avatar.avatarUrl; //this.seat1.getComponent("Seat")._isReady=true
 
         this.seat1.getComponent("Seat").refresh();
-        this.player = this.seat1; //this.entities[avatar.id]=this.player 
+        this.player = this.seat1;
       } else {
         this.seat2.active = true; //this.seat2.getComponent("Seat")._isReady=true
 
         this.seat2.getComponent("Seat")._userName = avatar.accountName;
         this.seat2.getComponent("Seat").avatarUrl = avatar.avatarUrl;
         this.seat2.getComponent("Seat").refresh();
-        this.player = this.seat2; //this.entities[avatar.id]=this.player 
-      } //var ctrl= this.player.addComponent("AvatarControl");
-      //var action= this.player.addComponent("AvatarAction");
+        this.player = this.seat2;
+      } //this.player.setPosition(avatar.position.x*SCALE, avatar.position.z*SCALE);
 
-
-      this.player.setPosition(avatar.position.x * SCALE, avatar.position.z * SCALE); //this.entities[avatar.id] = this.player;
     }
 
     cc.log("after createPlayer this.player=，avatar.modelID=", this.player, avatar.modelID);

@@ -6,8 +6,6 @@ __globalAdapter.init();
 
 require('cocos/cocos2d-js-min.js');
 
-require('physics-min.js');
-
 __globalAdapter.adaptEngine();
 
 require('./ccRequire');

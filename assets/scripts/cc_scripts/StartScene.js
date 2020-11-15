@@ -84,14 +84,22 @@ cc.Class({
         if(window.roomIID.length >0){           
            this.btn_accept.active=true;
            this.btn_accept.getChildByName("Background").getChildByName("Label").getComponent(cc.Label).string="确认接受"+ window.invateAcountname +"的邀请！"
+           if(this.flag==0){
+            this.flag=1
+            this.btn_accept.stopAllActions()
+            var action1 = cc.scaleTo(0.5,1.2);//渐显
+            var action2 = cc.scaleTo(0.5,1);//渐隐效果
+            var repeat=cc.repeatForever(cc.sequence(action1,action2))
+            this.btn_accept.runAction(repeat);
+           }
            //this.btn_start.active=false;
+           /*
            this.btn_accept.stopAllActions()
            var action1 = cc.scaleTo(0.5,1.2);//渐显
            var action2 = cc.scaleTo(0.5,1);//渐隐效果
            var repeat=cc.repeatForever(cc.sequence(action1,action2))
            this.btn_accept.runAction(repeat);
-
-            
+           */  
         }
     },
     accept_wx(){
@@ -102,7 +110,7 @@ cc.Class({
         this.joinPrivateRoominputcallback(window.roomIID)
     },
     onLoad: function () {
-        this.sum=0;      
+        this.flag=0;      
         this.initKbengine();
         this.installEvents();
         cc.loader.loadRes("prefab/JoinGame", cc.Prefab, function (err, prefab) {
@@ -123,15 +131,19 @@ cc.Class({
         this.btn_accept=this.node.getChildByName("start_bg").getChildByName("accept")
         this.btn_accept.active=false;
         this.btn_accept.stopAllActions()
+
         
         //this.loadItemPrefab();
-        //window.AudioMgr=this.node.addComponent("AudioMgr")      
-        var AudioMgr = require("AudioMgr");
-        window.AudioMgr = new AudioMgr();
-        window.AudioMgr.init();
-        window.AudioMgr.bgmVolume=0.5
-        window.AudioMgr.sfxVolume=0.5
+        //window.AudioMgr=this.node.addComponent("AudioMgr")
+        if(window.AudioMgr==undefined){
+            var AudioMgr = require("AudioMgr");
+            window.AudioMgr = new AudioMgr();
+            window.AudioMgr.init();
+            window.AudioMgr.bgmVolume=0.5
+            window.AudioMgr.sfxVolume=0.5
+        }
 
+        window.AudioMgr.stopBGM()
         this.userName = cc.sys.platform != cc.sys.WECHAT_GAME ? this.randomstring(4): '';
         //this.btn_start.node.on('click', this.startGame, this);
         this.code = "";
@@ -410,10 +422,10 @@ cc.Class({
                     
                 }
                 if (window.type==3 && window.roomIID.length>0){
-                    player.joinPrivateRoom(window.roomIID);
-                    window.roomIID=[]                    
+                    player.joinPrivateRoom(window.roomIID);               
                 }                
             }
+            window.roomIID=[]
             this.unInstallEvents();           
         });
      },

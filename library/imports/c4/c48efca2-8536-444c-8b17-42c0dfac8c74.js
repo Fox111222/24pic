@@ -47,6 +47,7 @@ cc.Class({
     this.labelTotalTime.string = TOTAL_TIME + 'S';
     this.labelScore.string = Math.round(100 * SCORE) + "%"; //胜利比率
 
+    window.AudioMgr.stopBGM();
     cc.director.preloadScene("WorldScene");
   },
   start: function start() {

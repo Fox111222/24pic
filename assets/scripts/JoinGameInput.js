@@ -92,18 +92,21 @@ cc.Class({
         this.onInput(9);
     },
     onResetClicked:function(){
+        window.AudioMgr.playSFX("ui_click")
         for(var i = 0; i < this.nums.length; ++i){
             this.nums[i].string = "";
         }
         this._inputIndex = 0;
     },
     onDelClicked:function(){
+        window.AudioMgr.playSFX("ui_click")
         if(this._inputIndex > 0){
             this._inputIndex -= 1;
             this.nums[this._inputIndex].string = "";
         }
     },
     onCloseClicked:function(){
+        window.AudioMgr.playSFX("ui_click")
         this.node.active = false;
     },
     

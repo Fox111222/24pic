@@ -41,6 +41,9 @@ KBEngine.Avatar = KBEngine.Entity.extend({
   reqChangeReadyState: function reqChangeReadyState() {
     this.cellCall("reqChangeReadyState", 1);
   },
+  updateStaus: function updateStaus() {
+    this.baseCall("updateStaus");
+  },
   playerReadyStateChange: function playerReadyStateChange(eid, state) {
     if (this.isPlayer()) {
       KBEngine.Event.fire("playerReadyStateChange", eid, state);
@@ -86,6 +89,11 @@ KBEngine.Avatar = KBEngine.Entity.extend({
       KBEngine.Event.fire("oniptChat", eid, strstr);
     }
   },
+  onclientMSG: function onclientMSG(msg) {
+    if (this.isPlayer()) {
+      KBEngine.Event.fire("onclientMSG", msg);
+    }
+  },
   joinRoom: function joinRoom() {
     KBEngine.INFO_MSG("avatar " + this.id + " join room");
     this.baseCall("joinRoom");
@@ -127,6 +135,10 @@ KBEngine.Avatar = KBEngine.Entity.extend({
   },
   onsureact: function onsureact(strr) {
     this.cellCall("onsureact", strr);
+  },
+  leaverequest: function leaverequest() {
+    KBEngine.INFO_MSG("avatar " + this.id + " leaverequest");
+    this.cellCall("leaverequest");
   },
   onsyncsureact: function onsyncsureact(eid, strr) {
     cc.log("avatar::onsyncsureact== ", strr); //KBEngine.Event.fire("onsyncsureact", strr);
